@@ -12,6 +12,11 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        bitter: ["Bitter"],
+        geist: ["Geist"],
+        geistMono: ["GeistMono"],
+      },
     },
   },
   plugins: [],

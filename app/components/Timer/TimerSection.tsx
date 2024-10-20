@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Timer from "@/app/components/TimerComponents/Timer";
+import Timer from "./Timer";
 import { Bitter } from "@next/font/google";
 import { Poppins } from "@next/font/google";
 import dynamic from "next/dynamic";
@@ -23,7 +23,7 @@ const TimerSection = () => {
         className="relative bg-no-repeat bg-cover bg-bottom bg-[#101010]"
         style={{
           backgroundImage:
-            "linear-gradient(180deg, rgb(16, 16, 16) 0%, rgba(15, 15, 15, 0.53) 48%, rgb(16, 16, 16) 100%), url('/timer_bg.jpg')",
+            "linear-gradient(180deg, rgb(16, 16, 16) 0%, rgba(15, 15, 15, 0.53) 48%, rgb(16, 16, 16) 100%), url('/backgrounds/timer_bg.jpg')",
           opacity: 1,
         }}
       >

@@ -1,12 +1,4 @@
-import type { Config } from "tailwindcss";
-import defaultTheme from "tailwindcss/defaultTheme";
-
-import colors from "tailwindcss/colors";
-
-import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
-
-
-const config: Config = {
+const config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -40,19 +32,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [addVariablesForColors],
+  plugins: [],
 };
 
-function addVariablesForColors({ addBase, theme }: any) {
-  const allColors = flattenColorPalette(theme("colors"));
-  const newVars = Object.fromEntries(
-      Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-  );
-
-  addBase({
-    ":root": newVars,
-  });
-}
 
 
 export default config;

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdLocationPin } from "react-icons/md";
 import { motion } from "framer-motion";
 

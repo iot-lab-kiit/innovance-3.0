@@ -55,7 +55,7 @@ const Timer = ({ launchDate }: { launchDate: string }) => {
     const timer = setInterval(() => {
       setTimeLeft(getTimeLeft(launchDate));
     }, 1000);
-    return () => clearInterval(timer); // Clean up the interval on component unmount
+    return () => clearInterval(timer);
   }, [launchDate]);
 
   return (

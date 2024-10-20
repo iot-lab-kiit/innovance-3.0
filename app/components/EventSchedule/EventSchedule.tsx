@@ -104,13 +104,13 @@ return(
       
       <div>
         {schedule.map((item, index) => (
-          <div key={index} className=" border-b-[0.02px] border-blue-500 py-8">
+          <div key={index} className=" border-b-[0.02px] border-blue-500 py-6">
             <div className="text-blue-500  text-md mb-2">
               {item.time}
             </div>
             <h3 className="text-xl mb-2 ">{item.title}</h3>     
-            <p className="text-lg mb-1">{item.description}</p>
-            <div className="flex items-center text-sm">
+            <p className="text-sm mb-[0.50rem] ">{item.description}</p>
+            <div className="flex items-center text-md gap-1">
             <MdLocationPin />
               <div>{item.location}</div>
             </div>

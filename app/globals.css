@@ -70,7 +70,7 @@ body {
       rgba(0, 0, 0, 0.574),
       rgb(0, 0, 0)
     ),
-    url("../public/heroBackground.png");
+    url("../public/backgrounds/heroBackground.png");
   background-position: center;
   background-size: cover;
 }

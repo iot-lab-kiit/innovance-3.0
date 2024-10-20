@@ -18,7 +18,7 @@ const speakers: Speaker[] = [
     title: "HealthTech Innovator",
     description:
       "A pioneer in health tech, exploring the digital transformation and innovation in the healthcare sector.",
-    image: "/speaker.png", // Path to the actual image in the public folder
+    image: "/speaker1.png",
     twitterUrl: "https://twitter.com/sophiawhite",
     linkedinUrl: "https://linkedin.com/in/sophiawhite",
     instagramUrl: "https://instagram.com/sophiawhite",
@@ -28,8 +28,8 @@ const speakers: Speaker[] = [
     name: "Alexander Turner",
     title: "Tech Entrepreneur",
     description:
-      "A successful entrepreneur with a visionary approach to new business models and digital strategies.",
-    image: "/speaker.png", // Path to the actual image in the public folder
+      "A successful entrepreneur with a visionary and innovative approach to developing new business models and strategies.",
+    image: "/speaker1.png",
     twitterUrl: "https://twitter.com/alexanderturner",
     linkedinUrl: "https://linkedin.com/in/alexanderturner",
     instagramUrl: "https://instagram.com/alexanderturner",
@@ -41,53 +41,53 @@ const SocialIcon = ({
   Icon,
   url,
 }: {
-  Icon: React.ComponentType<any>;
+  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
   url: string;
 }) => (
   <a href={url} target="_blank" rel="noopener noreferrer">
-    <Icon className="h-8 w-8 text-gray-400 hover:text-white transition-colors" />
+    <Icon className="h-6 w-6 md:h-5 md:w-5 sm:h-7 sm:w-7 lg:h-5 lg:w-5 text-gray-400 hover:text-white transition-colors" />
   </a>
 );
 
 export default function Card() {
   return (
-    <div className="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="text-4xl font-extrabold text-white text-center mb-4">
+    <div className="min-h-screen bg-black py-12 px-4 sm:px-6 lg:px-8 xl:px-12">
+      <div className="max-w-[90%] xl:max-w-[70%] md:max-w-[75%] sm:max-w-[60%] mx-auto">
+        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bitter text-white text-center mb-4">
           Speakers
         </h2>
-        <p className="text-lg text-gray-300 text-center mb-12">
+        <p className="text-base sm:text-lg lg:text-xl font-geist text-gray-300 text-center mb-12">
           Get ready to be inspired by industry leaders and visionaries. Explore
           a lineup of speakers who are at the forefront of innovation, sharing
           insights and expertise on the latest trends and technologies shaping
           the future.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 xl:gap-12">
           {speakers.map((speaker) => (
             <div
               key={speaker.name}
-              className="group flex flex-col bg-black rounded-lg border border-gray-500 p-6 shadow-lg transition-all hover:shadow-blue-500/50 hover:border-blue-500"
+              className="group flex flex-col bg-black rounded-lg border border-gray-500 p-6 shadow-lg transition-all hover:shadow-[#3b82f6]/50 hover:border-[#3b82f6]"
             >
               {/* Upper Container: Title, Name, Description (centered) */}
               <div className="text-center">
                 {/* Title */}
-                <p className={`text-2xl font-sans text-blue-500 mb-2`}>
+                <p className="text-lg sm:text-xl lg:text-2xl font-geist text-[#3b82f6] mb-2">
                   {speaker.title}
                 </p>
                 {/* Name */}
-                <h3 className="text-4xl font-mono font-semibold text-white mb-2">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bitter text-white mb-2">
                   {speaker.name}
                 </h3>
                 {/* Description */}
-                <p className="text-gray-300 font-sans font-medium text-xl">
+                <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-300 font-geist">
                   {speaker.description}
                 </p>
               </div>
 
-              {/* Lower Container: Social Icons and Image in flex */}
-              <div className="flex items-end">
-                {/* Social icons aligned vertically on the left */}
-                <div className="flex flex-col items-center space-y-6 mr-4">
+              {/* Lower Container: Social Icons and Image */}
+              <div className="flex items-end justify-between mt-4 lg:mt-6">
+                {/* Social icons aligned vertically */}
+                <div className="flex flex-col items-center space-y-4 lg:space-y-6">
                   <SocialIcon Icon={Twitter} url={speaker.twitterUrl} />
                   <SocialIcon Icon={Linkedin} url={speaker.linkedinUrl} />
                   <SocialIcon Icon={Instagram} url={speaker.instagramUrl} />
@@ -95,13 +95,13 @@ export default function Card() {
                 </div>
 
                 {/* Image stays on the right side and appears from the bottom border */}
-                <div className="relative ml-24">
+                <div className="relative">
                   <Image
                     src={speaker.image}
                     alt={speaker.name}
-                    width={340}
-                    height={360}
-                    className="object-cover transition-transform duration-300 ease-in-out transform group-hover:-translate-y-2 group-hover:scale-105 shadow-lg relative top-6"
+                    width={280} // Adjust width
+                    height={300} // Adjust height
+                    className="object-cover transition-transform duration-300 ease-in-out transform group-hover:-translate-y-3 group-hover:scale-110 shadow-lg relative top-6"
                     priority={true}
                   />
                 </div>

@@ -23,31 +23,31 @@ export default function Navbar() {
         <div className="hidden md:flex md:gap-9">
           <Link
             href="/"
-            className="hover:text-lg hover:text-blue-300 transition-all"
+            className="hover:scale-110 hover:text-blue-300 transition-all"
           >
             Home
           </Link>
           <Link
             href="/about"
-            className="hover:text-lg hover:text-blue-300 transition-all"
+            className="hover:scale-110 hover:text-blue-300 transition-all"
           >
             About
           </Link>
           <Link
             href="/schedule"
-            className="hover:text-lg hover:text-blue-300 transition-all"
+            className="hover:scale-110 hover:text-blue-300 transition-all"
           >
             Schedule
           </Link>
           <Link
             href="/gallery"
-            className="hover:text-lg hover:text-blue-300 transition-all"
+            className="hover:scale-110 hover:text-blue-300 transition-all"
           >
             Gallery
           </Link>
           <Link
             href="/contact"
-            className="hover:text-lg hover:text-blue-300 transition-all"
+            className="hover:scale-110 hover:text-blue-300 transition-all"
           >
             Contact
           </Link>

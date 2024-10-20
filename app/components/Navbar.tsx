@@ -54,10 +54,10 @@ export default function Navbar() {
         </div>
         <div
           className="hidden md:block relative"
-          onMouseEnter={(e) => {
+          onMouseEnter={() => {
             setIsHovered(!isHovered);
           }}
-          onMouseLeave={(e) => {
+          onMouseLeave={() => {
             setIsHovered(!isHovered);
           }}
         >

@@ -28,10 +28,10 @@ export default function Hero() {
           </motion.div>
           <div
             className="relative w-fit m-auto"
-            onMouseEnter={(e) => {
+            onMouseEnter={() => {
               setIsHovered(!isHovered);
             }}
-            onMouseLeave={(e) => {
+            onMouseLeave={() => {
               setIsHovered(!isHovered);
             }}
           >

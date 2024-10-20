@@ -23,11 +23,11 @@ const TimerSection = () => {
         className="relative bg-no-repeat bg-cover bg-bottom bg-[#101010]"
         style={{
           backgroundImage:
-            "linear-gradient(180deg, rgb(16, 16, 16) 0%, rgba(15, 15, 15, 0.53) 48%, rgb(16, 16, 16) 100%), url('/timer_bg.jpg')",
+            "linear-gradient(180deg, rgb(16, 16, 16) 0%, rgba(15, 15, 15, 0.53) 48%, rgb(16, 16, 16) 100%), url('/backgrounds/timer_bg.jpg')",
           opacity: 1,
         }}
       >
-        <div className="w-full h-screen flex items-center px-4 sm:px-8 lg:px-16">
+        <div className="w-full h-screen flex items-center gap-8 px-4 sm:px-8 lg:px-16">
           <div className="font-bitter flex items-center justify-center flex-col mx-auto mb-10 md:mb-20 text-white">
             <h1
               className={`text-4xl sm:text-5xl md:text-6xl ${bitter.className} text-center`}
@@ -41,7 +41,7 @@ const TimerSection = () => {
             </h1>
             <Timer launchDate="2024-11-08T17:00:00" />
             <div
-              className="relative w-fit m-auto"
+              className="relative w-fit m-auto mt-8"
               onMouseEnter={() => {
                 setIsHovered(!isHovered);
               }}

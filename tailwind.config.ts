@@ -13,7 +13,7 @@ const config: Config = {
         foreground: "var(--foreground)",
       },
       backgroundImage: {
-        bannerImg: "url('/timer_bg.jpg')",
+        bannerImg: "url('/backgrounds/timer_bg.jpg')",
       },
       fontFamily: {
         bitter: ["Bitter"],

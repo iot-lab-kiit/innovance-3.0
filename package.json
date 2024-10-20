@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "^14.2.15",
     "@devnomic/marquee": "^1.0.2",
+    "@next/font": "^14.2.15",
     "@nextui-org/react": "^2.4.8",
     "lucide-react": "^0.453.0",
     "framer-motion": "^11.11.9",

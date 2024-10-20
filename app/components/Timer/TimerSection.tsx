@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Timer from "./Timer";
 import { Bitter } from "@next/font/google";
 import { Poppins } from "@next/font/google";
+import dynamic from "next/dynamic";
+import { motion } from "framer-motion";
 
 const bitter = Bitter({
   weight: ["400", "700"],
@@ -14,6 +16,7 @@ const poppins = Poppins({
 });
 
 const TimerSection = () => {
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <div>
       <div
@@ -37,20 +40,42 @@ const TimerSection = () => {
               RESERVE YOUR SPOT NOW
             </h1>
             <Timer launchDate="2024-11-08T17:00:00" />
-            <button
-              className={`group relative mt-6 sm:mt-8 md:mt-10 px-3 sm:px-4 py-1.5 sm:py-2.5 bg-lime-500 text-black text-xs sm:text-sm md:text-base ${poppins.className} border-2 border-transparent transition-all duration-500 overflow-hidden`}
+            <div
+              className="relative w-fit m-auto"
+              onMouseEnter={() => {
+                setIsHovered(!isHovered);
+              }}
+              onMouseLeave={() => {
+                setIsHovered(!isHovered);
+              }}
             >
-              <span className="inline-block w-4 h-[1.3px] bg-black mr-2 align-middle"></span>
-              <span className="relative z-10 transition-colors duration-500 ease-in-out group-hover:text-[#32cd32]">
-                BUY TICKET
-              </span>
-              <div className="absolute inset-0 bg-black transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
-              <style jsx>{`
-                button:hover {
-                  border-color: #32cd32; /* green border on hover */
+              <motion.div
+                animate={
+                  isHovered
+                    ? { width: 0, y: 0, opacity: 1 }
+                    : { width: "100%", y: 0, opacity: 1 }
                 }
-              `}</style>
-            </button>
+                transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                className="absolute w-full h-full bg-blue-500"
+              ></motion.div>
+              <motion.button
+                animate={
+                  isHovered
+                    ? {
+                        color: "#3b82f6",
+                        borderColor: "#3b82f6",
+                        y: 0,
+                        opacity: 1,
+                      }
+                    : { y: 0, opacity: 1 }
+                }
+                transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+                className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+              >
+                BUY TICKET
+              </motion.button>
+            </div>
           </div>
         </div>
       </div>
@@ -58,4 +83,4 @@ const TimerSection = () => {
   );
 };
 
-export default TimerSection;
+export default dynamic(() => Promise.resolve(TimerSection), { ssr: false });

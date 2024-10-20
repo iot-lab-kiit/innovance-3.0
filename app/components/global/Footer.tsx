@@ -5,7 +5,7 @@ import Marquee from 'react-fast-marquee'
 const Footer = () => {
     return (
         <>
-            <div className="w-[calc(100vw+8px)] bg-blue-500 absolute z-10">
+            <div className="w-[calc(100vw+8px)] bg-blue-500 absolute z-10 py-1">
                 <Marquee
                     speed={20}
                     direction="right"
@@ -16,7 +16,7 @@ const Footer = () => {
                         RESERVE YOUR SPOT NOW
                     </span>
                     <Image
-                        src="/star.svg"
+                        src="/icons/star.svg"
                         width={15}
                         height={15}
                         alt="star"
@@ -24,6 +24,7 @@ const Footer = () => {
                     />
                 </Marquee>
             </div>
+            <br /><br /><br /><br />
             <footer className="w-full h-60 bg-black text-white flex flex-col items-center justify-center space-y-6">
                 <div className="flex space-x-6">
                     <a href="https://www.instagram.com/iot.lab.kiit/?hl=en" className="hover:scale-110 transform transition duration-300">
@@ -40,7 +41,6 @@ const Footer = () => {
                 <button className="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold hover:scale-105 hover:bg-blue-700 transform transition duration-300">
                     Contact Us
                 </button>
-
                 <p className="text-sm">Copyright &copy; 2024, <a className='underline underline-offset-1' href="https://iotkiit.in/">IOT Lab, KIIT</a></p>
             </footer>
         </>

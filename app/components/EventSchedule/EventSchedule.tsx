@@ -4,6 +4,13 @@ import { useEffect, useState } from "react";
 import { MdLocationPin } from "react-icons/md";
 import { motion } from "framer-motion";
 
+import { Poppins } from "@next/font/google";
+
+const poppins = Poppins({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+});
+
 export const EventSchedule: React.FC = ()=>{
 
   const [activeDay, setActiveDay] = useState(1);
@@ -48,7 +55,8 @@ export const EventSchedule: React.FC = ()=>{
   const schedule = activeDay === 1 ? day1Schedule : day2Schedule;
 
 return(
-   <div className="bg-black text-white py-16 px-16 w-full">
+  <div className={poppins.className}>
+ <div className="bg-black text-white py-16 px-16 w-full ">
       {/* Title Section */}
       <div className="text-center mb-12">
         <h1 className="text-6xl ">Event Schedule</h1>
@@ -65,7 +73,7 @@ return(
 
       <div className="relative"></div>
       <motion.div
-        className="absolute top-0 left-0 w-32 bg-lime-500 z-0"
+        className="absolute top-0 left-0 w-32 bg-blue-500 z-0"
         initial={{ x: 0 }}
         animate={{ x: activeDay === 2 ? 144 : 0 }} // Adjust the x value to move to the second button
         transition={{ duration: 4, ease: "linear" }}
@@ -74,7 +82,7 @@ return(
       <button
           className={`px-8 py-3 z-10 ${
             activeDay === 1
-              ? "bg-lime-500 text-black"
+              ? "bg-blue-500 text-black"
               : "bg-transparent  text-white"
           }`}
           onClick={() => setActiveDay(1)}
@@ -84,7 +92,7 @@ return(
         <button
           className={`px-8 py-3  z-10  ${
             activeDay === 2
-              ? "bg-lime-500 text-black"
+              ? "bg-blue-500 text-black"
               : "bg-transparent   text-white"
           }`}
           onClick={() => setActiveDay(2)}
@@ -96,13 +104,13 @@ return(
       
       <div>
         {schedule.map((item, index) => (
-          <div key={index} className=" border-b-[0.02px] border-lime-500 py-8">
-            <div className="text-lime-500  text-md mb-2">
+          <div key={index} className=" border-b-[0.02px] border-blue-500 py-8">
+            <div className="text-blue-500  text-md mb-2">
               {item.time}
             </div>
-            <h3 className="text-lg  mb-4">{item.title}</h3>     
-            <p className="text-lg  mb-4">{item.description}</p>
-            <div className="flex items-center">
+            <h3 className="text-xl mb-2 ">{item.title}</h3>     
+            <p className="text-lg mb-1">{item.description}</p>
+            <div className="flex items-center text-sm">
             <MdLocationPin />
               <div>{item.location}</div>
             </div>
@@ -110,5 +118,7 @@ return(
         ))}
       </div>
     </div>
+  </div>
+  
 )
 }

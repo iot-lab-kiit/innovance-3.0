@@ -12,6 +12,15 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      backgroundImage: {
+        bannerImg: "url('/timer_bg.jpg')",
+      },
+      fontFamily: {
+        bitter: ["Bitter"],
+        geist: ["Geist"],
+        geistMono: ["GeistMono"],
+        poppins: ["Poppins", "sans-serif"],
+      },
     },
   },
   plugins: [],

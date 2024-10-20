@@ -25,3 +25,52 @@ body {
     text-wrap: balance;
   }
 }
+
+@font-face {
+  font-family: "GeistMono";
+  src: url("./fonts/GeistMonoVF.woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("./fonts/GeistVF.woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Bitter";
+  src: url("./fonts/Bitter-VariableFont_wght.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+#comingSoon {
+  visibility: hidden;
+  position: relative;
+}
+
+#comingSoon:after {
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-wrap: nowrap;
+  content: "COMING SOON";
+  display: block;
+}
+
+#hero {
+  background-image: linear-gradient(
+      to bottom,
+      rgb(0, 0, 0),
+      rgba(0, 0, 0, 0.574),
+      rgb(0, 0, 0)
+    ),
+    url("../public/heroBackground.png");
+  background-position: center;
+  background-size: cover;
+}

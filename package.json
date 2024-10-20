@@ -9,11 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/font": "^14.2.15",
+    "@devnomic/marquee": "^1.0.2",
     "@nextui-org/react": "^2.4.8",
     "lucide-react": "^0.453.0",
+    "framer-motion": "^11.11.9",
     "next": "14.2.15",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-fast-marquee": "^1.6.5"
   },
   "devDependencies": {
     "@types/node": "^20",

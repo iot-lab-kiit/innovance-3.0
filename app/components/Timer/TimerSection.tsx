@@ -1,5 +1,5 @@
 import React from "react";
-import Timer from "@/app/components/TimerComponents/Timer";
+import Timer from "./Timer";
 import { Bitter } from "@next/font/google";
 import { Poppins } from "@next/font/google";
 

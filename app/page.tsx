@@ -1,12 +1,16 @@
 "use client";
-import Hero from "./components/HeroComponents/Hero";
-import TimerSection from "./components/TimerComponents/TimerSection";
+import Footer from "./components/global/Footer";
+import Hero from "./components/Hero/Hero";
+import StatisticsShowcase from "./components/StatisticsShowcase/StatisticsShowcase";
+import TimerSection from "./components/Timer/TimerSection";
 
 export default function Home() {
   return (
     <>
       <Hero />
+      <StatisticsShowcase />
       <TimerSection />
+      <Footer />
     </>
   );
 }

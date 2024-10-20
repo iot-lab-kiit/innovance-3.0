@@ -9,7 +9,7 @@ const StatisticsShowcase = () => {
                     <h1 className='text-[35px] md:text-[40px] font-serif font-[600]'>Tech that will<br />blow you away</h1>
                     <div>
                         <p className='text-[16px] font-sans pr-2 md:w-[80%]'>
-                            Embark on a journey into groundbreaking technology that will leave you awe-inspired. Explore the future's most innovative solutions, connect with industry experts, and immerse yourself in a tech experience like no other.
+                            Embark on a journey into groundbreaking technology that will leave you awe-inspired. Explore the future&apos;s most innovative solutions, connect with industry experts, and immerse yourself in a tech experience like no other.
                         </p>
                     </div>
                     <a href="/gallery" className='flex justify-center items-center px-4 py-2 w-1/2 rounded-lg bg-gradient-to-r from-blue-400 to-cyan-500 text-black text-base font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300'>

@@ -28,13 +28,13 @@ const Footer = () => {
             <footer className="w-full h-60 bg-black text-white flex flex-col items-center justify-center space-y-6">
                 <div className="flex space-x-6">
                     <a href="https://www.instagram.com/iot.lab.kiit/?hl=en" className="hover:scale-110 transform transition duration-300">
-                        <img src="/icons/instagram_footer_dark.svg" alt="Instagram" className="w-6 h-6" />
+                        <Image width={10} height={10} src="/icons/instagram_footer_dark.svg" alt="Instagram" className="w-6 h-6" />
                     </a>
                     <a href="https://x.com/iotlabkiit" className="hover:scale-110 transform transition duration-300">
-                        <img src="/icons/twitter_footer_dark.svg" alt="Twitter" className="w-6 h-6" />
+                        <Image width={10} height={10} src="/icons/twitter_footer_dark.svg" alt="Twitter" className="w-6 h-6" />
                     </a>
                     <a href="https://www.linkedin.com/company/iotlabkiit/mycompany/" className="hover:scale-110 transform transition duration-300">
-                        <img src="/icons/linkedin_footer_dark.svg" alt="Linkedin" className="w-6 h-6" />
+                        <Image width={10} height={10} src="/icons/linkedin_footer_dark.svg" alt="Linkedin" className="w-6 h-6" />
                     </a>
                 </div>
 

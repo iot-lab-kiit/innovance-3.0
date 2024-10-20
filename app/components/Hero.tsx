@@ -2,8 +2,10 @@
 import Marquee from "react-fast-marquee";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Hero() {
+  const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="h-[70vh] md:h-screen bg-background">
       <div id="hero" className="h-3/4 flex justify-center items-center">
@@ -24,16 +26,44 @@ export default function Hero() {
           >
             Innovance 3.0
           </motion.div>
-          <motion.button
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="text-xs sm:text-base border-foreground border w-fit m-auto py-3 px-7 font-geistMono"
+          <div
+            className="relative w-fit m-auto"
+            onMouseEnter={(e) => {
+              setIsHovered(!isHovered);
+            }}
+            onMouseLeave={(e) => {
+              setIsHovered(!isHovered);
+            }}
           >
-            GET TICKET
-          </motion.button>
+            <motion.div
+              initial={{ width: "100%", y: 100, opacity: 0 }}
+              animate={
+                isHovered
+                  ? { width: 0, y: 0, opacity: 1 }
+                  : { width: "100%", y: 0, opacity: 1 }
+              }
+              transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+              className="absolute w-full h-full bg-blue-500"
+            ></motion.div>
+            <motion.button
+              initial={{ y: 100, opacity: 0 }}
+              animate={
+                isHovered
+                  ? {
+                      color: "#3b82f6",
+                      borderColor: "#3b82f6",
+                      y: 0,
+                      opacity: 1,
+                    }
+                  : { y: 0, opacity: 1 }
+              }
+              transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+              whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+              className="text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 font-geistMono"
+            >
+              GET TICKET
+            </motion.button>
+          </div>
         </div>
       </div>
       <div id="marquee" className="font-geistMono">

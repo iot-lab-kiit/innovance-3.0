@@ -12,9 +12,9 @@ const StatisticsShowcase = () => {
                             Embark on a journey into groundbreaking technology that will leave you awe-inspired. Explore the future&apos;s most innovative solutions, connect with industry experts, and immerse yourself in a tech experience like no other.
                         </p>
                     </div>
-                    <a href="/gallery" className='flex justify-center items-center px-4 py-2 w-1/2 rounded-lg bg-gradient-to-r from-blue-400 to-cyan-500 text-black text-base font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300'>
+                    <a href="/gallery" className='flex justify-center items-center px-4 py-2 w-1/2  bg-gradient-to-r from-blue-400 to-blue-500 text-black text-base font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300'>
                         VIEW MORE
-                    </a>
+                    </a>
                 </div>
                 <div className='md:w-1/2 h-full'>
                     <div className='py-2 pb-4 w-full border-t-2 border-t-[#3B82F6] flex flex-col'>

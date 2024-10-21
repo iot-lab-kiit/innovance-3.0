@@ -1,0 +1,51 @@
+{
+    "days": [
+      {
+        "day": 1,
+        "schedule": [
+          {
+            "time": "09:00 - 10:00",
+            "title": "Panel Discussion: Tech Trends",
+            "description": "Sebastian Müller",
+            "location": "campus-17"
+          },
+          {
+            "time": "10:00 - 11:30",
+            "title": "Workshop: Cloud Computing Basics",
+            "description": "Sebastian Müller",
+            "location": "campus-17"
+          },
+          {
+            "time": "12:00 - 01:30",
+            "title": "Fireside Chat with Tech Leaders",
+            "description": "Sebastian Müller",
+            "location": "campus-17"
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "schedule": [
+          {
+            "time": "09:00 - 10:00",
+            "title": "Panel Discussion: Tech Trends",
+            "description": "hello",
+            "location": "campus-17"
+          },
+          {
+            "time": "10:00 - 11:30",
+            "title": "Workshop: Cloud Computing Basics",
+            "description": "hello",
+            "location": "campus-17"
+          },
+          {
+            "time": "12:00 - 01:30",
+            "title": "Fireside Chat with Tech Leaders",
+            "description": "hello",
+            "location": "campus-17"
+          }
+        ]
+      }
+    ]
+  }
+  

@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Hero() {
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <div className="h-[70vh] md:h-screen bg-background">
+    <div className="h-[70vh] md:h-screen bg-[#101010]">
       <div id="hero" className="h-3/4 flex justify-center items-center">
         <div className="text-center flex flex-col gap-8">
           <motion.div

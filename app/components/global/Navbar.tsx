@@ -18,7 +18,10 @@ export default function Navbar() {
   };
   return (
     <div className="font-geistMono z-30 relative">
-      <nav className="flex justify-between items-center p-4 bg-background z-40 relative">
+      <nav
+        className="flex justify-between items-center p-4 shadow-md shadow-blue-500 z-40 relative bg-black"
+        style={{ boxShadow: "0px 4px 6px rgba(59, 130, 246, 0.3)" }}
+      >
         <div>logo</div>
         <div className="hidden md:flex md:gap-9">
           <Link
@@ -79,7 +82,7 @@ export default function Navbar() {
           <HamburgerButton isOpen={isOpen} toggleMenu={toggleMenu} />
         </div>
       </nav>
-      <hr className="mx-4 z-40 relative" />
+      {/* <hr className="mx-4 z-40 relative" /> */}
       <AnimatePresence>
         {isOpen && (
           <div className={`relative`}>

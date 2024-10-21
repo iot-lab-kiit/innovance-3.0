@@ -25,7 +25,7 @@ const Footer = () => {
                 </Marquee>
             </div>
             <br /><br /><br /><br />
-            <footer className="w-full h-60 bg-black text-white flex flex-col items-center justify-center space-y-6">
+            <footer className="w-full h-60 text-white flex flex-col items-center justify-center space-y-6">
                 <div className="flex space-x-6">
                     <a href="https://www.instagram.com/iot.lab.kiit/?hl=en" className="hover:scale-110 transform transition duration-300">
                         <Image width={10} height={10} src="/icons/instagram_footer_dark.svg" alt="Instagram" className="w-6 h-6" />

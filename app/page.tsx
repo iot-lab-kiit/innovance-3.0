@@ -1,6 +1,7 @@
 "use client";
 
 import Footer from "./components/global/Footer";
+import Card from "./components/CardComponents/Card";
 import Hero from "./components/Hero/Hero";
 import StatisticsShowcase from "./components/StatisticsShowcase/StatisticsShowcase";
 import TimerSection from "./components/Timer/TimerSection";
@@ -13,8 +14,9 @@ export default function Home() {
       <Hero />
       <StatisticsShowcase />
       <TimerSection />
-      <EventSchedule/>
-      <FAQ/>
+      <EventSchedule />
+      <Card />
+      <FAQ />
       <Footer />
     </>
   );

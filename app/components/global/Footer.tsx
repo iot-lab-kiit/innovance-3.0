@@ -5,7 +5,7 @@ import Marquee from "react-fast-marquee";
 const Footer = () => {
   return (
     <>
-      <div className="bg-blue-500 absolute z-10 py-1">
+      <div className="bg-blue-500 absolute z-10 py-1 w-screen">
         <Marquee
           speed={20}
           direction="right"

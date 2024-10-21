@@ -15,6 +15,7 @@ export default function Home() {
       <StatisticsShowcase />
       <TimerSection />
       <EventSchedule />
+      <Card />
       <FAQ />
       <Footer />
     </>

@@ -10,7 +10,7 @@ const Footer = () => {
           speed={20}
           direction="right"
           autoFill={true}
-          className="py-3 bg-blue-500"
+          className="py-3 bg-blue-500 select-none"
         >
           <span id="comingSoon" className="text-background">
             RESERVE YOUR SPOT NOW

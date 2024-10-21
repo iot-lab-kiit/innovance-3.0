@@ -72,7 +72,7 @@ export default function Hero() {
             speed={30}
             direction="right"
             autoFill={true}
-            className="py-3 bg-blue-500"
+            className="py-3 bg-blue-500 select-none"
           >
             <span className="px-12 text-background">RESERVE YOUR SPOT NOW</span>
             <Image src="/icons/star.svg" width={15} height={15} alt="star" />
@@ -83,7 +83,7 @@ export default function Hero() {
             speed={20}
             direction="right"
             autoFill={true}
-            className="py-3 bg-blue-500"
+            className="py-3 bg-blue-500 select-none"
           >
             <span id="comingSoon" className="text-background">
               RESERVE YOUR SPOT NOW

@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Hero() {
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <div className="h-[70vh] md:h-screen bg-background">
+    <div className="h-[70vh] md:h-screen bg-[#101010]">
       <div id="hero" className="h-3/4 flex justify-center items-center">
         <div className="text-center flex flex-col gap-8">
           <motion.div
@@ -72,7 +72,7 @@ export default function Hero() {
             speed={30}
             direction="right"
             autoFill={true}
-            className="py-3 bg-blue-500"
+            className="py-3 bg-blue-500 select-none"
           >
             <span className="px-12 text-background">RESERVE YOUR SPOT NOW</span>
             <Image src="/icons/star.svg" width={15} height={15} alt="star" />
@@ -83,7 +83,7 @@ export default function Hero() {
             speed={20}
             direction="right"
             autoFill={true}
-            className="py-3 bg-blue-500"
+            className="py-3 bg-blue-500 select-none"
           >
             <span id="comingSoon" className="text-background">
               RESERVE YOUR SPOT NOW

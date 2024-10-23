@@ -19,7 +19,7 @@ const config: Config = {
         bitter: ["Bitter"],
         geist: ["Geist"],
         geistMono: ["GeistMono"],
-        poppins: ["Poppins", "sans-serif"],
+        poppins: ["Poppins"],
       },
     },
   },

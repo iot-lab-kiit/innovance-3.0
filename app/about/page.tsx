@@ -1,6 +1,10 @@
+'use client'
 import React from 'react'
+import Footer from '../components/global/Footer';
 import { Bitter } from '@next/font/google'
+import Star from '@/app/components/global/Star'
 import { Poppins } from '@next/font/google';
+import TimerSection from '../components/Timer/TimerSection';
 const bitter = Bitter({ subsets: ['latin'] });
 const poppins =Poppins({ subsets: ['latin'], weight: ['400', '700'] });
 function page() {
@@ -91,8 +95,12 @@ function page() {
            </div>  
         </div>
         </div> </div>
+       <Star />
+       <TimerSection />
+     <Footer />
   </section>
   )
 }
 
 export default page
+

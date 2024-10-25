@@ -5,6 +5,7 @@ import { Poppins } from "@next/font/google";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import Star from "../global/Star";
+import Link from "next/link";
 
 const bitter = Bitter({
   weight: ["400", "700"],
@@ -59,6 +60,7 @@ const TimerSection = () => {
                 transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                 className="absolute w-full h-full bg-blue-500"
               ></motion.div>
+              <Link href="/tickets">
               <motion.button
                 animate={
                   isHovered
@@ -76,6 +78,8 @@ const TimerSection = () => {
               >
                 BUY TICKET
               </motion.button>
+              </Link>
+              
             </div>
           </div>
         </div>

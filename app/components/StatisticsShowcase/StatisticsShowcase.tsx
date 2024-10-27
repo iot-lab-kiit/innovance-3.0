@@ -1,5 +1,6 @@
 import React from 'react'
 import StatisticsRow from './StatisticsRow'
+import CountUp from 'react-countup'
 
 const StatisticsShowcase = () => {
     return (
@@ -14,15 +15,21 @@ const StatisticsShowcase = () => {
                     </div>
                     <a href="/gallery" className='flex justify-center items-center px-4 py-2 w-1/2  bg-gradient-to-r from-blue-400 to-blue-500 text-black text-base font-semibold shadow-lg hover:scale-105 hover:shadow-xl transition-transform duration-300'>
                         VIEW MORE
-                    </a>
+                    </a>
                 </div>
                 <div className='md:w-1/2 h-full'>
                     <div className='py-2 pb-4 w-full border-t-2 border-t-[#3B82F6] flex flex-col'>
-                        <h1 className='text-[50px] md:text-[60px] font-[600]'>100%</h1>
+                        <h1 className='text-[50px] md:text-[60px] font-[600]'>
+                            <CountUp
+                                start={0}
+                                end={100}
+                                duration={3}
+                            />%
+                        </h1>
                         <p className='text-md'>An opportunity to connect with industry leaders and leading companies in the sector.</p>
                     </div>
-                    <StatisticsRow count1={"20"} title1='Event Speakers' count2={"400"} title2='Diverse Tech Sessions' />
-                    <StatisticsRow count1={"15+"} title1='Exhibitors' count2={"4"} title2='Tech Sessions' />
+                    <StatisticsRow count1={20} title1='Event Speakers' count2={400} title2='Diverse Tech Sessions' />
+                    <StatisticsRow count1={15} title1='Exhibitors' count2={4} title2='Tech Sessions' />
                 </div>
             </div>
         </div>

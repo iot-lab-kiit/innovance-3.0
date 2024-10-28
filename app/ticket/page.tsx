@@ -82,7 +82,7 @@ const TicketPage = () => {
                   className="w-full h-14 p-4 text-white placeholder-white bg-white bg-opacity-20 border-none rounded-lg backdrop-blur-md shadow-lg outline-none"
                   required
                 />
-                <i className="absolute top-1/2 right-4 transform -translate-y-1/2 bx bx-user text-white"></i>
+                
               </div>
 
               <div className="relative mb-4">
@@ -92,7 +92,7 @@ const TicketPage = () => {
                   className="w-full h-14 p-4 text-white placeholder-white bg-white bg-opacity-20 border-none rounded-lg backdrop-blur-md shadow-lg outline-none"
                   required
                 />
-                <i className="absolute top-1/2 right-4 transform -translate-y-1/2 bx bx-lock-alt text-white"></i>
+                
               </div>
 
               {/* QR Code Image */}
@@ -109,14 +109,6 @@ const TicketPage = () => {
                 Hope to See You Soon
                 <i className="bx bx-right-arrow-alt"></i>
               </button>
-            </div>
-
-            {/* Social Login */}
-            <div className="flex gap-5 mt-6">
-              <p className="text-white">Connect with us for updates</p>
-              <i className="bx bxl-facebook text-white text-2xl p-2 rounded-full bg-white bg-opacity-20 shadow-lg cursor-pointer"></i>
-              <i className="bx bxl-twitter text-white text-2xl p-2 rounded-full bg-white bg-opacity-20 shadow-lg cursor-pointer"></i>
-              <i className="bx bxl-instagram text-white text-2xl p-2 rounded-full bg-white bg-opacity-20 shadow-lg cursor-pointer"></i>
             </div>
           </div>
         </div>

@@ -32,6 +32,11 @@ const RegistrationForm = () => {
     setFormData({ ...formData, [e.currentTarget.id]: e.currentTarget.value });
   };
 
+  const handleSelectChanges = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (step === 2) {
@@ -121,14 +126,19 @@ const RegistrationForm = () => {
                     onChange={handleChange}
                   />
                 )}
-                <input
-                  type="checkbox"
-                  onChange={() => {
-                    setNumberFieldState(!numberFieldState);
-                    setFormData({ ...formData, whatsapp: formData.phone });
-                  }}
-                ></input>
+                <div className="flex items-center justify-center">
+                  <input
+                    type="checkbox"
+                    className="w-6 h-6  rounded-full border-2 border-gray-300 checked:bg-blue-500 checked:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onChange={() => {
+                      setNumberFieldState(!numberFieldState);
+                      setFormData({ ...formData, whatsapp: formData.phone });
+                    }}
+                  ></input>
+                </div>
               </div>
+
+              {/* Roll Number */}
               <div className="flex mb-4 gap-4">
                 <input
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -138,23 +148,42 @@ const RegistrationForm = () => {
                   value={formData.roll}
                   onChange={handleChange}
                 />
-                <input
+
+                {/* Branch */}
+                <select
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  type="text"
                   id="branch"
-                  placeholder="Branch"
                   value={formData.branch}
-                  onChange={handleChange}
-                />
+                  onChange={handleSelectChanges}
+                >
+                  <option value="" disabled>
+                    Select Branch
+                  </option>
+                  <option value="CSE">CSE</option>
+                  <option value="IT">IT</option>
+                  <option value="ECSE">ECSE</option>
+                  <option value="EEE">EEE</option>
+                  <option value="ECE">ECE</option>
+                  <option value="Mech">Mech</option>
+                  <option value="Civil">Civil</option>
+                </select>
               </div>
-              <input
+
+              {/* Year */}
+              <select
                 className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                type="text"
                 id="year"
-                placeholder="Enter your year"
                 value={formData.year}
-                onChange={handleChange}
-              />
+                onChange={handleSelectChanges}
+              >
+                <option value="" disabled>
+                  Select your year
+                </option>
+                <option value="1st year">1st Year</option>
+                <option value="2nd year">2nd Year</option>
+                <option value="3rd year">3rd Year</option>
+                <option value="4th year">4th Year</option>
+              </select>
 
               <div
                 className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"

@@ -63,8 +63,7 @@ const RegistrationForm = () => {
     img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
   };
 
-  const handleSubmit = async (e: React.QRFormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     if (step === 2) {
       try {
         setIsPending(true);

@@ -1,0 +1,403 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Poppins } from "@next/font/google";
+import QRCode from "react-qr-code";
+import { useRef } from "react";
+const poppins = Poppins({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+});
+
+const RegistrationForm = () => {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    branch: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    phone: "",
+    roll: "",
+    total_fare: "",
+    txn_id: "",
+    type: "offline",
+    whatsapp: "",
+    year: "",
+  });
+  const [numberFieldState, setNumberFieldState] = useState(false);
+  //   const [isHovered, setIsHovered] = useState(false);
+  const [uniqueId, setUniqueId] = useState(null);
+  const [isPending, setIsPending] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.currentTarget.id]: e.currentTarget.value });
+  };
+
+  const handleSelectChanges = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const qrRef = useRef(null);
+
+  const handleDownloadQRCode = () => {
+    if (!qrRef.current) return;
+    const svg = (qrRef.current as HTMLElement).querySelector("svg");
+    if (!svg) return;
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new window.Image();
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx?.drawImage(img, 0, 0);
+      const pngFile = canvas.toDataURL("image/png");
+      const downloadLink = document.createElement("a");
+      downloadLink.href = pngFile;
+      downloadLink.download = "innovance_virtial_ticket_status.png";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    };
+    img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
+  };
+
+  const handleSubmit = async () => {
+    if (step === 2) {
+      try {
+        setIsPending(true);
+        const response = await fetch("/api/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+        const data = await response.json();
+        console.log(data?.data.id);
+        setUniqueId(data?.data.id);
+        setIsPending(false);
+        setStep(3);
+      } catch (error) {
+        console.error("Error:", error);
+        setIsPending(false);
+      }
+    } else {
+      setStep(step + 1);
+    }
+  };
+  const [isHovered, setIsHovered] = useState(false);
+  return (
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-8">
+      <div className="p-6 sm:p-10 rounded-lg shadow-lg max-w-4xl w-full  text-white">
+        <h1 className="text-center mb-6 sm:mb-10 font-medium font-bitter md:text-5xl text-2xl sm:text-5xl lg:text-6xl">
+          Registration Form
+        </h1>
+        <form onSubmit={handleSubmit}>
+          {step === 1 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {/* Personal Info */}
+              <div className="flex mb-4 gap-4">
+                <input
+                  className="w-[70%] px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="text"
+                  id="first_name"
+                  required
+                  placeholder="First Name"
+                  value={formData.first_name}
+                  onChange={handleChange}
+                />
+                <input
+                  className="w-[30%] px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="text"
+                  id="last_name"
+                  placeholder="Last Name"
+                  value={formData.last_name}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  className="w-full px-4  py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="email"
+                  id="email"
+                  required
+                  placeholder="KIIT Email ID"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex mb-4 gap-4">
+                <input
+                  className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="text"
+                  id="phone"
+                  required
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
+
+                {!numberFieldState && (
+                  <input
+                    className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    type="text"
+                    id="whatsapp"
+                    required
+                    placeholder="WhatsApp Number"
+                    value={formData.whatsapp}
+                    onChange={handleChange}
+                  />
+                )}
+              </div>
+
+              <div className="flex items-center  py-2 pl-2 mr-3">
+                <p className="text-red text-sm text-gray-300">
+                  Whatsapp Number is same as your Phone Number *
+                </p>
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 mx-5 rounded-full border-2 text-gray-400 border-gray-300 checked:bg-blue-500 checked:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={() => {
+                    setNumberFieldState(!numberFieldState);
+                    setFormData({ ...formData, whatsapp: formData.phone });
+                  }}
+                ></input>
+              </div>
+
+              {/* Roll Number */}
+              <div className="flex mb-4 gap-4">
+                <input
+                  className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="text"
+                  id="roll"
+                  required
+                  placeholder="Roll Number"
+                  value={formData.roll}
+                  onChange={handleChange}
+                />
+
+                {/* Branch */}
+                <select
+                  className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  id="branch"
+                  required
+                  value={formData.branch}
+                  onChange={handleSelectChanges}
+                >
+                  <option value="" disabled>
+                    Select Branch
+                  </option>
+                  <option value="CSE">CSE</option>
+                  <option value="IT">IT</option>
+                  <option value="ECSE">ECSE</option>
+                  <option value="EEE">EEE</option>
+                  <option value="ECE">ECE</option>
+                  <option value="Mech">Mech</option>
+                  <option value="Civil">Civil</option>
+                </select>
+              </div>
+
+              {/* Year */}
+              <select
+                className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                id="year"
+                value={formData.year}
+                required
+                onChange={handleSelectChanges}
+              >
+                <option value="" disabled>
+                  Select your year
+                </option>
+                <option value="1st year">1st Year</option>
+                <option value="2nd year">2nd Year</option>
+                <option value="3rd year">3rd Year</option>
+                <option value="4th year">4th Year</option>
+              </select>
+
+              <div
+                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+                onMouseEnter={() => {
+                  setIsHovered(!isHovered);
+                }}
+                onMouseLeave={() => {
+                  setIsHovered(!isHovered);
+                }}
+              >
+                <motion.div
+                  animate={
+                    isHovered
+                      ? { width: 0, y: 0, opacity: 1 }
+                      : { width: "100%", y: 0, opacity: 1 }
+                  }
+                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                  className="absolute w-full h-full bg-blue-500"
+                ></motion.div>
+
+                <motion.button
+                  animate={
+                    isHovered
+                      ? {
+                          color: "#3b82f6",
+                          borderColor: "#3b82f6",
+                          y: 0,
+                          opacity: 1,
+                        }
+                      : { y: 0, opacity: 1 }
+                  }
+                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                  whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                >
+                  REGISTER
+                </motion.button>
+              </div>
+            </motion.div>
+          )}
+
+          {step === 2 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {/* Payment Info */}
+              <div className="mb-4 text-center">
+                <p>Scan the QR code below to make payment:</p>
+                <Image
+                  src="/qr-code.svg"
+                  alt="QR Code"
+                  className="w-40 mx-auto my-4"
+                  width={50}
+                  height={50}
+                />
+
+                {/* Total Fare */}
+                <div className="mb-4">
+                  <input
+                    value={"Registration - Rs 249"}
+                    className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    type="text"
+                    id="total_fare"
+                    placeholder="Enter the total fare"
+                  />
+                </div>
+
+                <input
+                  className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="text"
+                  id="txn_id"
+                  placeholder="Transaction ID"
+                  value={formData.txn_id}
+                  onChange={handleChange}
+                />
+              </div>
+
+              {/* Submit Button */}
+              <div
+                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+                onMouseEnter={() => {
+                  setIsHovered(!isHovered);
+                }}
+                onMouseLeave={() => {
+                  setIsHovered(!isHovered);
+                }}
+              >
+                <motion.div
+                  animate={
+                    !isHovered
+                      ? { width: 0, y: 0, opacity: 1 }
+                      : { width: "100%", y: 0, opacity: 1 }
+                  }
+                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                  className="absolute w-full h-full bg-blue-500"
+                ></motion.div>
+
+                <motion.button
+                  animate={
+                    !isHovered
+                      ? {
+                          color: "#3b82f6",
+                          borderColor: "#3b82f6",
+                          y: 0,
+                          opacity: 1,
+                        }
+                      : { y: 0, opacity: 1 }
+                  }
+                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                  whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                >
+                  SUBMIT
+                </motion.button>
+              </div>
+            </motion.div>
+          )}
+
+          {step === 3 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {isPending ? (
+                <div className="flex flex-col items-center">
+                  <p className="mb-4 text-center">Processing...</p>
+                  <Image
+                    src="/backgrounds/star_image_blue.jpg"
+                    alt="Loading"
+                    className="w-20"
+                    width={50}
+                    height={50}
+                  />
+                </div>
+              ) : (
+                <motion.div
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  animate={{ scaleX: 1, opacity: 1 }}
+                  id="hero"
+                  exit={{ scaleX: 0, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="mx-auto text-center flex flex-col items-center  justify-center gap-2 w-fit max-w-4xl h-[600px] border border-white bg-opacity-5 rounded-3xl backdrop-blur-md"
+                >
+                  <h2 className="text-2xl mb-4">You have registered!</h2>
+                  <span>Your Participation ID:</span>
+                  <span className="text-lg font-bold text-blue-500 mx-3">
+                    {uniqueId}
+                  </span>
+
+                  <div ref={qrRef}>
+                    <QRCode
+                      size={256}
+                      value={`https://localhost/ticket/${uniqueId}`}
+                      viewBox={`0 0 256 256`}
+                    />
+                  </div>
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDownloadQRCode();
+                    }}
+                    className="bg-blue-500 rounded px-5 py-1 text-center text-sm my-4 cursor-pointer"
+                  >
+                    Download QR Code
+                  </div>
+                  <span className="text-sm italic text-blue-500 mx-6">
+                    Please wait for our team to validate and approve your
+                    ticket.Scan this QR Code to check the status of it!
+                  </span>
+                </motion.div>
+              )}
+            </motion.div>
+          )}
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default RegistrationForm;

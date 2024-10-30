@@ -41,7 +41,7 @@ const TimerSection = () => {
             >
               RESERVE YOUR SPOT NOW
             </h1>
-            <Timer launchDate="2024-11-08T17:00:00" />
+            <Timer launchDate="2024-11-09T17:00:00" />
             <div
               className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
               onMouseEnter={() => {
@@ -60,31 +60,30 @@ const TimerSection = () => {
                 transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                 className="absolute w-full h-full bg-blue-500"
               ></motion.div>
-              <Link href="/tickets">
-              <motion.button
-                animate={
-                  isHovered
-                    ? {
-                        color: "#3b82f6",
-                        borderColor: "#3b82f6",
-                        y: 0,
-                        opacity: 1,
-                      }
-                    : { y: 0, opacity: 1 }
-                }
-                transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
-              >
-                BUY TICKET
-              </motion.button>
+              <Link href="/registrations">
+                <motion.button
+                  animate={
+                    isHovered
+                      ? {
+                          color: "#3b82f6",
+                          borderColor: "#3b82f6",
+                          y: 0,
+                          opacity: 1,
+                        }
+                      : { y: 0, opacity: 1 }
+                  }
+                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                  whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                >
+                  BUY TICKET
+                </motion.button>
               </Link>
-              
             </div>
           </div>
         </div>
       </div>
-      <Star/>
+      <Star />
     </div>
   );
 };

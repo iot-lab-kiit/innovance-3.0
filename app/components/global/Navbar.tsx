@@ -73,13 +73,15 @@ export default function Navbar() {
             transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
             className="absolute w-full h-full bg-blue-500"
           ></motion.div>
-          <motion.button
-            transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-            whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-            className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
-          >
-            GET TICKET
-          </motion.button>
+          <Link href="/registrations">
+            <motion.button
+              transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+              whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+              className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
+            >
+              GET TICKET
+            </motion.button>
+          </Link>
         </div>
         <div className="md:hidden flex justify-center items-center">
           <HamburgerButton isOpen={isOpen} toggleMenu={toggleMenu} />

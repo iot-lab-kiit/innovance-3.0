@@ -116,7 +116,7 @@ const TicketPage = () => {
               Virtual Ticket
             </h2>
 
-            {userData && (
+            {userData && !error && (
               <div className="w-full space-y-4">
                 <div className="relative mb-4">
                   <p className="w-full h-14 p-4 text-white bg-white bg-opacity-20 border-none rounded-lg backdrop-blur-md shadow-lg outline-none">

@@ -8,12 +8,10 @@ export async function POST(request: Request) {
       `${process.env.NEXT_PUBLIC_BASE_URL}/items/innovance_registration_2024`,
       {
         method: "POST",
-        headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` }
+        headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
         body: JSON.stringify(data),
       }
     );
-
-    console.log(apiResponse);
     if (!apiResponse.ok) {
       throw new Error("Failed to register user");
     }

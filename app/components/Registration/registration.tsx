@@ -42,7 +42,7 @@ const RegistrationForm = () => {
 
   const handleDownloadQRCode = () => {
     if (!qrRef.current) return;
-    const svg = qrRef.current.querySelector("svg");
+    const svg = (qrRef.current as HTMLElement).querySelector("svg");
     if (!svg) return;
     const svgData = new XMLSerializer().serializeToString(svg);
     const canvas = document.createElement("canvas");
@@ -51,7 +51,7 @@ const RegistrationForm = () => {
     img.onload = () => {
       canvas.width = img.width;
       canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
+      ctx?.drawImage(img, 0, 0);
       const pngFile = canvas.toDataURL("image/png");
       const downloadLink = document.createElement("a");
       downloadLink.href = pngFile;
@@ -63,7 +63,7 @@ const RegistrationForm = () => {
     img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.QRFormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (step === 2) {
       try {

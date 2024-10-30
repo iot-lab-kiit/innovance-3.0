@@ -41,7 +41,7 @@ const TimerSection = () => {
             >
               RESERVE YOUR SPOT NOW
             </h1>
-            <Timer launchDate="2024-11-08T17:00:00" />
+            <Timer launchDate="2024-11-09T17:00:00" />
             <div
               className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
               onMouseEnter={() => {

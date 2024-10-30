@@ -43,7 +43,7 @@ const RegistrationForm = () => {
       try {
         setIsPending(true);
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/items/innovance_registration_2024`,
+          "/api/register",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Poppins } from "@next/font/google";
@@ -18,27 +18,26 @@ const RegistrationForm = () => {
     last_name: "",
     phone: "",
     roll: "",
-    total_fare: "",
+    total_fare: "249",
     txn_id: "",
     type: "offline",
     whatsapp: "",
     year: "",
   });
+
+  const qrRef = useRef(null);
   const [numberFieldState, setNumberFieldState] = useState(false);
   //   const [isHovered, setIsHovered] = useState(false);
   const [uniqueId, setUniqueId] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setFormData({ ...formData, [e.currentTarget.id]: e.currentTarget.value });
-  };
 
   const handleSelectChanges = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
-
-  const qrRef = useRef(null);
 
   const handleDownloadQRCode = () => {
     if (!qrRef.current) return;
@@ -63,7 +62,8 @@ const RegistrationForm = () => {
     img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (step === 2) {
       try {
         setIsPending(true);
@@ -100,9 +100,9 @@ const RegistrationForm = () => {
               exit={{ opacity: 0 }}
             >
               {/* Personal Info */}
-              <div className="flex mb-4 gap-4">
+              <div className="flex my-3 gap-4">
                 <input
-                  className="w-[70%] px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="first_name"
                   required
@@ -111,7 +111,7 @@ const RegistrationForm = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="w-[30%] px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="last_name"
                   placeholder="Last Name"
@@ -119,7 +119,7 @@ const RegistrationForm = () => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="mb-4">
+              <div className="my-3">
                 <input
                   className="w-full px-4  py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="email"
@@ -130,8 +130,7 @@ const RegistrationForm = () => {
                   onChange={handleChange}
                 />
               </div>
-
-              <div className="flex mb-4 gap-4">
+              <div className="flex my-3 gap-4">
                 <input
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
@@ -155,11 +154,9 @@ const RegistrationForm = () => {
                 )}
               </div>
 
-              <div className="flex items-center  py-2 pl-2 mr-3">
-                <p className="text-red text-sm text-gray-300">
-                  Whatsapp Number is same as your Phone Number *
-                </p>
+              <div className="flex items-center my-3">
                 <input
+                  id="phone_whatsapp"
                   type="checkbox"
                   className="w-4 h-4 mx-5 rounded-full border-2 text-gray-400 border-gray-300 checked:bg-blue-500 checked:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   onChange={() => {
@@ -167,10 +164,16 @@ const RegistrationForm = () => {
                     setFormData({ ...formData, whatsapp: formData.phone });
                   }}
                 ></input>
+                <label
+                  className="text-red text-sm text-gray-300"
+                  htmlFor="phone_whatsapp"
+                >
+                  Whatsapp Number is same as your Phone Number *
+                </label>
               </div>
 
               {/* Roll Number */}
-              <div className="flex mb-4 gap-4">
+              <div className="flex my-3 gap-4">
                 <input
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
@@ -182,51 +185,55 @@ const RegistrationForm = () => {
                 />
 
                 {/* Branch */}
-                <select
-                  className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  id="branch"
-                  required
-                  value={formData.branch}
-                  onChange={handleSelectChanges}
-                >
-                  <option value="" disabled>
-                    Select Branch
-                  </option>
-                  <option value="CSE">CSE</option>
-                  <option value="IT">IT</option>
-                  <option value="ECSE">ECSE</option>
-                  <option value="EEE">EEE</option>
-                  <option value="ECE">ECE</option>
-                  <option value="Mech">Mech</option>
-                  <option value="Civil">Civil</option>
-                </select>
+                <div className="w-full px-4 bg-[#171717] rounded-lg focus-within:ring-2 focus-within:ring-blue-500 focus-outline:none">
+                  <select
+                    className={`w-full h-full bg-[#171717] focus:outline-none ${
+                      !formData.branch && "text-gray-400"
+                    }`}
+                    id="branch"
+                    required
+                    value={formData.branch}
+                    onChange={handleSelectChanges}
+                  >
+                    <option value="" disabled>
+                      Select Branch
+                    </option>
+                    <option value="CSE">CSE</option>
+                    <option value="IT">IT</option>
+                    <option value="ECSE">ECSE</option>
+                    <option value="EEE">EEE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="Mech">Mech</option>
+                    <option value="Civil">Civil</option>
+                  </select>
+                </div>
               </div>
 
               {/* Year */}
-              <select
-                className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                id="year"
-                value={formData.year}
-                required
-                onChange={handleSelectChanges}
-              >
-                <option value="" disabled>
-                  Select your year
-                </option>
-                <option value="1st year">1st Year</option>
-                <option value="2nd year">2nd Year</option>
-                <option value="3rd year">3rd Year</option>
-                <option value="4th year">4th Year</option>
-              </select>
+              <div className="w-full px-4 bg-[#171717] rounded-lg focus-within:ring-2 focus-within:ring-blue-500 focus-outline:none">
+                <select
+                  className={`w-full py-4 h-full bg-[#171717] focus:outline-none ${
+                    !formData.year && "text-gray-400"
+                  }`}
+                  id="year"
+                  value={formData.year}
+                  required
+                  onChange={handleSelectChanges}
+                >
+                  <option value="" disabled>
+                    Select your year
+                  </option>
+                  <option value="1">1st Year</option>
+                  <option value="2">2nd Year</option>
+                  <option value="3">3rd Year</option>
+                  <option value="4">4th Year</option>
+                </select>
+              </div>
 
               <div
                 className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
-                onMouseEnter={() => {
-                  setIsHovered(!isHovered);
-                }}
-                onMouseLeave={() => {
-                  setIsHovered(!isHovered);
-                }}
+                onMouseEnter={() => setIsHovered(!isHovered)}
+                onMouseLeave={() => setIsHovered(!isHovered)}
               >
                 <motion.div
                   animate={

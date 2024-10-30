@@ -2,7 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Poppins } from "@next/font/google";
-
+import QRCode from "react-qr-code";
+import { useRef } from "react";
 const poppins = Poppins({
   weight: ["400", "500", "700"],
   subsets: ["latin"],
@@ -37,21 +38,44 @@ const RegistrationForm = () => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
+  const qrRef = useRef(null);
+
+  const handleDownloadQRCode = () => {
+    if (!qrRef.current) return;
+    const svg = qrRef.current.querySelector("svg");
+    if (!svg) return;
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new window.Image();
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+      const pngFile = canvas.toDataURL("image/png");
+      const downloadLink = document.createElement("a");
+      downloadLink.href = pngFile;
+      downloadLink.download = "innovance_virtial_ticket_status.png";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    };
+    img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (step === 2) {
       try {
         setIsPending(true);
-        const response = await fetch(
-          "/api/register",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-          }
-        );
+        const response = await fetch("/api/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
         const data = await response.json();
-        setUniqueId(data.uniqueId);
+        console.log(data?.data.id);
+        setUniqueId(data?.data.id);
         setIsPending(false);
         setStep(3);
       } catch (error) {
@@ -66,7 +90,7 @@ const RegistrationForm = () => {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-8">
       <div className="p-6 sm:p-10 rounded-lg shadow-lg max-w-4xl w-full  text-white">
-        <h1 className="text-center mb-6 sm:mb-10 font-medium font-bitter md:text-5xl md:text-5xl text-2xl sm:text-5xl lg:text-6xl">
+        <h1 className="text-center mb-6 sm:mb-10 font-medium font-bitter md:text-5xl text-2xl sm:text-5xl lg:text-6xl">
           Registration Form
         </h1>
         <form onSubmit={handleSubmit}>
@@ -82,6 +106,7 @@ const RegistrationForm = () => {
                   className="w-[70%] px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="first_name"
+                  required
                   placeholder="First Name"
                   value={formData.first_name}
                   onChange={handleChange}
@@ -100,6 +125,7 @@ const RegistrationForm = () => {
                   className="w-full px-4  py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="email"
                   id="email"
+                  required
                   placeholder="KIIT Email ID"
                   value={formData.email}
                   onChange={handleChange}
@@ -111,6 +137,7 @@ const RegistrationForm = () => {
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="phone"
+                  required
                   placeholder="Phone Number"
                   value={formData.phone}
                   onChange={handleChange}
@@ -121,21 +148,26 @@ const RegistrationForm = () => {
                     className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     type="text"
                     id="whatsapp"
+                    required
                     placeholder="WhatsApp Number"
                     value={formData.whatsapp}
                     onChange={handleChange}
                   />
                 )}
-                <div className="flex items-center justify-center">
-                  <input
-                    type="checkbox"
-                    className="w-6 h-6  rounded-full border-2 border-gray-300 checked:bg-blue-500 checked:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    onChange={() => {
-                      setNumberFieldState(!numberFieldState);
-                      setFormData({ ...formData, whatsapp: formData.phone });
-                    }}
-                  ></input>
-                </div>
+              </div>
+
+              <div className="flex items-center  py-2 pl-2 mr-3">
+                <p className="text-red text-sm text-gray-300">
+                  Whatsapp Number is same as your Phone Number *
+                </p>
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 mx-5 rounded-full border-2 text-gray-400 border-gray-300 checked:bg-blue-500 checked:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={() => {
+                    setNumberFieldState(!numberFieldState);
+                    setFormData({ ...formData, whatsapp: formData.phone });
+                  }}
+                ></input>
               </div>
 
               {/* Roll Number */}
@@ -144,6 +176,7 @@ const RegistrationForm = () => {
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="roll"
+                  required
                   placeholder="Roll Number"
                   value={formData.roll}
                   onChange={handleChange}
@@ -153,6 +186,7 @@ const RegistrationForm = () => {
                 <select
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   id="branch"
+                  required
                   value={formData.branch}
                   onChange={handleSelectChanges}
                 >
@@ -174,6 +208,7 @@ const RegistrationForm = () => {
                 className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 id="year"
                 value={formData.year}
+                required
                 onChange={handleSelectChanges}
               >
                 <option value="" disabled>
@@ -310,7 +345,6 @@ const RegistrationForm = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              {/* Confirmation Page */}
               {isPending ? (
                 <div className="flex flex-col items-center">
                   <p className="mb-4 text-center">Processing...</p>
@@ -323,24 +357,41 @@ const RegistrationForm = () => {
                   />
                 </div>
               ) : (
-                <div className="text-center">
-                  <h2 className="text-2xl mb-4">Registration Confirmed!</h2>
-                  <p>Your Unique ID:</p>
-                  <p className="text-lg font-bold">{uniqueId}</p>
-                  <p className="mt-6">Details:</p>
-                  <div className="text-sm text-left">
-                    <p>
-                      Name: {formData.first_name} {formData.last_name}
-                    </p>
-                    <p>Email: {formData.email}</p>
-                    <p>Phone: {formData.phone}</p>
-                    <p>WhatsApp: {formData.whatsapp}</p>
-                    <p>Roll: {formData.roll}</p>
-                    <p>Branch: {formData.branch}</p>
-                    <p>Year: {formData.year}</p>
-                    <p>Transaction ID: {formData.txn_id}</p>
+                <motion.div
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  animate={{ scaleX: 1, opacity: 1 }}
+                  id="hero"
+                  exit={{ scaleX: 0, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="mx-auto text-center flex flex-col items-center  justify-center gap-2 w-fit max-w-4xl h-[600px] border border-white bg-opacity-5 rounded-3xl backdrop-blur-md"
+                >
+                  <h2 className="text-2xl mb-4">You have registered!</h2>
+                  <span>Your Participation ID:</span>
+                  <span className="text-lg font-bold text-blue-500 mx-3">
+                    {uniqueId}
+                  </span>
+
+                  <div ref={qrRef}>
+                    <QRCode
+                      size={256}
+                      value={`https://localhost/ticket/${uniqueId}`}
+                      viewBox={`0 0 256 256`}
+                    />
                   </div>
-                </div>
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDownloadQRCode();
+                    }}
+                    className="bg-blue-500 rounded px-5 py-1 text-center text-sm my-4 cursor-pointer"
+                  >
+                    Download QR Code
+                  </div>
+                  <span className="text-sm italic text-blue-500 mx-6">
+                    Please wait for our team to validate and approve your
+                    ticket.Scan this QR Code to check the status of it!
+                  </span>
+                </motion.div>
               )}
             </motion.div>
           )}

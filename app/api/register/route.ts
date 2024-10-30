@@ -8,7 +8,7 @@ export async function POST(request: Request) {
       `${process.env.NEXT_PUBLIC_BASE_URL}/items/innovance_registration_2024`,
       {
         method: "POST",
-        headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
+        headers: { Authorization: `Bearer ${process.env.TOKEN}` },
         body: JSON.stringify(data),
       }
     );
@@ -43,7 +43,7 @@ export async function GET(request: Request) {
       `${process.env.NEXT_PUBLIC_BASE_URL}/items/innovance_registration_2024/${id}`,
       {
         method: "GET",
-        headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}` },
+        headers: { Authorization: `Bearer ${process.env.TOKEN}` },
       }
     );
 

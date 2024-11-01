@@ -4,7 +4,7 @@ import CountUp from 'react-countup'
 
 const StatisticsShowcase = () => {
     return (
-        <div className='flex-grow bg-[#101010] flex justify-center items-center w-full font-sans py-8'>
+        <div className='flex-grow bg-[#101010] flex justify-center items-center w-full font-sans py-8 lg:h-screen h-fit'>
             <div className='w-[80%] md:w-[90%] lg:w-[70%] h-auto flex flex-col md:flex-row gap-4 justify-center items-center md:items-start'>
                 <div className='md:w-1/2 h-full flex flex-col justify-start gap-4 px-2 py-4'>
                     <h1 className='text-[35px] md:text-[40px] font-serif font-[600]'>Tech that will<br />blow you away</h1>

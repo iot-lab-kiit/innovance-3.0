@@ -32,7 +32,7 @@ const page = () => {
       </motion.div>
       <Star />
       <div className="mt-20 md:my-24 lg:my-28 mx-auto px-4 w-full flex flex-col md:flex-row gap-8 md:gap-14 justify-evenly items-center ">
-        <div className="w-full md:w-1/3 p-6 rounded-2xl h-auto border border-gray-500 flex flex-col gap-3 justify-center items-center">
+        {/* <div className="w-full md:w-1/3 p-6 rounded-2xl h-auto border border-gray-500 flex flex-col gap-3 justify-center items-center">
           <svg
             height="50"
             width="50"
@@ -47,7 +47,7 @@ const page = () => {
           </svg>
           <p className="font-bitter">ADDRESS</p>
           <p className="font-poppins">San Jose, CA</p>
-        </div>
+        </div> */}
         <div className="w-full md:w-1/3 p-6 rounded-2xl h-auto border border-gray-500 flex flex-col gap-3 justify-center items-center">
           <svg
             height="50"
@@ -62,7 +62,14 @@ const page = () => {
             />
           </svg>
           <p className="font-bitter">PHONE</p>
-          <p className="font-poppins">1234567890</p>
+          <div className="flex flex-wrap">
+          <a href="tel:+916297476549" className="font-poppins">
+            +91-6297476549 , 
+          </a>
+          <a href="tel:+916371942667" className="font-poppins">
+            +91-6371942667
+          </a>
+          </div>
         </div>
         <div className="w-full md:w-1/3 p-6 rounded-2xl h-auto border border-gray-500 flex flex-col gap-3 justify-center items-center">
           <svg
@@ -78,7 +85,7 @@ const page = () => {
             />
           </svg>
           <p className="font-bitter">EMAIL</p>
-          <p className="font-poppins">innovance@iot.kiit.in</p>
+          <a href="mailTo:iot.lab@kiit.ac.in" className="font-poppins">iot.lab@kiit.ac.in</a>
         </div>
       </div>
       <Star />

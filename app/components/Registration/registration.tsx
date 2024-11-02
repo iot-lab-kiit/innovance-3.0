@@ -283,9 +283,9 @@ const RegistrationForm = () => {
                   Send OTP
                 </button>
               </div>
-              <div className="my-4">
+              <div className="my-4 flex items-center justify-center">
                 <input
-                  className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-[50%] px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="otp"
                   required

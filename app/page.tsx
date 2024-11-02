@@ -17,7 +17,6 @@ export default function Home() {
       <Hero />
       <StatisticsShowcase />
       <About />
-
       <EventSchedule />
       <Star />
       {/* <Card /> */}

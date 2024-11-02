@@ -7,7 +7,7 @@ const bitter = Bitter({ subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 function About() {
   return (
-    <section className="bg-[#101010] min-h-96 w-full p-12">
+    <section className="bg-[#101010] min-h-96 w-full p-12" id="about">
       <Star />
       <div className="flex justify-center ">
         <div className="Section-title mt-8 ">
@@ -269,7 +269,7 @@ function About() {
           </div>
         </div>{" "}
       </div>
-      <Star/>
+      <Star />
     </section>
   );
 }

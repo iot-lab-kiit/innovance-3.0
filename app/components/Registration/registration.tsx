@@ -23,6 +23,7 @@ const RegistrationForm = () => {
     type: "offline",
     whatsapp: "",
     year: "",
+    otp: "",
   });
 
   const qrRef = useRef(null);
@@ -64,9 +65,10 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (step === 2) {
+    if (step === 3) {
       try {
         setIsPending(true);
+        console.log(formData);
         const response = await fetch("/api/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -265,8 +267,75 @@ const RegistrationForm = () => {
               </div>
             </motion.div>
           )}
-
           {step === 2 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {/* OTP Button */}
+              <div className="text-center">
+                <button
+                  type="button"
+                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                  onClick={() => alert("OTP Sent")}
+                >
+                  Send OTP
+                </button>
+              </div>
+              <div className="my-4">
+                <input
+                  className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="text"
+                  id="otp"
+                  required
+                  placeholder="Enter OTP"
+                  value={formData.otp || ""}
+                  onChange={handleChange}
+                />
+              </div>
+
+              {/* Submit Button */}
+              <div
+                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+                onMouseEnter={() => {
+                  setIsHovered(!isHovered);
+                }}
+                onMouseLeave={() => {
+                  setIsHovered(!isHovered);
+                }}
+              >
+                <motion.div
+                  animate={
+                    !isHovered
+                      ? { width: 0, y: 0, opacity: 1 }
+                      : { width: "100%", y: 0, opacity: 1 }
+                  }
+                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                  className="absolute w-full h-full bg-blue-500"
+                ></motion.div>
+
+                <motion.button
+                  animate={
+                    !isHovered
+                      ? {
+                          color: "#3b82f6",
+                          borderColor: "#3b82f6",
+                          y: 0,
+                          opacity: 1,
+                        }
+                      : { y: 0, opacity: 1 }
+                  }
+                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                  whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                >
+                  SUBMIT
+                </motion.button>
+              </div>
+            </motion.div>
+          )}
+          {step === 3 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -345,7 +414,7 @@ const RegistrationForm = () => {
             </motion.div>
           )}
 
-          {step === 3 && (
+          {step === 4 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

@@ -1,7 +1,6 @@
 "use client";
 
 import Footer from "./components/global/Footer";
-import Card from "./components/CardComponents/Card";
 import Hero from "./components/Hero/Hero";
 import StatisticsShowcase from "./components/StatisticsShowcase/StatisticsShowcase";
 import TimerSection from "./components/Timer/TimerSection";

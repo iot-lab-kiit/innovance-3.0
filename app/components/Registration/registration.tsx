@@ -8,7 +8,7 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const notify = () =>
-  toast.info("🦄 OTP Sent", {
+  toast.info("OTP Sent", {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -427,60 +427,58 @@ const RegistrationForm = () => {
                 />
               </div>
 
-              
-                {/* Back Button */}
-                <div className="text-center mb-4">
-                  <button
-                    type="button"
-                    className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
-                    onClick={() => setStep(1)}
-                  >
-                    BACK
-                  </button>
-                </div>
-
-                {/* Verify Button */}
-                <div
-                  className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
-                  onMouseEnter={() => {
-                    setIsHovered(!isHovered);
-                  }}
-                  onMouseLeave={() => {
-                    setIsHovered(!isHovered);
-                  }}
-                  onClick={() => {
-                    verifyOTP();
-                  }}
+              {/* Back Button */}
+              <div className="text-center mb-4">
+                <button
+                  type="button"
+                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                  onClick={() => setStep(1)}
                 >
-                  <motion.div
-                    animate={
-                      !isHovered
-                        ? { width: 0, y: 0, opacity: 1 }
-                        : { width: "100%", y: 0, opacity: 1 }
-                    }
-                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                    className="absolute w-full h-full bg-blue-500"
-                  ></motion.div>
+                  BACK
+                </button>
+              </div>
 
-                  <motion.button
-                    animate={
-                      !isHovered
-                        ? {
-                            color: "#3b82f6",
-                            borderColor: "#3b82f6",
-                            y: 0,
-                            opacity: 1,
-                          }
-                        : { y: 0, opacity: 1 }
-                    }
-                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                    whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                    className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
-                  >
-                    VERIFY
-                  </motion.button>
-                </div>
-              
+              {/* Verify Button */}
+              <div
+                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+                onMouseEnter={() => {
+                  setIsHovered(!isHovered);
+                }}
+                onMouseLeave={() => {
+                  setIsHovered(!isHovered);
+                }}
+                onClick={() => {
+                  verifyOTP();
+                }}
+              >
+                <motion.div
+                  animate={
+                    !isHovered
+                      ? { width: 0, y: 0, opacity: 1 }
+                      : { width: "100%", y: 0, opacity: 1 }
+                  }
+                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                  className="absolute w-full h-full bg-blue-500"
+                ></motion.div>
+
+                <motion.button
+                  animate={
+                    !isHovered
+                      ? {
+                          color: "#3b82f6",
+                          borderColor: "#3b82f6",
+                          y: 0,
+                          opacity: 1,
+                        }
+                      : { y: 0, opacity: 1 }
+                  }
+                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                  whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                >
+                  VERIFY
+                </motion.button>
+              </div>
             </motion.div>
           )}
           {step === 3 && (

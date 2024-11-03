@@ -9,6 +9,8 @@ import FAQ from "./components/FAQ/FAQ";
 import About from "./components/About";
 import Star from "./components/global/Star";
 import SpeakerDummy from "./components/CardComponents/SpeakerDummy";
+import SponsorshipSection from "@/app/components/SponsorshipComponents/SponsorshipSection";
+import TestimonialsSection from "@/app/components/TestimonialsComponents/TestimonialsSection";
 
 export default function Home() {
   return (
@@ -23,6 +25,8 @@ export default function Home() {
       <Star />
       <FAQ />
       <Star />
+      <SponsorshipSection/>
+      <TestimonialsSection/>
       <TimerSection />
       <Footer />
     </>

@@ -52,7 +52,7 @@ const SocialIcon = ({
 export default function Card() {
   return (
     <div className="min-h-screen bg-black py-12 px-4 sm:px-6 lg:px-8 xl:px-12">
-      <div className="max-w-[90%] xl:max-w-[70%] md:max-w-[75%] sm:max-w-[60%] mx-auto">
+      <div className="max-w-[90%] xl:max-w-[70%] md:max-w-[75%] sm:max-w-[60%] mx-auto ">
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bitter text-white text-center mb-4">
           Past Speakers
         </h2>
@@ -61,11 +61,11 @@ export default function Card() {
           speakers who are at the forefront of innovation, sharing insights and
           expertise on the latest trends and technologies shaping the future.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 xl:gap-12">
+        <div className=" gap-6 lg:gap-8 xl:gap-12 flex flex-col ">
           {speakers.map((speaker) => (
             <div
               key={speaker.name}
-              className="group flex flex-col bg-black rounded-lg border border-gray-500 p-6 shadow-lg transition-all hover:shadow-[#3b82f6]/50 hover:border-[#3b82f6]"
+              className="group w-[500px] flex flex-col bg-black rounded-lg border border-gray-500 mx-auto p-6 shadow-lg transition-all hover:shadow-[#3b82f6]/50 hover:border-[#3b82f6]"
             >
               {/* Upper Container: Title, Name, Description (centered) */}
               <div className="text-center">

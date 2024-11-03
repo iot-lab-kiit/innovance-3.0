@@ -262,7 +262,7 @@ const RegistrationForm = () => {
                   whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
                   className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
                 >
-                  REGISTER
+                  SEND OTP
                 </motion.button>
               </div>
             </motion.div>
@@ -274,15 +274,7 @@ const RegistrationForm = () => {
               exit={{ opacity: 0 }}
             >
               {/* OTP Button */}
-              <div className="text-center">
-                <button
-                  type="button"
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
-                  onClick={() => alert("OTP Sent")}
-                >
-                  Send OTP
-                </button>
-              </div>
+              <div className="text-center"></div>
               <div className="my-4 flex items-center justify-center">
                 <input
                   className="w-[50%] px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -330,7 +322,7 @@ const RegistrationForm = () => {
                   whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
                   className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
                 >
-                  SUBMIT
+                  Verify OTP
                 </motion.button>
               </div>
             </motion.div>
@@ -374,7 +366,7 @@ const RegistrationForm = () => {
               </div>
 
               {/* Submit Button */}
-              <div
+             { <div
                 className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
                 onMouseEnter={() => {
                   setIsHovered(!isHovered);
@@ -410,7 +402,7 @@ const RegistrationForm = () => {
                 >
                   SUBMIT
                 </motion.button>
-              </div>
+              </div>}
             </motion.div>
           )}
 

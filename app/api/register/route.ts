@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const data = await request.json();
+  console.log(data);
   try {
     const apiResponse = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/items/innovance_registration_2024`,

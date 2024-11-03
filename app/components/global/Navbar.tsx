@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import HamburgerButton from "./HamburgerButton";
 import Image from "next/image";
-
+import logo from "../../../public/assets/img/logo.png";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -24,7 +24,7 @@ export default function Navbar() {
         style={{ boxShadow: "0px 4px 6px rgba(59, 130, 246, 0.3)" }}
       >
         <div>
-          <Image src="/icons/logo.webp" width={40} height={40} alt="logo" />
+          <Image src={logo} width={40} height={40} alt="logo" />
         </div>
         <div className="hidden md:flex md:gap-9">
           <Link

@@ -8,7 +8,8 @@ import { EventSchedule } from "./components/EventSchedule/EventSchedule";
 import FAQ from "./components/FAQ/FAQ";
 import About from "./components/About";
 import Star from "./components/global/Star";
-import SpeakerDummy from "./components/CardComponents/SpeakerDummy";
+import Card from "./components/CardComponents/Card";
+// import SpeakerDummy from "./components/CardComponents/SpeakerDummy";
 
 export default function Home() {
   return (
@@ -18,8 +19,8 @@ export default function Home() {
       <About />
       <EventSchedule />
       <Star />
-      {/* <Card /> */}
-      <SpeakerDummy />
+      <Card />
+      {/* <SpeakerDummy /> */}
       <Star />
       <FAQ />
       <Star />

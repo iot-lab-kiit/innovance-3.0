@@ -62,7 +62,6 @@ export async function GET(request: Request) {
     if (!apiResponse.ok) throw new Error("Failed to fetch user data");
 
     const result = await apiResponse.json();
-    console.log(result);
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.error("Error:", error);

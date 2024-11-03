@@ -178,14 +178,12 @@ const RegistrationForm = () => {
     if (step === 3) {
       try {
         setIsPending(true);
-        console.log(formData);
         const response = await fetch("/api/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
         });
         const data = await response.json();
-        console.log(data?.data.id);
         setUniqueId(data?.data.id);
         setIsPending(false);
         setStep(4);
@@ -376,7 +374,7 @@ const RegistrationForm = () => {
                   whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
                   className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
                 >
-                  REGISTER
+                  SEND OTP
                 </motion.button>
               </div>
             </motion.div>
@@ -401,6 +399,7 @@ const RegistrationForm = () => {
                 transition={Bounce}
               />
               {/* OTP Button */}
+
               <div className="text-center">
                 <button
                   type="button"
@@ -415,6 +414,7 @@ const RegistrationForm = () => {
                     : "Send OTP"}
                 </button>
               </div>
+
               <div className="my-4 flex items-center justify-center">
                 <input
                   className="w-[50%] px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -476,7 +476,9 @@ const RegistrationForm = () => {
                   whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
                   className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
                 >
-                  VERIFY
+
+                  Verify OTP
+
                 </motion.button>
               </div>
             </motion.div>
@@ -531,8 +533,10 @@ const RegistrationForm = () => {
               </div>
 
               {/* Submit Button */}
-              <div
-                className="relative w-fit  m-auto mt-0 sm:mt-4 md:mt-8"
+
+             { <div
+                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+
                 onMouseEnter={() => {
                   setIsHovered(!isHovered);
                 }}
@@ -567,7 +571,7 @@ const RegistrationForm = () => {
                 >
                   SUBMIT
                 </motion.button>
-              </div>
+              </div>}
             </motion.div>
           )}
 

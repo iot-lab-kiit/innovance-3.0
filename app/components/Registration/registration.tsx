@@ -76,7 +76,7 @@ const RegistrationForm = () => {
         const data = await response.json();
         setUniqueId(data?.data.id);
         setIsPending(false);
-        setStep(3);
+        setStep(4);
       } catch (error) {
         console.error("Error:", error);
         setIsPending(false);
@@ -85,6 +85,7 @@ const RegistrationForm = () => {
       setStep(step + 1);
     }
   };
+  console.log(step);
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-8">

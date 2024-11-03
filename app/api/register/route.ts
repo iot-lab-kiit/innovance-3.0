@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 export async function POST(request: Request) {
   const data = await request.json();
@@ -30,6 +31,7 @@ export async function POST(request: Request) {
     if (!apiResponse.ok) throw new Error("Failed to register user");
 
     const result = await apiResponse.json();
+    await sendConfirmationEmail(data.email, data.first_name, data.last_name);
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.error("Error:", error);
@@ -38,6 +40,30 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
+}
+async function sendConfirmationEmail(
+  email: string,
+  first_name: string,
+  last_name: string
+) {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "Registration Successful",
+    html: `<p>Dear ${first_name} ${last_name},</p>
+           <p>Your registration for Innovance 2024 has been successfully completed.</p>
+           <p>Thank you for registering!</p>`,
+  };
+
+  await transporter.sendMail(mailOptions);
 }
 
 export async function GET(request: Request) {

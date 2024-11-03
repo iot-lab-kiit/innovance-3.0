@@ -1,7 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
+import QRCode from "react-qr-code";
+import html2canvas from "html2canvas";
 
 interface UserData {
   id: string;
@@ -18,9 +20,25 @@ interface UserData {
   food: boolean;
 }
 const TicketPage = () => {
+  const ticketRef = useRef(null);
+
   const { id } = useParams();
   const [error, setError] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
+
+  const handleDownloadTicket = async () => {
+    if (!ticketRef.current) return;
+
+    const canvas = await html2canvas(ticketRef.current);
+    const pngFile = canvas.toDataURL("image/png");
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = pngFile;
+    downloadLink.download = "innovance_virtual_ticket.png";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
 
   useEffect(() => {
     if (!id) return;
@@ -43,140 +61,143 @@ const TicketPage = () => {
   }, [id]);
 
   return (
-    <div
-      className="flex items-center justify-center min-h-screen bg-cover bg-fixed bg-center"
-      // style={{ backgroundImage: "url(/assets/img/1.jpg)" }}
-      id="hero"
-    >
-      <div className="flex w-full max-w-4xl h-[600px] border border-white border-opacity-30 rounded-3xl backdrop-blur-md overflow-hidden">
-        {/* First Column */}
-        <div className="hidden lg:flex flex-col items-center justify-center w-1/2 bg-opacity-30 backdrop-blur-md rounded-r-[20%] transition-all duration-300">
-          <div className="relative">
-            <Image
-              src="/assets/img/white-outline.png"
-              width={400}
-              height={400}
-              alt="Main Layer"
-            />
-            <Image
-              src="/assets/img/dots.png"
-              width={400}
-              height={400}
-              alt="Dots"
-              className="absolute left-0 top-0"
-            />
-            <Image
-              src="/assets/img/coin.png"
-              width={100}
-              height={100}
-              alt="Coin"
-              className="absolute left-10 top-10"
-            />
-            <Image
-              src="/assets/img/spring.png"
-              width={100}
-              height={100}
-              alt="Spring"
-              className="absolute right-20 top-20"
-            />
-            <Image
-              src="/assets/img/rocket.png"
-              width={400}
-              height={100}
-              alt="Rocket"
-              className="absolute left-19 bottom-0"
-            />
-            <Image
-              src="/assets/img/cloud.png"
-              width={100}
-              height={100}
-              alt="Cloud"
-              className="absolute right-10 bottom-20"
-            />
-            <Image
-              src="/assets/img/stars.png"
-              width={300}
-              height={100}
-              alt="Stars"
-              className="absolute left-20 top-2"
-            />
-          </div>
-          <p className="text-center text-white max-w-xs mt-8">
-            You are a few minutes away from boosting your skills with{" "}
-            <span className="font-semibold text-[#171717] text-primary">
-              IOT
-            </span>
-          </p>
-        </div>
-
-        <div className="flex flex-col items-center justify-center w-full lg:w-1/2 p-6">
-          {/* Displaying API Data */}
-          <div className="flex flex-col items-center w-full mt-8 transition-all">
-            <h2 className="text-white text-2xl font-semibold mb-6">
-              Virtual Ticket
-            </h2>
-
-            {userData && !error && (
-              <div className="w-full space-y-4">
-                <div className="relative mb-4">
-                  <p className="w-full h-14 p-4 text-white bg-white bg-opacity-20 border-none rounded-lg backdrop-blur-md shadow-lg outline-none">
-                    {userData.first_name} {userData.last_name}
-                  </p>
+    <div className="flex justify-center">
+      {userData && !error && (
+        <div className="ref p-10 max-w-[420px] md:max-w-[1024px] flex flex-col items-center">
+          <div
+            ref={ticketRef}
+            className="flex flex-col md:flex-row bg-white text-black relative"
+          >
+            <div className="bg-[#101010] z-10 absolute -top-5 -left-5 rounded-full w-12 h-12"></div>
+            <div className="bg-[#101010] z-10 absolute -top-5 -right-5 rounded-full w-12 h-12"></div>
+            <div className="bg-[#101010] z-10 absolute -bottom-5 -left-5 rounded-full w-12 h-12"></div>
+            <div className="bg-[#101010] z-10 absolute -bottom-5 -right-5 rounded-full w-12 h-12"></div>
+            <div className="w-full h-[320px] md:h-auto md:w-[500px] relative">
+              <Image
+                src={"/assets/img/ticket.jpeg"}
+                alt="innovance 3.0"
+                // width={500}
+                // height={500}
+                // sizes="500px"
+                fill
+                style={{ objectFit: "cover" }}
+                // className="object-fill"
+              />
+            </div>
+            <div className="h-2/3 md:w-2/3 mt-10 mb-5 ml-4 mr-4 fl flex-col">
+              <div className="flex  md:flex-nowrap gap-5 items-center">
+                <div className="text-4xl text-wrap font-bold text-blue-700">
+                  INNOVANCE 3.0
                 </div>
-
-                <div className="relative mb-4">
-                  <p className="w-full h-14 p-4 text-white bg-white bg-opacity-20 border-none rounded-lg backdrop-blur-md shadow-lg outline-none">
-                    id : {userData.id}
-                  </p>
-                </div>
-                <div className="relative mb-4">
-                  <p className="w-full h-14 p-4 text-white bg-white bg-opacity-20 border-none rounded-lg backdrop-blur-md shadow-lg outline-none">
-                    email : {userData.email}
-                  </p>
-                </div>
-                <div className="relative mb-4">
-                  <p className="w-full h-14 p-4 text-white bg-white bg-opacity-20 border-none rounded-lg backdrop-blur-md shadow-lg outline-none">
-                    branch : {userData.branch} {userData.year}
-                  </p>
-                </div>
-                <div className="relative mb-4">
-                  <p className="w-full h-14 p-4 text-white bg-white bg-opacity-20 border-none rounded-lg backdrop-blur-md shadow-lg outline-none">
-                    type : {userData.type}
-                  </p>
-                </div>
-
-                <div className="relative mb-4">
-                  <p className="w-full h-14 p-4 text-white bg-white bg-opacity-20 border-none rounded-lg backdrop-blur-md shadow-lg outline-none">
-                    Status - {userData.status}
-                  </p>
-                </div>
-                <label>
-                  <input type="radio" name="icard" checked={userData.icard} />
-                  ICard
-                </label>
-                <label>
-                  <input type="radio" name="day1" checked={userData.day1} />
-                  Day 1
-                </label>
-                <label>
-                  <input type="radio" name="day2" checked={userData.day2} />
-                  Day 2
-                </label>
-                <label>
-                  <input type="radio" name="food" checked={userData.food} />
-                  Food
-                </label>
-
-                <button className="w-full h-14 bg-[#21264D] text-white font-semibold bg-primary rounded-lg shadow-lg flex items-center justify-center gap-2 transition-all hover:gap-3">
-                  Hope to See You Soon
-                  <i className="bx bx-right-arrow-alt"></i>
-                </button>
+                <Image
+                  src={"/assets/img/logo.png"}
+                  alt="logo"
+                  width={90}
+                  height={90}
+                />
               </div>
-            )}
+              <div className="flex flex-col md:flex-row mt-6 md:mt-0 gap-5">
+                <div className="flex flex-col gap-10">
+                  <div>
+                    <div>9-10 NOVEMBER</div>
+                    <div>CAMPUS 15</div>
+                    <div>11 AM ONWARDS</div>
+                  </div>
+                  {userData.status === "pending" ? (
+                    <div>
+                      <div>Your registration status is pending.</div>
+                      <div>
+                        After comfirmation of the registration, your details
+                        will be visible here
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="text-xl font-bold">
+                        {userData.first_name.toUpperCase()}&nbsp;
+                        {userData.last_name.toUpperCase()}
+                      </div>
+                      <div>{userData.email}</div>
+                      <div>{userData.branch}</div>
+                    </div>
+                  )}
+                </div>
+                <div className="flex justify-center items-center">
+                  <QRCode
+                    size={120}
+                    value={
+                      userData.status === "pending"
+                        ? `https://localhost/`
+                        : `https://localhost/ticket/${userData.id}`
+                    }
+                    viewBox={`0 0 256 256`}
+                    className="flex justify-center items-center"
+                  />
+                </div>
+              </div>
+              <div className="px-6 md:px-0">
+                <div className="flex flex-wrap justify-between gap-2 items-center md:mr-14 mt-10">
+                  <div className="flex gap-3 md:m-0 m-auto">
+                    <div
+                      className={
+                        `w-7 h-7 ` +
+                        (userData.day1 ? "bg-blue-300" : "bg-[#bfc0c2]")
+                      }
+                    ></div>
+                    <div
+                      className={
+                        `w-7 h-7 ` +
+                        (userData.day1 ? "bg-blue-300" : "bg-[#bfc0c2]")
+                      }
+                    ></div>
+                    <div
+                      className={
+                        `w-7 h-7 ` +
+                        (userData.day1 ? "bg-blue-300" : "bg-[#bfc0c2]")
+                      }
+                    ></div>
+                  </div>
+                  <div className="flex items-center gap-3 md:m-0 m-auto">
+                    <Image
+                      src={"/icons/logo.webp"}
+                      alt="iotLab"
+                      width={40}
+                      height={40}
+                    />
+                    <Image
+                      src={"/icons/kiit.png"}
+                      alt="iotLab"
+                      width={0}
+                      height={0}
+                      sizes="40px"
+                      className="w-full h-fit"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDownloadTicket();
+            }}
+            disabled={userData.status === "pending"}
+            className="p-4 px-8 border border-white text-xl mt-5 disabled:text-gray-500 disabled:border-gray-500"
+          >
+            Download
+          </button>
         </div>
-      </div>
+      )}
     </div>
+
+    // <div>
+    //   {userData && !error && (
+    //     <div>
+    //       <canvas ref={canvasRef} width={200} height={100} />
+    //     </div>
+    //   )}
+    // </div>
   );
 };
 

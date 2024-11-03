@@ -16,7 +16,7 @@ export default function SponsorshipSection() {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <div className={`bg-black text-white p-4 flex flex-col w-full items-center ${poppins.className}`}>
+        <div className={`text-white p-4 flex flex-col w-full items-center ${poppins.className}`}>
             <div className=" py-16 flex flex-col md:flex-row justify-evenly items-center ">
                 <div className={"w-full md:w-[40%]"}>
                     <h2 className="text-5xl  mb-8 font-bitter">Sponsors</h2>

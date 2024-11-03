@@ -35,7 +35,7 @@ export const SponsorshipSlider = ({
             )}
         >
             <Marquee
-                speed={20}
+                speed={10}
                 direction="right"
                 autoFill={true}
                 className="flex overflow-clip"

@@ -11,7 +11,7 @@ const poppins = Poppins({
 
 export default function TestimonialsSection(){
     return (
-        <div className={`bg-black text-white p-4 flex flex-col w-full items-center  ${poppins.className}`}>
+        <div className={` text-white p-4 flex flex-col w-full items-center  ${poppins.className}`}>
             <div className=" py-16 flex justify-center items-center text-white text-6xl font-bitter">
                 Testimonials
             </div>

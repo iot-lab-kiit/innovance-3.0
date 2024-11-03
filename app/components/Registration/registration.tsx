@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Poppins } from "@next/font/google";
 import QRCode from "react-qr-code";
 import { useRef } from "react";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const notify = () =>
+  toast.info("🦄 OTP Sent", {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce,
+  });
+
 const poppins = Poppins({
   weight: ["400", "500", "700"],
   subsets: ["latin"],
@@ -31,9 +47,45 @@ const RegistrationForm = () => {
   //   const [isHovered, setIsHovered] = useState(false);
   const [uniqueId, setUniqueId] = useState(null);
   const [isPending, setIsPending] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [timer, setTimer] = useState(0);
+  const [isOtpSent, setIsOtpSent] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setFormData({ ...formData, [e.currentTarget.id]: e.currentTarget.value });
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    } else if (timer === 0 && isOtpSent) {
+      setIsOtpSent(false);
+    }
+    return () => clearInterval(interval);
+  }, [timer, isOtpSent]);
+
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+  };
+
+  const handleSendOtp = () => {
+    sendOtp();
+    setIsOtpSent(true);
+    setTimer(120);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.currentTarget;
+    setFormData({ ...formData, [id]: value });
+    if (id === "email") {
+      if (!value.endsWith("@kiit.ac.in")) {
+        setEmailError("Email must be a KIIT email ID");
+      } else {
+        setEmailError("");
+      }
+    }
+  };
 
   const handleSelectChanges = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { id, value } = e.target;
@@ -63,6 +115,64 @@ const RegistrationForm = () => {
     img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
   };
 
+  async function sendOtp() {
+    const response = await fetch(
+      "https://innovanve-otp-3-0.onrender.com/api/otp/send",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.email,
+          rollNo: formData.roll,
+        }),
+      }
+    );
+    const data = await response.json();
+    if (data.success) {
+      notify();
+    }
+  }
+  async function verifyOTP() {
+    const response = await fetch(
+      "https://innovanve-otp-3-0.onrender.com/api/otp/verify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.email,
+          otp: formData.otp,
+        }),
+      }
+    );
+    const data = await response.json();
+    if (data.success) {
+      toast.success("OTP Verified!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      setStep(3);
+    } else {
+      toast.error("OTP is not correct!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (step === 3) {
@@ -78,12 +188,13 @@ const RegistrationForm = () => {
         console.log(data?.data.id);
         setUniqueId(data?.data.id);
         setIsPending(false);
-        setStep(3);
+        setStep(4);
       } catch (error) {
         console.error("Error:", error);
         setIsPending(false);
       }
     } else {
+      if (step === 2) return;
       setStep(step + 1);
     }
   };
@@ -131,6 +242,9 @@ const RegistrationForm = () => {
                   value={formData.email}
                   onChange={handleChange}
                 />
+                {emailError && (
+                  <p className="text-red-500 text-sm">{emailError}</p>
+                )}
               </div>
               <div className="flex my-3 gap-4">
                 <input
@@ -273,14 +387,32 @@ const RegistrationForm = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition={Bounce}
+              />
               {/* OTP Button */}
               <div className="text-center">
                 <button
                   type="button"
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
-                  onClick={() => alert("OTP Sent")}
+                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${
+                    poppins.className
+                  } ${isOtpSent ? "grayscale cursor-not-allowed" : ""}`}
+                  onClick={handleSendOtp}
+                  disabled={isOtpSent}
                 >
-                  Send OTP
+                  {isOtpSent
+                    ? `Resend OTP in ${formatTime(timer)}`
+                    : "Send OTP"}
                 </button>
               </div>
               <div className="my-4 flex items-center justify-center">
@@ -295,44 +427,60 @@ const RegistrationForm = () => {
                 />
               </div>
 
-              {/* Submit Button */}
-              <div
-                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
-                onMouseEnter={() => {
-                  setIsHovered(!isHovered);
-                }}
-                onMouseLeave={() => {
-                  setIsHovered(!isHovered);
-                }}
-              >
-                <motion.div
-                  animate={
-                    !isHovered
-                      ? { width: 0, y: 0, opacity: 1 }
-                      : { width: "100%", y: 0, opacity: 1 }
-                  }
-                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                  className="absolute w-full h-full bg-blue-500"
-                ></motion.div>
+              
+                {/* Back Button */}
+                <div className="text-center mb-4">
+                  <button
+                    type="button"
+                    className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                    onClick={() => setStep(1)}
+                  >
+                    BACK
+                  </button>
+                </div>
 
-                <motion.button
-                  animate={
-                    !isHovered
-                      ? {
-                          color: "#3b82f6",
-                          borderColor: "#3b82f6",
-                          y: 0,
-                          opacity: 1,
-                        }
-                      : { y: 0, opacity: 1 }
-                  }
-                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                  whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                {/* Verify Button */}
+                <div
+                  className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+                  onMouseEnter={() => {
+                    setIsHovered(!isHovered);
+                  }}
+                  onMouseLeave={() => {
+                    setIsHovered(!isHovered);
+                  }}
+                  onClick={() => {
+                    verifyOTP();
+                  }}
                 >
-                  SUBMIT
-                </motion.button>
-              </div>
+                  <motion.div
+                    animate={
+                      !isHovered
+                        ? { width: 0, y: 0, opacity: 1 }
+                        : { width: "100%", y: 0, opacity: 1 }
+                    }
+                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                    className="absolute w-full h-full bg-blue-500"
+                  ></motion.div>
+
+                  <motion.button
+                    animate={
+                      !isHovered
+                        ? {
+                            color: "#3b82f6",
+                            borderColor: "#3b82f6",
+                            y: 0,
+                            opacity: 1,
+                          }
+                        : { y: 0, opacity: 1 }
+                    }
+                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                    whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+                    className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                  >
+                    VERIFY
+                  </motion.button>
+                </div>
+              
             </motion.div>
           )}
           {step === 3 && (
@@ -373,9 +521,20 @@ const RegistrationForm = () => {
                 />
               </div>
 
+              {/* Back Button */}
+              <div className="text-center mb-4">
+                <button
+                  type="button"
+                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                  onClick={() => setStep(2)}
+                >
+                  BACK
+                </button>
+              </div>
+
               {/* Submit Button */}
               <div
-                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+                className="relative w-fit  m-auto mt-0 sm:mt-4 md:mt-8"
                 onMouseEnter={() => {
                   setIsHovered(!isHovered);
                 }}

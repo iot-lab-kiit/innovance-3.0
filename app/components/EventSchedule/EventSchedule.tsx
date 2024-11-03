@@ -48,10 +48,7 @@ export const EventSchedule: React.FC = () => {
         <div className="sm:text-center mb-12">
           <h1 className="text-4xl sm:text-6xl">Event Schedule</h1>
           <p className="text-base sm:text-lg mt-4">
-            Dive into the heart of innovation with our event schedule. Discover thought-provoking
-            keynotes, engaging workshops, and networking opportunities designed to elevate your tech
-            experience. Explore the future, engage with industry leaders, and let innovation guide
-            your journey.
+          As you explore our event schedule, prepare to leap into the future of technology! Engage in interactive workshops, stimulating conversations, and unique networking opportunities with professionals in the field. Now is the time to rekindle your enthusiasm and get new ideas. Don&apos;t pass up the opportunity to influence the next big thing in technology! 
           </p>
         </div>
 

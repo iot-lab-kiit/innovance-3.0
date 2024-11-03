@@ -13,17 +13,17 @@ interface Speaker {
 }
 
 const speakers: Speaker[] = [
-  {
-    name: "Sophia White",
-    title: "HealthTech Innovator",
-    description:
-      "A pioneer in health tech, exploring the digital transformation and innovation in the healthcare sector.",
-    image: "/speaker1.png",
-    twitterUrl: "https://twitter.com/sophiawhite",
-    linkedinUrl: "https://linkedin.com/in/sophiawhite",
-    instagramUrl: "https://instagram.com/sophiawhite",
-    youtubeUrl: "https://youtube.com/sophiawhite",
-  },
+  // {
+  //   name: "Raj Vikramaditya | Striver",
+  //   title: "SWE-III @Google | YouTuber | Educator | Mentor | Striver",
+  //   description:
+  //     "Empowering people to embrace innovation and explore new possibilities in the wild world of tech.",
+  //   image: "/speaker1.png",
+  //   twitterUrl: "https://twitter.com/sophiawhite",
+  //   linkedinUrl: "https://linkedin.com/in/sophiawhite",
+  //   instagramUrl: "https://instagram.com/sophiawhite",
+  //   youtubeUrl: "https://youtube.com/sophiawhite",
+  // },
   {
     name: "Alexander Turner",
     title: "Tech Entrepreneur",
@@ -54,13 +54,12 @@ export default function Card() {
     <div className="min-h-screen bg-black py-12 px-4 sm:px-6 lg:px-8 xl:px-12">
       <div className="max-w-[90%] xl:max-w-[70%] md:max-w-[75%] sm:max-w-[60%] mx-auto">
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bitter text-white text-center mb-4">
-          Speakers
+          Past Speakers
         </h2>
         <p className="text-base sm:text-lg lg:text-xl font-geist text-gray-300 text-center mb-12">
-          Get ready to be inspired by industry leaders and visionaries. Explore
-          a lineup of speakers who are at the forefront of innovation, sharing
-          insights and expertise on the latest trends and technologies shaping
-          the future.
+          Inspired by industry leaders and visionaries. Explore a lineup of
+          speakers who are at the forefront of innovation, sharing insights and
+          expertise on the latest trends and technologies shaping the future.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 xl:gap-12">
           {speakers.map((speaker) => (

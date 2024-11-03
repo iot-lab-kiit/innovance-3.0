@@ -68,14 +68,12 @@ const RegistrationForm = () => {
     if (step === 3) {
       try {
         setIsPending(true);
-        console.log(formData);
         const response = await fetch("/api/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
         });
         const data = await response.json();
-        console.log(data?.data.id);
         setUniqueId(data?.data.id);
         setIsPending(false);
         setStep(3);

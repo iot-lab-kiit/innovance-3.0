@@ -37,6 +37,7 @@ const Page = () => {
         </div>
       </motion.div>
       <Star />
+      
       <Registration />
 
       

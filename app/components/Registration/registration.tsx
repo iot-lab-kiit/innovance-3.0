@@ -117,7 +117,7 @@ const RegistrationForm = () => {
 
   async function sendOtp() {
     const response = await fetch(
-      "https://innovanve-otp-3-0.onrender.com/api/otp/send",
+      `${process.env.NEXT_PUBLIC_OTP_URL}/api/otp/send`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -134,7 +134,7 @@ const RegistrationForm = () => {
   }
   async function verifyOTP() {
     const response = await fetch(
-      "https://innovanve-otp-3-0.onrender.com/api/otp/verify",
+      `${process.env.NEXT_PUBLIC_OTP_URL}/api/otp/verify`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -196,6 +196,7 @@ const RegistrationForm = () => {
       setStep(step + 1);
     }
   };
+  console.log(step);
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-8">
@@ -374,7 +375,7 @@ const RegistrationForm = () => {
                   whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
                   className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
                 >
-                  SEND OTP
+                  NEXT
                 </motion.button>
               </div>
             </motion.div>
@@ -406,7 +407,7 @@ const RegistrationForm = () => {
                   className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${
                     poppins.className
                   } ${isOtpSent ? "grayscale cursor-not-allowed" : ""}`}
-                  onClick={handleSendOtp}
+                  onClick={() => handleSendOtp()}
                   disabled={isOtpSent}
                 >
                   {isOtpSent
@@ -427,7 +428,7 @@ const RegistrationForm = () => {
                 />
               </div>
 
-              {/* Back Button */}
+              {/*    
               <div className="text-center mb-4">
                 <button
                   type="button"
@@ -436,7 +437,7 @@ const RegistrationForm = () => {
                 >
                   BACK
                 </button>
-              </div>
+              </div> */}
 
               {/* Verify Button */}
               <div
@@ -476,9 +477,7 @@ const RegistrationForm = () => {
                   whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
                   className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
                 >
-
                   Verify OTP
-
                 </motion.button>
               </div>
             </motion.div>
@@ -501,14 +500,8 @@ const RegistrationForm = () => {
                 />
 
                 {/* Total Fare */}
-                <div className="mb-4">
-                  <input
-                    value={"Registration - Rs 249"}
-                    className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    type="text"
-                    id="total_fare"
-                    placeholder="Enter the total fare"
-                  />
+                <div className="w-full px-4 mb-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  Registration - Rs 249
                 </div>
 
                 <input
@@ -520,8 +513,7 @@ const RegistrationForm = () => {
                   onChange={handleChange}
                 />
               </div>
-
-              {/* Back Button */}
+              {/* 
               <div className="text-center mb-4">
                 <button
                   type="button"
@@ -530,48 +522,49 @@ const RegistrationForm = () => {
                 >
                   BACK
                 </button>
-              </div>
+              </div> */}
 
               {/* Submit Button */}
 
-             { <div
-                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
-
-                onMouseEnter={() => {
-                  setIsHovered(!isHovered);
-                }}
-                onMouseLeave={() => {
-                  setIsHovered(!isHovered);
-                }}
-              >
-                <motion.div
-                  animate={
-                    !isHovered
-                      ? { width: 0, y: 0, opacity: 1 }
-                      : { width: "100%", y: 0, opacity: 1 }
-                  }
-                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                  className="absolute w-full h-full bg-blue-500"
-                ></motion.div>
-
-                <motion.button
-                  animate={
-                    !isHovered
-                      ? {
-                          color: "#3b82f6",
-                          borderColor: "#3b82f6",
-                          y: 0,
-                          opacity: 1,
-                        }
-                      : { y: 0, opacity: 1 }
-                  }
-                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                  whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+              {
+                <div
+                  className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+                  onMouseEnter={() => {
+                    setIsHovered(!isHovered);
+                  }}
+                  onMouseLeave={() => {
+                    setIsHovered(!isHovered);
+                  }}
                 >
-                  SUBMIT
-                </motion.button>
-              </div>}
+                  <motion.div
+                    animate={
+                      !isHovered
+                        ? { width: 0, y: 0, opacity: 1 }
+                        : { width: "100%", y: 0, opacity: 1 }
+                    }
+                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                    className="absolute w-full h-full bg-blue-500"
+                  ></motion.div>
+
+                  <motion.button
+                    animate={
+                      !isHovered
+                        ? {
+                            color: "#3b82f6",
+                            borderColor: "#3b82f6",
+                            y: 0,
+                            opacity: 1,
+                          }
+                        : { y: 0, opacity: 1 }
+                    }
+                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                    whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+                    className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                  >
+                    SUBMIT
+                  </motion.button>
+                </div>
+              }
             </motion.div>
           )}
 
@@ -624,8 +617,8 @@ const RegistrationForm = () => {
                     Download QR Code
                   </div>
                   <span className="text-sm italic text-blue-500 mx-6">
-                    Please wait for our team to validate and approve your
-                    ticket.Scan this QR Code to check the status of it!
+                    Your ticket will be validated within 48 hours . Download the
+                    above QR to check yout ticket status.
                   </span>
                 </motion.div>
               )}

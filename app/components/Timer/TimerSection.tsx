@@ -17,7 +17,12 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-const TimerSection = () => {
+type Props = {
+  text1: string;
+  text2: string;
+};
+
+const TimerSection = ({ text1, text2 }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div>
@@ -34,12 +39,12 @@ const TimerSection = () => {
             <h1
               className={`text-4xl sm:text-5xl md:text-6xl ${bitter.className} text-center`}
             >
-              HURRY UP!
+              {text1}
             </h1>
             <h1
               className={`text-4xl sm:text-5xl md:text-6xl ${bitter.className} text-center`}
             >
-              RESERVE YOUR SPOT NOW
+              {text2}
             </h1>
             <Timer launchDate="2024-11-09T17:00:00" />
             <div

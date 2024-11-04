@@ -4,7 +4,9 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import QRCode from "react-qr-code";
 import html2canvas from "html2canvas";
-
+import TimerSection from "@/app/components/Timer/TimerSection";
+import Footer from "@/app/components/global/Footer";
+import { motion } from "framer-motion";
 interface UserData {
   id: string;
   first_name: string;
@@ -82,9 +84,33 @@ const TicketPage = () => {
   }, [userData]);
 
   return (
-    <div className="flex justify-center font-poppins">
+    <div className="font-poppins">
+      <motion.div
+        initial={{ y: 80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="mt-16 md:mt-20 lg:mt-24 mb-6"
+      >
+        <div className="flex flex-col gap-4 md:gap-8 justify-center items-center">
+          <div className="text-center text-blue-400 font-medium text-2xl font-poppins">
+            Tickets
+          </div>
+          <h1 className="text-center font-medium font-bitter text-4xl md:text-6xl lg:text-8xl">
+            Your FutureTech <br />
+            Tickets Now!
+          </h1>
+          <div className="w-1/2 text-center font-poppins">
+            Discover the next wave of innovation at FutureTech Conference.{" "}
+            <br />
+            Choose between Premium and Standard tickets to secure your spot.{" "}
+            <br />
+            Join us for a tech-filled experience that will redefine the future.
+          </div>
+        </div>
+      </motion.div>
+
       {userData && !error && (
-        <div className="ref py-10 max-w-[320px] md:max-w-[1024px] flex flex-col items-center">
+        <div className="ref p-10 max-w-[420px] md:max-w-[1024px] flex flex-col items-center mx-auto">
           <div
             ref={ticketRef}
             className="flex flex-col md:flex-row bg-white text-black relative"
@@ -112,6 +138,7 @@ const TicketPage = () => {
                   width={70}
                   height={70}
                   style={{ maxWidth: "70px", maxHeight: "70px" }}
+                  className="mr-4 md:mr-0"
                 />
               </div>
               <div className="flex flex-col md:flex-row mt-6 md:mt-0 gap-5 md:mr-7 md:justify-between">
@@ -147,8 +174,8 @@ const TicketPage = () => {
                     size={120}
                     value={
                       userData.status === "pending"
-                        ? `https://localhost/`
-                        : `https://localhost/ticket/${userData.id}`
+                        ? `${userData.id}`
+                        : `${userData.id}`
                     }
                     viewBox={`0 0 256 256`}
                     className="flex justify-center items-center"
@@ -203,6 +230,9 @@ const TicketPage = () => {
           </button>
         </div>
       )}
+
+      <TimerSection text1="GET READY!" text2="INNOVANCE STARTS SOON" />
+      <Footer />
     </div>
   );
 };

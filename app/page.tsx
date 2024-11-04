@@ -24,7 +24,7 @@ export default function Home() {
       <Star />
       <FAQ />
       <Star />
-      <TimerSection />
+      <TimerSection text1="HURRY!" text2="RESERVE YOUR SPOTS NOW" />
       <Footer />
     </>
   );

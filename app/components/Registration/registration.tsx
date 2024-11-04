@@ -325,7 +325,7 @@ const RegistrationForm = () => {
               </div>
 
               {/* Year */}
-              <div className="w-full px-4 bg-[#171717] rounded-lg focus-within:ring-2 focus-within:ring-blue-500 focus-outline:none">
+              <div className="w-full px-4 mb-3 lg:mb-0 bg-[#171717] rounded-lg focus-within:ring-2 focus-within:ring-blue-500 focus-outline:none">
                 <select
                   className={`w-full py-4 h-full bg-[#171717] focus:outline-none ${
                     !formData.year && "text-gray-400"

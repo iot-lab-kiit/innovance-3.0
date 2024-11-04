@@ -84,7 +84,7 @@ const TicketPage = () => {
   return (
     <div className="flex justify-center font-poppins">
       {userData && !error && (
-        <div className="ref p-10 max-w-[420px] md:max-w-[1024px] flex flex-col items-center">
+        <div className="ref py-10 max-w-[320px] md:max-w-[1024px] flex flex-col items-center">
           <div
             ref={ticketRef}
             className="flex flex-col md:flex-row bg-white text-black relative"
@@ -101,8 +101,8 @@ const TicketPage = () => {
                 style={{ objectFit: "cover" }}
               />
             </div>
-            <div className="h-2/3 md:w-2/3 mt-10 mb-5 ml-4 mr-4 fl flex-col">
-              <div className="flex relative md:flex-nowrap gap-5 items-center">
+            <div className="md:w-2/3 mt-10 mb-5 ml-4 mr-0 fl flex-col">
+              <div className="flex relative md:flex-nowrap gap-5 items-center md:justify-between md:mr-7">
                 <div className="text-4xl text-wrap font-bold text-blue-700">
                   INNOVANCE 3.0
                 </div>
@@ -114,7 +114,7 @@ const TicketPage = () => {
                   style={{ maxWidth: "70px", maxHeight: "70px" }}
                 />
               </div>
-              <div className="flex flex-col md:flex-row mt-6 md:mt-0 gap-5">
+              <div className="flex flex-col md:flex-row mt-6 md:mt-0 gap-5 md:mr-7 md:justify-between">
                 <div className="flex flex-col gap-10">
                   <div>
                     <div>9-10 NOVEMBER</div>
@@ -156,7 +156,7 @@ const TicketPage = () => {
                 </div>
               </div>
               <div className="px-6 md:px-0">
-                <div className="flex flex-wrap justify-between gap-2 items-center md:mr-14 mt-10">
+                <div className="flex flex-wrap justify-between gap-2 items-center md:pr-10 mt-10">
                   <div className="flex gap-3 md:m-0 m-auto">
                     <div
                       className={

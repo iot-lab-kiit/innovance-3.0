@@ -21,10 +21,24 @@ interface UserData {
 }
 const TicketPage = () => {
   const ticketRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const { id } = useParams();
   const [error, setError] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
+
+  const drawGradientText = (text: string, canvas: HTMLCanvasElement) => {
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    gradient.addColorStop(0, "#f39223");
+    gradient.addColorStop(1, "#c83b91");
+
+    ctx.fillStyle = gradient;
+    ctx.font = "bold 20px Poppins";
+    ctx.fillText(text, 0, 30);
+  };
 
   const handleDownloadTicket = async () => {
     if (!ticketRef.current) return;
@@ -60,8 +74,15 @@ const TicketPage = () => {
     fetchUserData();
   }, [id]);
 
+  useEffect(() => {
+    if (userData && canvasRef.current) {
+      const fullName = `${userData.first_name.toUpperCase()} ${userData.last_name.toUpperCase()}`;
+      drawGradientText(fullName, canvasRef.current);
+    }
+  }, [userData]);
+
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center font-poppins">
       {userData && !error && (
         <div className="ref p-10 max-w-[420px] md:max-w-[1024px] flex flex-col items-center">
           <div
@@ -74,26 +95,23 @@ const TicketPage = () => {
             <div className="bg-[#101010] z-10 absolute -bottom-5 -right-5 rounded-full w-12 h-12"></div>
             <div className="w-full h-[320px] md:h-auto md:w-[500px] relative">
               <Image
-                src={"/assets/img/ticket.jpeg"}
+                src={"/assets/img/ticket.png"}
                 alt="innovance 3.0"
-                // width={500}
-                // height={500}
-                // sizes="500px"
                 fill
                 style={{ objectFit: "cover" }}
-                // className="object-fill"
               />
             </div>
             <div className="h-2/3 md:w-2/3 mt-10 mb-5 ml-4 mr-4 fl flex-col">
-              <div className="flex  md:flex-nowrap gap-5 items-center">
+              <div className="flex relative md:flex-nowrap gap-5 items-center">
                 <div className="text-4xl text-wrap font-bold text-blue-700">
                   INNOVANCE 3.0
                 </div>
                 <Image
                   src={"/assets/img/logo.png"}
                   alt="logo"
-                  width={90}
-                  height={90}
+                  width={70}
+                  height={70}
+                  style={{ maxWidth: "70px", maxHeight: "70px" }}
                 />
               </div>
               <div className="flex flex-col md:flex-row mt-6 md:mt-0 gap-5">
@@ -113,10 +131,12 @@ const TicketPage = () => {
                     </div>
                   ) : (
                     <div>
-                      <div className="text-xl font-bold">
-                        {userData.first_name.toUpperCase()}&nbsp;
-                        {userData.last_name.toUpperCase()}
-                      </div>
+                      <canvas
+                        ref={canvasRef}
+                        width={200}
+                        height={50}
+                        className="w-fit h-fit"
+                      />
                       <div>{userData.email}</div>
                       <div>{userData.branch}</div>
                     </div>
@@ -159,18 +179,12 @@ const TicketPage = () => {
                   </div>
                   <div className="flex items-center gap-3 md:m-0 m-auto">
                     <Image
-                      src={"/icons/logo.webp"}
-                      alt="iotLab"
-                      width={40}
-                      height={40}
-                    />
-                    <Image
-                      src={"/icons/kiit.png"}
+                      src={"/assets/img/iotlab+kiit.png"}
                       alt="iotLab"
                       width={0}
-                      height={0}
-                      sizes="40px"
-                      className="w-full h-fit"
+                      height={65}
+                      sizes="65px"
+                      className="w-auto"
                     />
                   </div>
                 </div>
@@ -190,14 +204,6 @@ const TicketPage = () => {
         </div>
       )}
     </div>
-
-    // <div>
-    //   {userData && !error && (
-    //     <div>
-    //       <canvas ref={canvasRef} width={200} height={100} />
-    //     </div>
-    //   )}
-    // </div>
   );
 };
 

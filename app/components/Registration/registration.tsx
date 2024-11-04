@@ -6,7 +6,7 @@ import QRCode from "react-qr-code";
 import { useRef } from "react";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { Watch } from "react-loader-spinner";
 const notify = () =>
   toast.info("OTP Sent", {
     position: "top-right",
@@ -27,6 +27,7 @@ const poppins = Poppins({
 
 const RegistrationForm = () => {
   const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     branch: "",
     email: "",
@@ -133,6 +134,7 @@ const RegistrationForm = () => {
     }
   }
   async function verifyOTP() {
+    setLoading(true);
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_OTP_URL}/api/otp/verify`,
       {
@@ -158,6 +160,7 @@ const RegistrationForm = () => {
         transition: Bounce,
       });
       setStep(3);
+      setLoading(false);
     } else {
       toast.error("OTP is not correct!", {
         position: "top-right",
@@ -170,14 +173,17 @@ const RegistrationForm = () => {
         theme: "light",
         transition: Bounce,
       });
+      setLoading(false);
     }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     if (step === 3) {
       try {
         setIsPending(true);
+
         const response = await fetch("/api/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -187,6 +193,7 @@ const RegistrationForm = () => {
         setUniqueId(data?.data.id);
         setIsPending(false);
         setStep(4);
+        setLoading(false);
       } catch (error) {
         console.error("Error:", error);
         setIsPending(false);
@@ -194,9 +201,10 @@ const RegistrationForm = () => {
     } else {
       if (step === 2) return;
       setStep(step + 1);
+      setLoading(false);
     }
   };
-  console.log(step);
+ 
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-8">
@@ -242,7 +250,9 @@ const RegistrationForm = () => {
                   onChange={handleChange}
                 />
                 {emailError && (
-                  <p className="text-red-500 text-sm">{emailError}</p>
+                  <p className="text-red-500 text-sm my-2 mt-4 md:mx-4">
+                    {emailError}
+                  </p>
                 )}
               </div>
               <div className="flex my-3 gap-4">
@@ -280,7 +290,7 @@ const RegistrationForm = () => {
                   }}
                 ></input>
                 <label
-                  className="text-red text-sm text-gray-300"
+                  className="text-red text-sm text-gray-300 my-6"
                   htmlFor="phone_whatsapp"
                 >
                   Whatsapp Number is same as your Phone Number *
@@ -315,10 +325,16 @@ const RegistrationForm = () => {
                     </option>
                     <option value="CSE">CSE</option>
                     <option value="IT">IT</option>
+                    <option value="IT">CSSE</option>
+                    <option value="IT">CSCE</option>
+                    <option value="IT">CE</option>
+                    <option value="IT">MME</option>
+                    <option value="IT">MCA</option>
+                    <option value="IT">MTech</option>
                     <option value="ECSE">ECSE</option>
                     <option value="EEE">EEE</option>
                     <option value="ECE">ECE</option>
-                    <option value="Mech">Mech</option>
+                    <option value="Mech">ME</option>
                     <option value="Civil">Civil</option>
                   </select>
                 </div>
@@ -338,7 +354,6 @@ const RegistrationForm = () => {
                   <option value="" disabled>
                     Select your year
                   </option>
-                  <option value="1">1st Year</option>
                   <option value="2">2nd Year</option>
                   <option value="3">3rd Year</option>
                   <option value="4">4th Year</option>
@@ -401,21 +416,6 @@ const RegistrationForm = () => {
               />
               {/* OTP Button */}
 
-              <div className="text-center">
-                <button
-                  type="button"
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${
-                    poppins.className
-                  } ${isOtpSent ? "grayscale cursor-not-allowed" : ""}`}
-                  onClick={() => handleSendOtp()}
-                  disabled={isOtpSent}
-                >
-                  {isOtpSent
-                    ? `Resend OTP in ${formatTime(timer)}`
-                    : "Send OTP"}
-                </button>
-              </div>
-
               <div className="my-4 flex items-center justify-center">
                 <input
                   className="w-[50%] px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -426,6 +426,20 @@ const RegistrationForm = () => {
                   value={formData.otp || ""}
                   onChange={handleChange}
                 />
+              </div>
+              <div className="text-center">
+                <button
+                  type="button"
+                  className={`text-xs sm:text-base text-white border-white hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${
+                    poppins.className
+                  } ${isOtpSent ? "grayscale cursor-not-allowed" : ""}`}
+                  onClick={() => handleSendOtp()}
+                  disabled={isOtpSent}
+                >
+                  {isOtpSent
+                    ? `Resend OTP in ${formatTime(timer)}`
+                    : "Send OTP"}
+                </button>
               </div>
 
               {/*    
@@ -559,9 +573,20 @@ const RegistrationForm = () => {
                     }
                     transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                     whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                    className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                    className={`text-xs sm:text-base hover:font-semibold flex items-center gap-2 text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
                   >
-                    SUBMIT
+                    <p>SUBMIT</p>
+
+                    <Watch
+                      visible={loading}
+                      height="20"
+                      width="20"
+                      radius="48"
+                      color="#ffffff"
+                      ariaLabel="watch-loading"
+                      wrapperStyle={{}}
+                      wrapperClass="text-white"
+                    />
                   </motion.button>
                 </div>
               }

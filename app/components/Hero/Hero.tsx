@@ -17,7 +17,7 @@ export default function Hero() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
           >
-            9-10 November, 2024 &#8226; Campus 6 Auditorium
+           &#8226;   9th-10th November, 2024 &#8226; 
           </motion.div>
           <motion.div
             initial={{ y: 100, opacity: 0 }}

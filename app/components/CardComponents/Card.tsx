@@ -19,7 +19,7 @@ const speakers: Speaker[] = [
     title: "Educator",
     description:
       "Empowering people to embrace innovation and explore new possibilities in the wild world of tech",
-    image: "/striver-speaker.png",
+    image: "/assets/img/striver-final.png",
     twitterUrl: "https://x.com/striver_79?lang=en",
     linkedinUrl:
       "https://www.linkedin.com/in/rajstriver?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
@@ -46,7 +46,7 @@ export default function Card() {
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 xl:px-12">
       <div className="max-w-[90%] xl:max-w-[70%] mx-auto">
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bitter text-white text-center mb-4">
-          Innovace 2.O
+          Past Speaker
         </h2>
         <p className="text-base sm:text-lg lg:text-xl font-geist text-gray-300 text-center mb-12">
           Innovance 2.0 united 400+ innovators with Striver&apos;s insights on
@@ -93,15 +93,15 @@ export default function Card() {
 
                 {/* Image with hover effect */}
                 <motion.div
-                  className="w-[150px] h-[150px] md:w-[180px] md:h-[180px] lg:w-[220px] lg:h-[220px] overflow-hidden rounded-lg shadow-lg"
+                  className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[250px] lg:h-[250px] overflow-hidden rounded-lg shadow-lg"
                   whileHover={{ scale: 1.1, y: -10 }}
                   transition={{ type: "spring", stiffness: 200 }}
                 >
                   <Image
                     src={speaker.image}
                     alt={speaker.name}
-                    width={500}
-                    height={450}
+                    width={600}
+                    height={550}
                     className="object-cover ml-4"
                     priority={true}
                   />

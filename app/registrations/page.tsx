@@ -27,7 +27,7 @@ const Page = () => {
             Get Your FutureTech <br />
             Tickets Now!
           </h1>
-          <div className="w-1/2 text-center font-poppins">
+          <div className="w-[80vw] md:w-3/2 text-center font-poppins font-light xl:text-lg">
             Discover the next wave of innovation at FutureTech Conference.{" "}
             <br />
             Choose between Premium and Standard tickets to secure your spot.{" "}

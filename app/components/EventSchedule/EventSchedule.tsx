@@ -43,8 +43,7 @@ export const EventSchedule: React.FC = () => {
 
   return (
     <div className={poppins.className}>
-      <div className="text-white py-16 px-8 sm:px-12 md:px-20 lg:px-32 max-w-[1400px] mx-auto">
-        
+      <div className="text-white py-16 px-8 sm:px-12 md:px-20 lg:px-32 max-w-[1400px] mx-auto" id="schedule">
         <div className="sm:text-center mb-12">
           <h1 className="text-4xl sm:text-6xl">Event Schedule</h1>
           <p className="text-base sm:text-lg mt-4">

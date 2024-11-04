@@ -7,10 +7,7 @@ import Footer from "../components/global/Footer";
 import Star from "../components/global/Star";
 import Registration from "../components/Registration/registration";
 
-
-
 const Page = () => {
-  
   return (
     <div>
       <motion.div
@@ -37,13 +34,11 @@ const Page = () => {
         </div>
       </motion.div>
       <Star />
-      
+
       <Registration />
 
-      
-
       <Star />
-      <TimerSection />
+      <TimerSection text1="HURRY!" text2="RESERVE YOUR SPOTS NOW" />
       <Footer />
     </div>
   );

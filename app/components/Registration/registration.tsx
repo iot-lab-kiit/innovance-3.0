@@ -35,7 +35,7 @@ const RegistrationForm = () => {
     last_name: "",
     phone: "",
     roll: "",
-    total_fare: "249",
+    total_fare: "199",
     txn_id: "",
     type: "offline",
     whatsapp: "",
@@ -117,7 +117,6 @@ const RegistrationForm = () => {
   };
 
   async function sendOtp() {
-  
     const response = await fetch("/api/otp/send", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -488,16 +487,16 @@ const RegistrationForm = () => {
               <div className="mb-4 text-center">
                 <p>Scan the QR code below to make payment:</p>
                 <Image
-                  src="/qr-code.svg"
+                  src="/code.jpg"
                   alt="QR Code"
                   className="w-40 mx-auto my-4"
-                  width={50}
-                  height={50}
+                  width={100}
+                  height={100}
                 />
 
                 {/* Total Fare */}
                 <div className="w-full px-4 mb-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  Registration - Rs 249
+                  Registration amount : ₹{formData.total_fare}
                 </div>
 
                 <input

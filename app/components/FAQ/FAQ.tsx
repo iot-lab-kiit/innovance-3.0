@@ -60,11 +60,20 @@ const FAQAccordion: React.FC = () => {
 
                 {faqs.map((faq, index) => (
                     <motion.div key={index} className="border-b border-blue-500 mb-4" initial={false}>
-                        <motion.div className="flex justify-between items-center cursor-pointer py-4" onClick={() => handleToggle(index)} whileHover={{scale: 1.01}} transition={{duration: 0.2}}>
-                            <h3 className="text-lg font-medium">{faq.question}</h3>
-                            <motion.span className="text-xl" animate={{rotate: activeIndex === index ? 180 : 0}} transition={{duration: 0.3}}>
-                                {activeIndex === index ? "−" : "+"}
-                            </motion.span>
+                        <motion.div 
+                            className="flex justify-between items-center cursor-pointer py-4" 
+                            onClick={() => handleToggle(index)} 
+                            whileHover={{scale: 1.01}} 
+                            transition={{duration: 0.2}}
+                        >
+                            <h3 className="text-lg font-medium flex-1 pr-4">{faq.question}</h3>
+                            <motion.div 
+                                className="w-6 h-6 flex items-center justify-center"
+                                animate={{rotate: activeIndex === index ? 180 : 0}} 
+                                transition={{duration: 0.3}}
+                            >
+                                <span className="text-xl">{activeIndex === index ? "−" : "+"}</span>
+                            </motion.div>
                         </motion.div>
 
                         <AnimatePresence initial={false}>
@@ -74,8 +83,14 @@ const FAQAccordion: React.FC = () => {
                                     animate={{height: "auto", opacity: 1}}
                                     exit={{height: 0, opacity: 0}}
                                     transition={{duration: 0.3, ease: "easeInOut"}}
-                                    className="overflow-hidden">
-                                    <motion.p className="pb-4 text-gray-500" initial={{y: -10}} animate={{y: 0}} exit={{y: -10}}>
+                                    className="overflow-hidden"
+                                >
+                                    <motion.p 
+                                        className="pb-4 text-gray-500" 
+                                        initial={{y: -10}} 
+                                        animate={{y: 0}} 
+                                        exit={{y: -10}}
+                                    >
                                         {faq.answer}
                                     </motion.p>
                                 </motion.div>
@@ -87,4 +102,5 @@ const FAQAccordion: React.FC = () => {
         </div>
     );
 };
+
 export default FAQAccordion;

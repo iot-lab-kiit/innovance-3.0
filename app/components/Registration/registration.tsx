@@ -117,45 +117,33 @@ const RegistrationForm = () => {
   };
 
   async function sendOtp() {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_OTP_URL}/api/otp/send`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: formData.email,
-          rollNo: formData.roll,
-        }),
-      }
-    );
+  
+    const response = await fetch("/api/otp/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: formData.email, rollNo: formData.roll }),
+    });
+
     const data = await response.json();
     if (data.success) {
       notify();
+    } else {
+      toast.error("Failed to send OTP", { autoClose: 3000 });
     }
   }
   async function verifyOTP() {
     setLoading(true);
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_OTP_URL}/api/otp/verify`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: formData.email,
-          otp: formData.otp,
-        }),
-      }
-    );
+    const response = await fetch("/api/otp/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: formData.email, otp: formData.otp }),
+    });
+
     const data = await response.json();
     if (data.success) {
       toast.success("OTP Verified!", {
         position: "top-right",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
         theme: "dark",
         transition: Bounce,
       });
@@ -165,18 +153,12 @@ const RegistrationForm = () => {
       toast.error("OTP is not correct!", {
         position: "top-right",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
         theme: "light",
         transition: Bounce,
       });
-      setLoading(false);
     }
+    setLoading(false);
   }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -628,7 +610,7 @@ const RegistrationForm = () => {
                   <div ref={qrRef}>
                     <QRCode
                       size={256}
-                      value={`https://localhost/ticket/${uniqueId}`}
+                      value={`${process.env.NEXT_PUBLIC_CLIENT_URL}/${uniqueId}`}
                       viewBox={`0 0 256 256`}
                     />
                   </div>

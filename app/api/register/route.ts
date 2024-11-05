@@ -33,7 +33,14 @@ export async function POST(request: Request) {
     if (!apiResponse.ok) throw new Error("Failed to register user");
 
     const result = await apiResponse.json();
-    await sendConfirmationEmail(data.email, data.first_name, data.last_name,data.roll);
+    const id = result.data.id;
+    await sendConfirmationEmail(
+      data.email,
+      data.first_name,
+      data.last_name,
+      data.roll,
+      id
+    );
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.error("Error:", error);
@@ -43,7 +50,14 @@ export async function POST(request: Request) {
     );
   }
 }
-async function sendConfirmationEmail(email:string, first_name:string, last_name:string,roll:string) {
+
+async function sendConfirmationEmail(
+  email: string,
+  first_name: string,
+  last_name: string,
+  roll: string,
+  id: string
+): Promise<void> {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -60,9 +74,10 @@ async function sendConfirmationEmail(email:string, first_name:string, last_name:
 
   let htmlContent = await fs.readFile(htmlTemplatePath, "utf-8");
   htmlContent = htmlContent
-    .replace("{{first_name}}", first_name)
-    .replace("{{roll}}", roll)
-    .replace("{{last_name}}", last_name);
+    .replace(/{{first_name}}/g, first_name)
+    .replace(/{{last_name}}/g, last_name)
+    .replace(/{{ticket_url}}/g, `${process.env.NEXT_PUBLIC_CLIENT_URL}/${id}`)
+    .replace(/{{roll}}/g, roll);
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -71,11 +86,8 @@ async function sendConfirmationEmail(email:string, first_name:string, last_name:
     html: htmlContent,
   };
 
-
   await transporter.sendMail(mailOptions);
 }
-
-export default sendConfirmationEmail;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

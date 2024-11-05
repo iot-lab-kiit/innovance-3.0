@@ -148,7 +148,7 @@ const TicketPage = () => {
                     <div>CAMPUS 15</div>
                     <div>11 AM ONWARDS</div>
                   </div>
-                  {userData.status === "pending" ? (
+                  {userData.status !== "completed" ? (
                     <div>
                       <div>Your registration status is pending.</div>
                       <div>
@@ -194,13 +194,13 @@ const TicketPage = () => {
                     <div
                       className={
                         `w-7 h-7 ` +
-                        (userData.day1 ? "bg-blue-300" : "bg-[#bfc0c2]")
+                        (userData.day2 ? "bg-blue-300" : "bg-[#bfc0c2]")
                       }
                     ></div>
                     <div
                       className={
                         `w-7 h-7 ` +
-                        (userData.day1 ? "bg-blue-300" : "bg-[#bfc0c2]")
+                        (userData.food ? "bg-blue-300" : "bg-[#bfc0c2]")
                       }
                     ></div>
                   </div>
@@ -223,7 +223,7 @@ const TicketPage = () => {
               e.stopPropagation();
               handleDownloadTicket();
             }}
-            disabled={userData.status === "pending"}
+            disabled={userData.status !== "completed"}
             className="p-4 px-8 border border-white text-xl mt-5 disabled:text-gray-500 disabled:border-gray-500"
           >
             Download

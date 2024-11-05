@@ -8,7 +8,7 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Watch } from "react-loader-spinner";
 const notify = () =>
-  toast.info("OTP Sent", {
+  toast.info("OTP Sent to your registered email!", {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -204,7 +204,7 @@ const RegistrationForm = () => {
       setLoading(false);
     }
   };
- 
+
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-8">

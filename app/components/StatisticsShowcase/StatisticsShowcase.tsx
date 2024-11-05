@@ -11,16 +11,13 @@ const StatisticsShowcase = () => {
         <div className="w-[80%] md:w-[90%] lg:w-[70%] h-auto flex flex-col md:flex-row gap-4 justify-center items-center md:items-start">
           <div className="md:w-1/2 h-full flex flex-col justify-start gap-4 px-2 py-4">
             <h1 className="text-[35px] md:text-[40px] font-bitter font-[400]">
-              Tech that will
+              Who
               <br />
-              blow you away
+              are we?
             </h1>
             <div>
               <p className="text-[16px] font-poppins pr-2 md:w-[80%] font-light">
-                Embark on a journey into groundbreaking technology that will
-                leave you awe-inspired. Explore the future&apos;s most
-                innovative solutions, connect with industry experts, and immerse
-                yourself in a tech experience like no other.
+              Empowered by technology, a student-faculty team tackles social challenges. Our goal is to leverage each member&apos;s unique skills for creative problem-solving.
               </p>
             </div>
             <a
@@ -42,15 +39,15 @@ const StatisticsShowcase = () => {
             </div>
             <StatisticsRow
               count1={20}
-              title1="Event Speakers"
+              title1="Events conducted"
               count2={400}
-              title2="Diverse Tech Sessions"
+              title2="and more Attendees"
             />
             <StatisticsRow
-              count1={15}
-              title1="Exhibitors"
-              count2={4}
-              title2="Tech Sessions"
+              count1={30}
+              title1="and more projects"
+              count2={11}
+              title2="Domains"
             />
           </div>
         </div>

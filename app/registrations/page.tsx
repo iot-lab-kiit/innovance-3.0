@@ -24,6 +24,11 @@ const Page = () => {
             Get Your FutureTech <br />
             Tickets Now!
           </h1>
+          <div className="w-[80vw] md:w-3/2 text-center font-poppins font-light xl:text-lg text-blue-500">
+            Register now for just ₹199 for the first 100 sign-ups! Regular
+            price: ₹249.
+          </div>
+
           <div className="w-[80vw] md:w-3/2 text-center font-poppins font-light xl:text-lg">
             Discover the next wave of innovation at FutureTech Conference.{" "}
             <br />

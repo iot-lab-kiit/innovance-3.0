@@ -315,6 +315,7 @@ const RegistrationForm = () => {
                     <option value="ECSE">ECSE</option>
                     <option value="EEE">EEE</option>
                     <option value="ECE">ECE</option>
+                    <option value="ECE">MBA</option>
                     <option value="Mech">ME</option>
                     <option value="Civil">Civil</option>
                   </select>
@@ -487,7 +488,7 @@ const RegistrationForm = () => {
               <div className="mb-4 text-center">
                 <p>Scan the QR code below to make payment:</p>
                 <Image
-                  src="/code.jpg"
+                  src="/code1.jpg"
                   alt="QR Code"
                   className="w-40 mx-auto my-4"
                   width={100}
@@ -624,7 +625,8 @@ const RegistrationForm = () => {
                   </div>
                   <span className="text-sm italic text-blue-500 mx-6">
                     Your ticket will be validated within 48 hours . Download the
-                    above QR to check yout ticket status.
+                    above QR to check yout ticket status.Ticket is sent to your
+                    registered email.
                   </span>
                 </motion.div>
               )}

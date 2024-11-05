@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import HamburgerButton from "./HamburgerButton";
 import Image from "next/image";
-
+import logo from "../../../public/assets/img/logo-dark.png";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -24,7 +24,7 @@ export default function Navbar() {
         style={{ boxShadow: "0px 4px 6px rgba(59, 130, 246, 0.3)" }}
       >
         <div>
-          <Image src="/icons/logo.webp" width={40} height={40} alt="logo" />
+          <Image src={logo} width={60} height={60} alt="logo" />
         </div>
         <div className="hidden md:flex md:gap-9">
           <Link
@@ -34,13 +34,13 @@ export default function Navbar() {
             Home
           </Link>
           <Link
-            href="/about"
+            href="/#about"
             className="hover:scale-110 hover:text-blue-300 transition-all"
           >
             About
           </Link>
           <Link
-            href="/schedule"
+            href="/#schedule"
             className="hover:scale-110 hover:text-blue-300 transition-all"
           >
             Schedule
@@ -73,13 +73,15 @@ export default function Navbar() {
             transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
             className="absolute w-full h-full bg-blue-500"
           ></motion.div>
-          <motion.button
-            transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-            whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-            className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
-          >
-            GET TICKET
-          </motion.button>
+          <Link href="/registrations">
+            <motion.button
+              transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+              whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+              className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
+            >
+              GET TICKET
+            </motion.button>
+          </Link>
         </div>
         <div className="md:hidden flex justify-center items-center">
           <HamburgerButton isOpen={isOpen} toggleMenu={toggleMenu} />
@@ -105,13 +107,13 @@ export default function Navbar() {
                 Home
               </Link>
               <Link
-                href="/about"
+                href="#about"
                 className="hover:text-lg hover:text-blue-300 transition-all"
               >
                 About
               </Link>
               <Link
-                href="/schedule"
+                href="#schedule"
                 className="hover:text-lg hover:text-blue-300 transition-all"
               >
                 Schedule

@@ -16,7 +16,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Innovance 3.0",
-  description: "Innovance 3.0",
+  description: "Innovance 3.0 offers a unique opportunity to dive into the latest advancements and practical applications in technology, guided by industry experts and hands-on sessions.",
 };
 
 export default function RootLayout({

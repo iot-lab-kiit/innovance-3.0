@@ -181,6 +181,10 @@ const RegistrationForm = () => {
       }
     } else {
       if (step === 2) return;
+      if (step === 1 && !formData.email.endsWith("@kiit.ac.in")) {
+        setEmailError("Email must be a KIIT email ID");
+        return;
+      }
       setStep(step + 1);
       setLoading(false);
     }
@@ -193,6 +197,7 @@ const RegistrationForm = () => {
         <h1 className="text-center mb-6 sm:mb-10 font-medium font-bitter md:text-5xl text-2xl sm:text-5xl lg:text-6xl">
           Registration Form
         </h1>
+
         <form onSubmit={handleSubmit}>
           {step === 1 && (
             <motion.div
@@ -315,6 +320,7 @@ const RegistrationForm = () => {
                     <option value="ECSE">ECSE</option>
                     <option value="EEE">EEE</option>
                     <option value="ECE">ECE</option>
+                    <option value="ECE">MBA</option>
                     <option value="Mech">ME</option>
                     <option value="Civil">Civil</option>
                   </select>
@@ -487,7 +493,7 @@ const RegistrationForm = () => {
               <div className="mb-4 text-center">
                 <p>Scan the QR code below to make payment:</p>
                 <Image
-                  src="/code.jpg"
+                  src="/code1.jpg"
                   alt="QR Code"
                   className="w-40 mx-auto my-4"
                   width={100}
@@ -507,6 +513,7 @@ const RegistrationForm = () => {
                   value={formData.txn_id}
                   onChange={handleChange}
                 />
+                <p className="text-red text-sm py-5 text-red-700">NOTE: Please submit your UTR number of the transaction.</p>
               </div>
               {/* 
               <div className="text-center mb-4">
@@ -624,7 +631,8 @@ const RegistrationForm = () => {
                   </div>
                   <span className="text-sm italic text-blue-500 mx-6">
                     Your ticket will be validated within 48 hours . Download the
-                    above QR to check yout ticket status.
+                    above QR to check yout ticket status.Ticket is sent to your
+                    registered email.
                   </span>
                 </motion.div>
               )}

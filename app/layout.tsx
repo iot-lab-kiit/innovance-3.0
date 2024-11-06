@@ -16,7 +16,11 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Innovance 3.0",
-  description: "Innovance 3.0",
+  description:
+    "Innovance 3.0 , flagship event of IoT Lab , KIIT offers a unique opportunity to dive into the latest advancements and practical applications in technology, guided by industry experts and hands-on sessions.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

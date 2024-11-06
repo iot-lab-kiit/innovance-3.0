@@ -50,7 +50,7 @@ const TicketPage = () => {
 
     const downloadLink = document.createElement("a");
     downloadLink.href = pngFile;
-    downloadLink.download = "innovance_virtual_ticket.png";
+    downloadLink.download = "innovance_virtual_ticket.jpeg";
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
@@ -121,7 +121,7 @@ const TicketPage = () => {
             <div className="bg-[#101010] z-10 absolute -bottom-5 -right-5 rounded-full w-12 h-12"></div>
             <div className="w-full h-[320px] md:h-auto md:w-[500px] relative">
               <Image
-                src={"/assets/img/ticket.png"}
+                src={"/assets/img/ticket.jpeg"}
                 alt="innovance 3.0"
                 fill
                 style={{ objectFit: "cover" }}
@@ -148,7 +148,7 @@ const TicketPage = () => {
                     <div>CAMPUS 15</div>
                     <div>11 AM ONWARDS</div>
                   </div>
-                  {userData.status === "pending" ? (
+                  {userData.status !== "completed" ? (
                     <div>
                       <div>Your registration status is pending.</div>
                       <div>
@@ -194,13 +194,13 @@ const TicketPage = () => {
                     <div
                       className={
                         `w-7 h-7 ` +
-                        (userData.day1 ? "bg-blue-300" : "bg-[#bfc0c2]")
+                        (userData.day2 ? "bg-blue-300" : "bg-[#bfc0c2]")
                       }
                     ></div>
                     <div
                       className={
                         `w-7 h-7 ` +
-                        (userData.day1 ? "bg-blue-300" : "bg-[#bfc0c2]")
+                        (userData.food ? "bg-blue-300" : "bg-[#bfc0c2]")
                       }
                     ></div>
                   </div>
@@ -223,7 +223,7 @@ const TicketPage = () => {
               e.stopPropagation();
               handleDownloadTicket();
             }}
-            disabled={userData.status === "pending"}
+            disabled={userData.status !== "completed"}
             className="p-4 px-8 border border-white text-xl mt-5 disabled:text-gray-500 disabled:border-gray-500"
           >
             Download

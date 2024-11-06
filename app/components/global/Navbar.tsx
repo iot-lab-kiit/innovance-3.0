@@ -14,8 +14,8 @@ export default function Navbar() {
   };
 
   const variants = {
-    hidden: { opacity: 0, y: -256 }, // Start off-screen and transparent
-    visible: { opacity: 1, y: 0 }, // End position
+    hidden: { opacity: 0, y: -256 },
+    visible: { opacity: 1, y: 0 },
   };
   return (
     <div className="font-geistMono z-30 relative">

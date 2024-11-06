@@ -513,7 +513,7 @@ const RegistrationForm = () => {
                   value={formData.txn_id}
                   onChange={handleChange}
                 />
-                <p className="text-red">NOTE: If you are using PhonePe for payment, please enter your UTR, instead of Transaction ID</p>
+                <p className="text-red text-sm py-5 text-red-700">NOTE: Please submit your UTR number of the transaction.</p>
               </div>
               {/* 
               <div className="text-center mb-4">

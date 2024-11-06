@@ -1,14 +1,15 @@
+"use client";
 import Marquee from "react-fast-marquee";
 import Image from "next/image";
 import { motion } from "framer-motion";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function Hero() {
-  // const [isHovered, setIsHovered] = useState(false);
-  // useEffect(() => {
-  //   setIsHovered(false);
-  // }, []);
+  const [isHovered, setIsHovered] = useState(false);
+  useEffect(() => {
+    setIsHovered(false);
+  }, []);
 
   return (
     <div className="h-[80vh] md:h-screen bg-[#101010]">
@@ -34,13 +35,15 @@ export default function Hero() {
             Innovance 3.0
           </motion.div>
           <div
-            className="relative w-fit m-auto"
-            // onMouseEnter={() => setIsHovered(true)}
-            // onMouseLeave={() => setIsHovered(false)}
-          >
-            <Link href="/registrations">
-              {/* <motion.div
-                initial={{ width: "100%", y: 100, opacity: 0 }}
+              className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+              onMouseEnter={() => {
+                setIsHovered(!isHovered);
+              }}
+              onMouseLeave={() => {
+                setIsHovered(!isHovered);
+              }}
+            >
+              <motion.div
                 animate={
                   isHovered
                     ? { width: 0, y: 0, opacity: 1 }
@@ -48,12 +51,27 @@ export default function Hero() {
                 }
                 transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                 className="absolute w-full h-full bg-blue-500"
-              ></motion.div> */}
-              <button className="text-xs hover:text-sm  sm:text-base sm:hover:text-lg text-background bg-blue-500 border-background border w-fit m-auto py-3 px-7 font-geistMono">
-                GET TICKET
-              </button>
-            </Link>
-          </div>
+              ></motion.div>
+              <Link href="/registrations">
+                <motion.button
+                  animate={
+                    isHovered
+                      ? {
+                          color: "#3b82f6",
+                          borderColor: "#3b82f6",
+                          y: 0,
+                          opacity: 1,
+                        }
+                      : { y: 0, opacity: 1 }
+                  }
+                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                  whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 `}
+                >
+                  BUY TICKET
+                </motion.button>
+              </Link>
+            </div>
         </div>
       </div>
       <div id="marquee" className="font-geistMono mt-2 md:mt-0">

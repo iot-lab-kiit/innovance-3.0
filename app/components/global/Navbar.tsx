@@ -107,13 +107,13 @@ export default function Navbar() {
                 Home
               </Link>
               <Link
-                href="#about"
+                href="/#about"
                 className="hover:text-lg hover:text-blue-300 transition-all"
               >
                 About
               </Link>
               <Link
-                href="#schedule"
+                href="/#schedule"
                 className="hover:text-lg hover:text-blue-300 transition-all"
               >
                 Schedule

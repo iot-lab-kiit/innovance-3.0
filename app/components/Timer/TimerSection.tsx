@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react";
 import Timer from "./Timer";
 import { Bitter } from "@next/font/google";

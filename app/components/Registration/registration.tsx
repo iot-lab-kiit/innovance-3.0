@@ -346,36 +346,26 @@ const RegistrationForm = () => {
                   <option value="4">4th Year</option>
                 </select>
               </div>
-
               <div
-                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
-                onMouseEnter={() => setIsHovered(!isHovered)}
-                onMouseLeave={() => setIsHovered(!isHovered)}
+                className="hidden md:block relative w-[11rem] mx-auto my-8"
+                onMouseEnter={() => {
+                  setIsHovered(!isHovered);
+                }}
+                onMouseLeave={() => {
+                  setIsHovered(!isHovered);
+                }}
               >
                 <motion.div
-                  animate={
-                    isHovered
-                      ? { width: 0, y: 0, opacity: 1 }
-                      : { width: "100%", y: 0, opacity: 1 }
-                  }
+                  initial={{ width: "100%" }}
+                  animate={isHovered ? { width: 0 } : { width: "100%" }}
                   transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                   className="absolute w-full h-full bg-blue-500"
                 ></motion.div>
 
                 <motion.button
-                  animate={
-                    isHovered
-                      ? {
-                          color: "#3b82f6",
-                          borderColor: "#3b82f6",
-                          y: 0,
-                          opacity: 1,
-                        }
-                      : { y: 0, opacity: 1 }
-                  }
                   transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                   whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                  className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
                 >
                   NEXT
                 </motion.button>
@@ -442,43 +432,29 @@ const RegistrationForm = () => {
 
               {/* Verify Button */}
               <div
-                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
-                onMouseEnter={() => {
-                  setIsHovered(!isHovered);
-                }}
-                onMouseLeave={() => {
-                  setIsHovered(!isHovered);
-                }}
+                className="hidden md:block relative w-[11rem] mx-auto my-8"
                 onClick={() => {
                   verifyOTP();
                 }}
               >
                 <motion.div
-                  animate={
-                    !isHovered
-                      ? { width: 0, y: 0, opacity: 1 }
-                      : { width: "100%", y: 0, opacity: 1 }
-                  }
-                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                  initial={{ width: "100%" }}
+                  // animate={isHovered ? { width: 0 } : { width: "100%" }}
+                  // transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+
                   className="absolute w-full h-full bg-blue-500"
                 ></motion.div>
 
                 <motion.button
-                  animate={
-                    !isHovered
-                      ? {
-                          color: "#3b82f6",
-                          borderColor: "#3b82f6",
-                          y: 0,
-                          opacity: 1,
-                        }
-                      : { y: 0, opacity: 1 }
-                  }
                   transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                  whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                  whileHover={{
+                    color: "#3b82f6",
+                    borderColor: "#3b82f6",
+                    backgroundColor: "black",
+                  }}
+                  className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
                 >
-                  Verify OTP
+                  VERIFY OTP
                 </motion.button>
               </div>
             </motion.div>
@@ -513,7 +489,10 @@ const RegistrationForm = () => {
                   value={formData.txn_id}
                   onChange={handleChange}
                 />
-                <p className="text-red text-sm py-5 text-red-700">NOTE: If you are using PhonePe for payment, please enter your UTR, instead of Transaction ID.</p>
+                <p className="text-red text-sm py-5 text-red-700">
+                  NOTE: If you are using PhonePe for payment, please enter your
+                  UTR, instead of Transaction ID.
+                </p>
               </div>
               {/* 
               <div className="text-center mb-4">
@@ -530,7 +509,7 @@ const RegistrationForm = () => {
 
               {
                 <div
-                  className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+                  className="hidden md:block relative"
                   onMouseEnter={() => {
                     setIsHovered(!isHovered);
                   }}
@@ -539,42 +518,25 @@ const RegistrationForm = () => {
                   }}
                 >
                   <motion.div
-                    animate={
-                      !isHovered
-                        ? { width: 0, y: 0, opacity: 1 }
-                        : { width: "100%", y: 0, opacity: 1 }
-                    }
-                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                    initial={{ width: "100%" }}
+                    // animate={isHovered ? { width: 0 } : { width: "100%" }}
+                    // transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                     className="absolute w-full h-full bg-blue-500"
                   ></motion.div>
 
                   <motion.button
-                    animate={
-                      !isHovered
-                        ? {
-                            color: "#3b82f6",
-                            borderColor: "#3b82f6",
-                            y: 0,
-                            opacity: 1,
-                          }
-                        : { y: 0, opacity: 1 }
-                    }
-                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                    whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                    className={`text-xs sm:text-base hover:font-semibold flex items-center gap-2 text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                    transition={{
+                      duration: 0.5,
+                      ease: [0.17, 0.55, 0.55, 1],
+                    }}
+                    whileHover={{
+                      color: "#3b82f6",
+                      borderColor: "#3b82f6",
+                      backgroundColor: "#171717",
+                    }}
+                    className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
                   >
-                    <p>SUBMIT</p>
-
-                    <Watch
-                      visible={loading}
-                      height="20"
-                      width="20"
-                      radius="48"
-                      color="#ffffff"
-                      ariaLabel="watch-loading"
-                      wrapperStyle={{}}
-                      wrapperClass="text-white"
-                    />
+                    GET TICKET
                   </motion.button>
                 </div>
               }

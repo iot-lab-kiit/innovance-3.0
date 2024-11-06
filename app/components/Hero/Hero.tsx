@@ -35,30 +35,28 @@ export default function Hero() {
             Innovance 3.0
           </motion.div>
           <div
-          className="hidden md:block relative w-[11rem] mx-auto"
-          onMouseEnter={() => {
-            setIsHovered(!isHovered);
-          }}
-          onMouseLeave={() => {
-            setIsHovered(!isHovered);
-          }}
-        >
-          <motion.div
-            initial={{ width: "100%" }}
-            animate={isHovered ? { width: 0 } : { width: "100%" }}
-            transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-            className="absolute w-full h-full bg-blue-500"
-          ></motion.div>
-          <Link href="/registrations">
-            <motion.button
+            className="block relative w-[11rem] mx-auto"
+            onMouseEnter={() => setIsHovered(!isHovered)}
+            onMouseLeave={() => setIsHovered(!isHovered)}
+          >
+            <motion.div
+              initial={{ width: "100%", opacity: 0, y: 100 }}
+              animate={{ opacity: 1, width: isHovered ? 0 : "100%", y: 0 }}
               transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-              whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-              className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
-            >
-              GET TICKET
-            </motion.button>
-          </Link>
-        </div>
+              className="absolute w-full h-full bg-blue-500"
+            ></motion.div>
+            <Link href="/registrations">
+              <motion.button
+                initial={{ y: 100 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+                className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
+              >
+                GET TICKET
+              </motion.button>
+            </Link>
+          </div>
         </div>
       </div>
       <div id="marquee" className="font-geistMono mt-2 md:mt-0">

@@ -90,7 +90,7 @@ export default function Navbar() {
       {/* <hr className="mx-4 z-40 relative" /> */}
       <AnimatePresence>
         {isOpen && (
-          <div className={`relative`}>
+          <div className={`relative`} onClick={()=>toggleMenu()}>
             <motion.div
               key={"hamburger"}
               initial="hidden"
@@ -130,11 +130,11 @@ export default function Navbar() {
               >
                 Contact
               </Link>
-              <div className="">
-                <button className="py-2 px-5 border border-foreground hover:text-lg hover:text-blue-300 hover:border-blue-300 transition-all">
+              <Link href="/registrations">
+                <button className="py-2 px-5 border border-foreground text-blue-300 transition-all">
                   GET TICKET
                 </button>
-              </div>
+              </Link>
             </motion.div>
           </div>
         )}

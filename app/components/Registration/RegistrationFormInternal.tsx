@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Poppins } from "@next/font/google";
 import QRCode from "react-qr-code";
 import { useRef } from "react";
 
 import "react-toastify/dist/ReactToastify.css";
 import { Watch } from "react-loader-spinner";
-
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-});
+import Link from "next/link";
 
 const RegistrationFormInternal = () => {
   const [step, setStep] = useState(1);
@@ -23,7 +18,7 @@ const RegistrationFormInternal = () => {
     last_name: "",
     phone: "",
     roll: "",
-    total_fare: "249",
+    total_fare: "199",
     txn_id: "",
     type: "offline",
     whatsapp: "",
@@ -114,7 +109,7 @@ const RegistrationFormInternal = () => {
         setIsPending(false);
       }
     } else {
-    //   if (step === 1) return;
+      //   if (step === 1) return;
       setStep(step + 1);
       setLoading(false);
     }
@@ -276,34 +271,25 @@ const RegistrationFormInternal = () => {
               </div>
 
               <div
-                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
-                onMouseEnter={() => setIsHovered(!isHovered)}
-                onMouseLeave={() => setIsHovered(!isHovered)}
+                className="block relative w-[11rem] mx-auto my-8"
+                onMouseEnter={() => {
+                  setIsHovered(!isHovered);
+                }}
+                onMouseLeave={() => {
+                  setIsHovered(!isHovered);
+                }}
               >
                 <motion.div
-                  animate={
-                    isHovered
-                      ? { width: 0, y: 0, opacity: 1 }
-                      : { width: "100%", y: 0, opacity: 1 }
-                  }
+                  initial={{ width: "100%" }}
+                  animate={isHovered ? { width: 0 } : { width: "100%" }}
                   transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                   className="absolute w-full h-full bg-blue-500"
                 ></motion.div>
 
                 <motion.button
-                  animate={
-                    isHovered
-                      ? {
-                          color: "#3b82f6",
-                          borderColor: "#3b82f6",
-                          y: 0,
-                          opacity: 1,
-                        }
-                      : { y: 0, opacity: 1 }
-                  }
                   transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                   whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                  className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
                 >
                   NEXT
                 </motion.button>
@@ -330,7 +316,7 @@ const RegistrationFormInternal = () => {
 
                 {/* Total Fare */}
                 <div className="w-full px-4 mb-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  Registration - Rs 249
+                  Registration amount : ₹{formData.total_fare}
                 </div>
 
                 <input
@@ -357,7 +343,7 @@ const RegistrationFormInternal = () => {
 
               {
                 <div
-                  className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+                  className="block relative"
                   onMouseEnter={() => {
                     setIsHovered(!isHovered);
                   }}
@@ -366,38 +352,31 @@ const RegistrationFormInternal = () => {
                   }}
                 >
                   <motion.div
-                    animate={
-                      !isHovered
-                        ? { width: 0, y: 0, opacity: 1 }
-                        : { width: "100%", y: 0, opacity: 1 }
-                    }
-                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                    initial={{ width: "100%" }}
+                    // animate={isHovered ? { width: 0 } : { width: "100%" }}
+                    // transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                     className="absolute w-full h-full bg-blue-500"
                   ></motion.div>
 
                   <motion.button
-                    animate={
-                      !isHovered
-                        ? {
-                            color: "#3b82f6",
-                            borderColor: "#3b82f6",
-                            y: 0,
-                            opacity: 1,
-                          }
-                        : { y: 0, opacity: 1 }
-                    }
-                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                    whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                    className={`text-xs sm:text-base hover:font-semibold flex items-center gap-2 text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                    transition={{
+                      duration: 0.5,
+                      ease: [0.17, 0.55, 0.55, 1],
+                    }}
+                    whileHover={{
+                      color: "#3b82f6",
+                      borderColor: "#3b82f6",
+                      backgroundColor: "#171717",
+                    }}
+                    className="w-full h-full text-background relative z-10 py-2 px-5 border border-background flex justify-center gap-5 items-center"
                   >
-                    <p>SUBMIT</p>
-
+                    GET TICKET
                     <Watch
                       visible={loading}
                       height="20"
                       width="20"
                       radius="48"
-                      color="#ffffff"
+                      color="#3b82f6"
                       ariaLabel="watch-loading"
                       wrapperStyle={{}}
                       wrapperClass="text-white"
@@ -447,14 +426,22 @@ const RegistrationFormInternal = () => {
                       viewBox={`0 0 256 256`}
                     />
                   </div>
-                  <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDownloadQRCode();
-                    }}
-                    className="bg-blue-500 rounded px-5 py-1 text-center text-sm my-4 cursor-pointer"
-                  >
-                    Download QR Code
+                  <div className="flex items-center flex-col justify-center w-56 gap-3 my-2">
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDownloadQRCode();
+                      }}
+                      className="bg-blue-500 rounded px-5 py-1 text-center text-sm cursor-pointer w-full"
+                    >
+                      Download QR Code
+                    </div>
+                    <Link
+                      href={`${process.env.NEXT_PUBLIC_CLIENT_URL}/${uniqueId}`}
+                      className="bg-blue-500 rounded px-5 py-1 text-center text-sm cursor-pointer w-full"
+                    >
+                      <button>Go to Ticket</button>
+                    </Link>
                   </div>
                   <span className="text-sm italic text-blue-500 mx-6">
                     Your ticket will be validated within 48 hours . Download the

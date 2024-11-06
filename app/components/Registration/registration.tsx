@@ -6,6 +6,8 @@ import QRCode from "react-qr-code";
 import { useRef } from "react";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
+import { Watch } from "react-loader-spinner";
 // import { Watch } from "react-loader-spinner";
 const notify = () =>
   toast.info("OTP Sent to your registered email!", {
@@ -51,7 +53,7 @@ const RegistrationForm = () => {
   const [emailError, setEmailError] = useState("");
   const [timer, setTimer] = useState(0);
   const [isOtpSent, setIsOtpSent] = useState(false);
-  console.log(loading)
+  console.log(loading);
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (timer > 0) {
@@ -347,7 +349,7 @@ const RegistrationForm = () => {
                 </select>
               </div>
               <div
-                className="hidden md:block relative w-[11rem] mx-auto my-8"
+                className="block relative w-[11rem] mx-auto my-8"
                 onMouseEnter={() => {
                   setIsHovered(!isHovered);
                 }}
@@ -432,7 +434,7 @@ const RegistrationForm = () => {
 
               {/* Verify Button */}
               <div
-                className="hidden md:block relative w-[11rem] mx-auto my-8"
+                className="block relative w-[11rem] mx-auto my-8"
                 onClick={() => {
                   verifyOTP();
                 }}
@@ -509,7 +511,7 @@ const RegistrationForm = () => {
 
               {
                 <div
-                  className="hidden md:block relative"
+                  className="block relative"
                   onMouseEnter={() => {
                     setIsHovered(!isHovered);
                   }}
@@ -534,9 +536,19 @@ const RegistrationForm = () => {
                       borderColor: "#3b82f6",
                       backgroundColor: "#171717",
                     }}
-                    className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
+                    className="w-full h-full text-background relative z-10 py-2 px-5 border border-background flex justify-center gap-5 items-center"
                   >
                     GET TICKET
+                    <Watch
+                      visible={loading}
+                      height="20"
+                      width="20"
+                      radius="48"
+                      color="#3b82f6"
+                      ariaLabel="watch-loading"
+                      wrapperStyle={{}}
+                      wrapperClass="text-white"
+                    />
                   </motion.button>
                 </div>
               }
@@ -582,14 +594,22 @@ const RegistrationForm = () => {
                       viewBox={`0 0 256 256`}
                     />
                   </div>
-                  <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDownloadQRCode();
-                    }}
-                    className="bg-blue-500 rounded px-5 py-1 text-center text-sm my-4 cursor-pointer"
-                  >
-                    Download QR Code
+                  <div className="flex items-center flex-col justify-center w-56 gap-3 my-2">
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDownloadQRCode();
+                      }}
+                      className="bg-blue-500 rounded px-5 py-1 text-center text-sm cursor-pointer w-full"
+                    >
+                      Download QR Code
+                    </div>
+                    <Link
+                      href={`${process.env.NEXT_PUBLIC_CLIENT_URL}/${uniqueId}`}
+                      className="bg-blue-500 rounded px-5 py-1 text-center text-sm cursor-pointer w-full"
+                    >
+                      <button>Go to Ticket</button>
+                    </Link>
                   </div>
                   <span className="text-sm italic text-blue-500 mx-6">
                     Your ticket will be validated within 48 hours . Download the

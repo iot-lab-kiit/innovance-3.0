@@ -28,7 +28,7 @@ const Footer = () => {
       <br />
       <br />
       <br />
-      <footer className="w-full h-60 bg-black text-white flex flex-col items-center justify-center space-y-6">
+      <footer className="w-full h-60 bg-black text-white flex flex-col items-center justify-center space-y-6 pb-12">
         <div className="flex space-x-6">
           <a
             href="https://www.instagram.com/iot.lab.kiit/?hl=en"
@@ -68,16 +68,18 @@ const Footer = () => {
           </a>
         </div>
 
-        <button className="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold hover:scale-105 hover:bg-blue-700 transform transition duration-300">
+        {/* <button className="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold hover:scale-105 hover:bg-blue-700 transform transition duration-300">
           Contact Us
-        </button>
+        </button> */}
+
+        <div className="w-[1px] h-24 bg-gray-400"></div>
         <p className="text-sm">
           Copyright &copy; 2024,{" "}
           <a
             className="underline underline-offset-1"
             href="https://iotkiit.in/"
           >
-            IOT Lab, KIIT
+            IoT Lab, KIIT
           </a>
         </p>
       </footer>

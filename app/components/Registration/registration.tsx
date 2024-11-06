@@ -207,9 +207,7 @@ const RegistrationForm = () => {
         <h1 className="text-center mb-6 sm:mb-10 font-medium font-bitter md:text-5xl text-2xl sm:text-5xl lg:text-6xl">
           Registration Form
         </h1>
-        <h2 className="text-center mb-6 sm:mb-10 font-medium font-bitter md:text-3xl text-xl sm:text-3xl lg:text-4xl">
-          Rs 250
-        </h2>
+
         <form onSubmit={handleSubmit}>
           {step === 1 && (
             <motion.div
@@ -483,9 +481,7 @@ const RegistrationForm = () => {
                   whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
                   className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
                 >
-
                   Verify OTP
-
                 </motion.button>
               </div>
             </motion.div>
@@ -541,44 +537,45 @@ const RegistrationForm = () => {
 
               {/* Submit Button */}
 
-             { <div
-                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
-
-                onMouseEnter={() => {
-                  setIsHovered(!isHovered);
-                }}
-                onMouseLeave={() => {
-                  setIsHovered(!isHovered);
-                }}
-              >
-                <motion.div
-                  animate={
-                    !isHovered
-                      ? { width: 0, y: 0, opacity: 1 }
-                      : { width: "100%", y: 0, opacity: 1 }
-                  }
-                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                  className="absolute w-full h-full bg-blue-500"
-                ></motion.div>
-
-                <motion.button
-                  animate={
-                    !isHovered
-                      ? {
-                          color: "#3b82f6",
-                          borderColor: "#3b82f6",
-                          y: 0,
-                          opacity: 1,
-                        }
-                      : { y: 0, opacity: 1 }
-                  }
-                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                  whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+              {
+                <div
+                  className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+                  onMouseEnter={() => {
+                    setIsHovered(!isHovered);
+                  }}
+                  onMouseLeave={() => {
+                    setIsHovered(!isHovered);
+                  }}
                 >
-                  SUBMIT
-                </motion.button>
-              </div>}
+                  <motion.div
+                    animate={
+                      !isHovered
+                        ? { width: 0, y: 0, opacity: 1 }
+                        : { width: "100%", y: 0, opacity: 1 }
+                    }
+                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                    className="absolute w-full h-full bg-blue-500"
+                  ></motion.div>
+
+                  <motion.button
+                    animate={
+                      !isHovered
+                        ? {
+                            color: "#3b82f6",
+                            borderColor: "#3b82f6",
+                            y: 0,
+                            opacity: 1,
+                          }
+                        : { y: 0, opacity: 1 }
+                    }
+                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                    whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
+                    className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                  >
+                    SUBMIT
+                  </motion.button>
+                </div>
+              }
             </motion.div>
           )}
 

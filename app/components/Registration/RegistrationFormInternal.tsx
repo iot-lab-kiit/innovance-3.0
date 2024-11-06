@@ -442,7 +442,7 @@ const RegistrationFormInternal = () => {
                   <div ref={qrRef}>
                     <QRCode
                       size={256}
-                      value={`https://localhost/ticket/${uniqueId}`}
+                      value={`${process.env.NEXT_PUBLIC_CLIENT_URL}/${uniqueId}`}
                       viewBox={`0 0 256 256`}
                     />
                   </div>

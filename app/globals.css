@@ -3,92 +3,100 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
 }
 @media (prefers-color-scheme: light) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #ffffff;
-  scroll-behavior: smooth;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    scroll-behavior: smooth;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+    .text-balance {
+        text-wrap: balance;
+    }
 }
 
 @font-face {
-  font-family: "GeistMono";
-  src: url("./fonts/GeistMonoVF.woff");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "GeistMono";
+    src: url("./fonts/GeistMonoVF.woff");
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: "Geist";
-  src: url("./fonts/GeistVF.woff");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "Geist";
+    src: url("./fonts/GeistVF.woff");
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: "Bitter";
-  src: url("./fonts/Bitter-VariableFont_wght.ttf");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "Bitter";
+    src: url("./fonts/Bitter-VariableFont_wght.ttf");
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: "Poppins";
-  src: url("./fonts/Poppins-Medium.ttf");
-  font-weight: normal;
-  font-style: normal;
+    font-family: "Poppins";
+    src: url("./fonts/Poppins-Medium.ttf");
+    font-weight: normal;
+    font-style: normal;
 }
 
 #comingSoon {
-  visibility: hidden;
-  position: relative;
+    visibility: hidden;
+    position: relative;
 }
 
 #comingSoon:after {
-  visibility: visible;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  text-wrap: nowrap;
-  content: "COMING SOON";
-  display: block;
+    visibility: visible;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-wrap: nowrap;
+    content: "COMING SOON";
+    display: block;
 }
 
 #hero {
-  background-image: linear-gradient(
-      to bottom,
-      rgb(0, 0, 0),
-      rgba(0, 0, 0, 0.574),
-      rgb(0, 0, 0)
-    ),
-    url("../public/backgrounds/hero_bg.jpg");
-  background-position: center;
-  background-size: cover;
+    background-image: linear-gradient(to bottom, rgb(0, 0, 0), rgba(0, 0, 0, 0.574), rgb(0, 0, 0)), url("../public/backgrounds/hero_bg.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.skeleton-animate {
+    background-size: 400%;
+    -webkit-animation: skeletonGlow 2s ease-in-out infinite;
+    animation: skeletonGlow 2s ease-in-out infinite;
+}
+
+@keyframes skeletonGlow {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

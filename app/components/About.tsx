@@ -21,7 +21,7 @@ function About() {
             >
               <h1 className="lg:text-5xl sm:text-3xl text-2xl text-center">
                 {" "}
-                Why Attend
+                Why Attend?
               </h1>
             </div>
             <div
@@ -29,8 +29,7 @@ function About() {
     shrink-0 ${poppins.className} mt-3`}
             >
               <p className="font-normal md:text-lg sm:text-sm sm:w-full w-3/4 text-center text-wrap text-xs">
-                FutureTech Conference is packed with powerful features and
-                innovations.
+              Innovance 3.0 offers a unique opportunity to dive into the latest advancements and practical applications in technology, guided by industry experts and hands-on sessions.
               </p>
             </div>
           </div>
@@ -62,17 +61,16 @@ function About() {
                   </svg>
                 </div>
                 <div
-                  className={`mt-4 sm:text-2xl text-xl trackling-wide ${bitter.className}`}
+                  className={`mt-5  sm:text-xl text-xl trackling-tight ${bitter.className}`}
                 >
-                  Innovative Content
+                Hands on experience
                 </div>
               </div>
               <div className="describtion relative ">
                 <p
-                  className={`sm:text-base text-sm h-fit overflow-hidden break-words m-5 tracking-wide leading-relaxed ${poppins.className}`}
+                  className={`sm:text-base text-xs h-fit overflow-hidden break-words m-5 tracking-normal leading-relaxed ${poppins.className}`}
                 >
-                  Engage with thought-provoking sessions featuring up-to-date
-                  and captivating content from industry leaders.
+                  Experience the thrill of hands-on learning. Dive in, get creative, and watch your confidence soar as you sharpen your expertise in a real-world setting.
                 </p>
               </div>
             </div>
@@ -147,10 +145,11 @@ function About() {
               </div>
               <div className="describtion relative ">
                 <p
-                  className={`sm:text-base text-sm h-fit overflow-hidden break-words m-5 tracking-wide leading-relaxed ${poppins.className}`}
+                  className={`sm:text-sm text-xs h-fit overflow-hidden break-words m-5 tracking-wider leading-relaxed ${poppins.className}`}
                 >
-                  Gain practical knowledge and skills through hands-on workshops
-                  and interactive sessions.
+                Dynamic learning experiences that foster audience participation and engagement.
+                Learn through seminars, quizzes and insightful discussions.
+               Ask questions, share ideas and stimulate your critical thinking abilities with us.
                 </p>
               </div>
             </div>
@@ -181,15 +180,14 @@ function About() {
                 <div
                   className={`mt-4 sm:text-2xl text-xl trackling-wide ${bitter.className}`}
                 >
-                  Industry Leaders
+                Certification
                 </div>
               </div>
               <div className="describtion relative ">
                 <p
                   className={`sm:text-base text-sm h-fit overflow-hidden break-words m-5 tracking-wide leading-relaxed ${poppins.className}`}
                 >
-                  Collaborate, find projects, and interact with other industry
-                  leaders for effective networking.
+               All participants will receive a certification upon successful completion of the event.
                 </p>
               </div>
             </div>
@@ -227,8 +225,7 @@ function About() {
                 <p
                   className={`sm:text-base text-sm h-fit overflow-hidden break-words m-5 tracking-wide leading-relaxed ${poppins.className}`}
                 >
-                  Explore the latest trends in the industry and future
-                  technological developments.
+                Gain insights into ground breaking advancements and industry shifts that will shape the tech landscape of tomorrow.
                 </p>
               </div>
             </div>

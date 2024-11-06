@@ -35,7 +35,7 @@ const RegistrationForm = () => {
     last_name: "",
     phone: "",
     roll: "",
-    total_fare: "249",
+    total_fare: "199",
     txn_id: "",
     type: "offline",
     whatsapp: "",
@@ -117,45 +117,32 @@ const RegistrationForm = () => {
   };
 
   async function sendOtp() {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_OTP_URL}/api/otp/send`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: formData.email,
-          rollNo: formData.roll,
-        }),
-      }
-    );
+    const response = await fetch("/api/otp/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: formData.email, rollNo: formData.roll }),
+    });
+
     const data = await response.json();
     if (data.success) {
       notify();
+    } else {
+      toast.error("Failed to send OTP", { autoClose: 3000 });
     }
   }
   async function verifyOTP() {
     setLoading(true);
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_OTP_URL}/api/otp/verify`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: formData.email,
-          otp: formData.otp,
-        }),
-      }
-    );
+    const response = await fetch("/api/otp/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: formData.email, otp: formData.otp }),
+    });
+
     const data = await response.json();
     if (data.success) {
       toast.success("OTP Verified!", {
         position: "top-right",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
         theme: "dark",
         transition: Bounce,
       });
@@ -165,18 +152,12 @@ const RegistrationForm = () => {
       toast.error("OTP is not correct!", {
         position: "top-right",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
         theme: "light",
         transition: Bounce,
       });
-      setLoading(false);
     }
+    setLoading(false);
   }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -200,6 +181,10 @@ const RegistrationForm = () => {
       }
     } else {
       if (step === 2) return;
+      if (step === 1 && !formData.email.endsWith("@kiit.ac.in")) {
+        setEmailError("Email must be a KIIT email ID");
+        return;
+      }
       setStep(step + 1);
       setLoading(false);
     }
@@ -212,6 +197,7 @@ const RegistrationForm = () => {
         <h1 className="text-center mb-6 sm:mb-10 font-medium font-bitter md:text-5xl text-2xl sm:text-5xl lg:text-6xl">
           Registration Form
         </h1>
+
         <form onSubmit={handleSubmit}>
           {step === 1 && (
             <motion.div
@@ -334,6 +320,7 @@ const RegistrationForm = () => {
                     <option value="ECSE">ECSE</option>
                     <option value="EEE">EEE</option>
                     <option value="ECE">ECE</option>
+                    <option value="ECE">MBA</option>
                     <option value="Mech">ME</option>
                     <option value="Civil">Civil</option>
                   </select>
@@ -506,16 +493,16 @@ const RegistrationForm = () => {
               <div className="mb-4 text-center">
                 <p>Scan the QR code below to make payment:</p>
                 <Image
-                  src="/qr-code.svg"
+                  src="/code1.jpg"
                   alt="QR Code"
                   className="w-40 mx-auto my-4"
-                  width={50}
-                  height={50}
+                  width={100}
+                  height={100}
                 />
 
                 {/* Total Fare */}
                 <div className="w-full px-4 mb-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  Registration - Rs 249
+                  Registration amount : ₹{formData.total_fare}
                 </div>
 
                 <input
@@ -526,6 +513,7 @@ const RegistrationForm = () => {
                   value={formData.txn_id}
                   onChange={handleChange}
                 />
+                <p className="text-red text-sm py-5 text-red-700">NOTE: If you are using PhonePe for payment, please enter your UTR, instead of Transaction ID.</p>
               </div>
               {/* 
               <div className="text-center mb-4">
@@ -628,7 +616,7 @@ const RegistrationForm = () => {
                   <div ref={qrRef}>
                     <QRCode
                       size={256}
-                      value={`https://localhost/ticket/${uniqueId}`}
+                      value={`${process.env.NEXT_PUBLIC_CLIENT_URL}/${uniqueId}`}
                       viewBox={`0 0 256 256`}
                     />
                   </div>
@@ -643,7 +631,8 @@ const RegistrationForm = () => {
                   </div>
                   <span className="text-sm italic text-blue-500 mx-6">
                     Your ticket will be validated within 48 hours . Download the
-                    above QR to check yout ticket status.
+                    above QR to check yout ticket status.Ticket is sent to your
+                    registered email.
                   </span>
                 </motion.div>
               )}

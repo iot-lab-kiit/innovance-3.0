@@ -4,22 +4,22 @@
         "day": 1,
         "schedule": [
           {
-            "time": "09:00 - 10:00",
-            "title": "Panel Discussion: Tech Trends",
-            "description": "Sebastian Müller",
-            "location": "campus-17"
+            "time": "06:00 p.m. - 07:00 p.m.",
+            "title": "Opening Ceremony",
+            "description": "By musical band",
+            "location": "campus-17 auditorium"
           },
           {
-            "time": "10:00 - 11:30",
-            "title": "Workshop: Cloud Computing Basics",
-            "description": "Sebastian Müller",
-            "location": "campus-17"
+            "time": "07:00 p.m. - 08:00 p.m.",
+            "title": "Path to Impact",
+            "description": "Navigating the World of Machine Learning",
+            "location": "campus-17 auditorium"
           },
           {
-            "time": "12:00 - 01:30",
-            "title": "Fireside Chat with Tech Leaders",
-            "description": "Sebastian Müller",
-            "location": "campus-17"
+            "time": "08:00 p.m. - 08:30 p.m.",
+            "title": "Q&A Session",
+            "description": "Get all your ML related queries answered",
+            "location": "campus-17 auditorium"
           }
         ]
       },
@@ -27,22 +27,28 @@
         "day": 2,
         "schedule": [
           {
-            "time": "09:00 - 10:00",
-            "title": "Panel Discussion: Tech Trends",
-            "description": "hello",
-            "location": "campus-17"
+            "time": "10:00 a.m. - 01:00 p.m.",
+            "title": "The Growth Grid  ",
+            "description": "Career Guidance Session: Charting Your Path in The Tech World",
+            "location": "campus-7 auditorium"
           },
           {
-            "time": "10:00 - 11:30",
-            "title": "Workshop: Cloud Computing Basics",
-            "description": "hello",
-            "location": "campus-17"
+            "time": "02:00 p.m. - 04:00 p.m.",
+            "title": "Map my Model ",
+            "description": "Machine learning 101: Mastering Essentials",
+            "location": "campus-7 auditorium"
           },
           {
-            "time": "12:00 - 01:30",
-            "title": "Fireside Chat with Tech Leaders",
-            "description": "hello",
-            "location": "campus-17"
+            "time": "04:00 p.m. - 05:00 p.m.",
+            "title": "Build & Brag",
+            "description": "Intro to Web Development: Build your Portfolio Website",
+            "location": "campus-7 auditorium"
+          },
+          {
+            "time": "05:00 p.m. - 06:00 p.m.",
+            "title": "Cultural Event",
+            "description": "By musical band",
+            "location": "campus-7 auditorium"
           }
         ]
       }

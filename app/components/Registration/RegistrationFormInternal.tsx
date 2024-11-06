@@ -320,11 +320,11 @@ const RegistrationFormInternal = () => {
               <div className="mb-4 text-center">
                 <p>Scan the QR code below to make payment:</p>
                 <Image
-                  src="/qr-code.svg"
+                  src="/code1.jpg"
                   alt="QR Code"
                   className="w-40 mx-auto my-4"
-                  width={50}
-                  height={50}
+                  width={100}
+                  height={100}
                 />
 
                 {/* Total Fare */}
@@ -442,7 +442,7 @@ const RegistrationFormInternal = () => {
                   <div ref={qrRef}>
                     <QRCode
                       size={256}
-                      value={`https://localhost/ticket/${uniqueId}`}
+                      value={`${process.env.NEXT_PUBLIC_CLIENT_URL}/${uniqueId}`}
                       viewBox={`0 0 256 256`}
                     />
                   </div>

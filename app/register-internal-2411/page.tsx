@@ -25,6 +25,9 @@ const Page = () => {
             Tickets Now!
           </h1>
           <div className="w-[80vw] md:w-3/2 text-center font-poppins font-light xl:text-lg">
+            at 199/- for first 100 registrations! else 249/-{" "}
+           </div>
+          <div className="w-[80vw] md:w-3/2 text-center font-poppins font-light xl:text-lg">
             Discover the next wave of innovation at FutureTech Conference.{" "}
             <br />
             Choose between Premium and Standard tickets to secure your spot.{" "}

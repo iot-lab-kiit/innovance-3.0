@@ -46,7 +46,7 @@ export default function Card() {
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 xl:px-12">
       <div className="max-w-[90%] xl:max-w-[70%] mx-auto">
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bitter text-white text-center mb-4">
-          Past Speaker
+          Archives
         </h2>
         <p className="text-base sm:text-lg lg:text-xl font-geist text-gray-300 text-center mb-12">
           Innovance 2.0 united 400+ innovators with Striver&apos;s insights on

@@ -5,6 +5,7 @@ import Hero from "./components/Hero/Hero";
 import StatisticsShowcase from "./components/StatisticsShowcase/StatisticsShowcase";
 import TimerSection from "./components/Timer/TimerSection";
 import { EventSchedule } from "./components/EventSchedule/EventSchedule";
+import Pricing from "./components/Pricing/tickets";
 import FAQ from "./components/FAQ/FAQ";
 import About from "./components/About";
 import Star from "./components/global/Star";
@@ -18,6 +19,7 @@ export default function Home() {
       <StatisticsShowcase />
       <About />
       <EventSchedule />
+      <Pricing />
       <Star />
       <Card />
       {/* <SpeakerDummy /> */}

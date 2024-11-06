@@ -28,7 +28,7 @@ const Footer = () => {
       <br />
       <br />
       <br />
-      <footer className="w-full h-60 bg-black text-white flex flex-col items-center justify-center space-y-6 pb-12">
+      <footer className="w-full pt-5 h-60 bg-black text-white flex flex-col items-center justify-center space-y-6 pb-12">
         <div className="flex space-x-6">
           <a
             href="https://www.instagram.com/iot.lab.kiit/?hl=en"

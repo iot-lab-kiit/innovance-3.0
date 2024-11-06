@@ -4,28 +4,16 @@ import Image from "next/image";
 import { Poppins } from "@next/font/google";
 import QRCode from "react-qr-code";
 import { useRef } from "react";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 import { Watch } from "react-loader-spinner";
-const notify = () =>
-  toast.info("OTP Sent to your registered email!", {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition: Bounce,
-  });
 
 const poppins = Poppins({
   weight: ["400", "500", "700"],
   subsets: ["latin"],
 });
 
-const RegistrationForm = () => {
+const RegistrationFormInternal = () => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -35,7 +23,7 @@ const RegistrationForm = () => {
     last_name: "",
     phone: "",
     roll: "",
-    total_fare: "199",
+    total_fare: "249",
     txn_id: "",
     type: "offline",
     whatsapp: "",
@@ -63,18 +51,6 @@ const RegistrationForm = () => {
     }
     return () => clearInterval(interval);
   }, [timer, isOtpSent]);
-
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
-  };
-
-  const handleSendOtp = () => {
-    sendOtp();
-    setIsOtpSent(true);
-    setTimer(120);
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.currentTarget;
@@ -116,55 +92,12 @@ const RegistrationForm = () => {
     img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
   };
 
-  async function sendOtp() {
-    const response = await fetch("/api/otp/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: formData.email, rollNo: formData.roll }),
-    });
-
-    const data = await response.json();
-    if (data.success) {
-      notify();
-    } else {
-      toast.error("Failed to send OTP", { autoClose: 3000 });
-    }
-  }
-  async function verifyOTP() {
-    setLoading(true);
-    const response = await fetch("/api/otp/verify", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: formData.email, otp: formData.otp }),
-    });
-
-    const data = await response.json();
-    if (data.success) {
-      toast.success("OTP Verified!", {
-        position: "top-right",
-        autoClose: 5000,
-        theme: "dark",
-        transition: Bounce,
-      });
-      setStep(3);
-      setLoading(false);
-    } else {
-      toast.error("OTP is not correct!", {
-        position: "top-right",
-        autoClose: 5000,
-        theme: "light",
-        transition: Bounce,
-      });
-    }
-    setLoading(false);
-  }
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     if (step === 3) {
       try {
         setIsPending(true);
-
         const response = await fetch("/api/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -173,18 +106,14 @@ const RegistrationForm = () => {
         const data = await response.json();
         setUniqueId(data?.data.id);
         setIsPending(false);
-        setStep(4);
+        setStep(3);
         setLoading(false);
       } catch (error) {
         console.error("Error:", error);
         setIsPending(false);
       }
     } else {
-      if (step === 2) return;
-      if (step === 1 && !formData.email.endsWith("@kiit.ac.in")) {
-        setEmailError("Email must be a KIIT email ID");
-        return;
-      }
+    //   if (step === 1) return;
       setStep(step + 1);
       setLoading(false);
     }
@@ -197,7 +126,6 @@ const RegistrationForm = () => {
         <h1 className="text-center mb-6 sm:mb-10 font-medium font-bitter md:text-5xl text-2xl sm:text-5xl lg:text-6xl">
           Registration Form
         </h1>
-
         <form onSubmit={handleSubmit}>
           {step === 1 && (
             <motion.div
@@ -320,7 +248,6 @@ const RegistrationForm = () => {
                     <option value="ECSE">ECSE</option>
                     <option value="EEE">EEE</option>
                     <option value="ECE">ECE</option>
-                    <option value="ECE">MBA</option>
                     <option value="Mech">ME</option>
                     <option value="Civil">Civil</option>
                   </select>
@@ -382,108 +309,8 @@ const RegistrationForm = () => {
               </div>
             </motion.div>
           )}
+
           {step === 2 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-                transition={Bounce}
-              />
-              {/* OTP Button */}
-
-              <div className="my-4 flex items-center justify-center">
-                <input
-                  className="w-[50%] px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  type="text"
-                  id="otp"
-                  required
-                  placeholder="Enter OTP"
-                  value={formData.otp || ""}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="text-center">
-                <button
-                  type="button"
-                  className={`text-xs sm:text-base text-white border-white hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${
-                    poppins.className
-                  } ${isOtpSent ? "grayscale cursor-not-allowed" : ""}`}
-                  onClick={() => handleSendOtp()}
-                  disabled={isOtpSent}
-                >
-                  {isOtpSent
-                    ? `Resend OTP in ${formatTime(timer)}`
-                    : "Send OTP"}
-                </button>
-              </div>
-
-              {/*    
-              <div className="text-center mb-4">
-                <button
-                  type="button"
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
-                  onClick={() => setStep(1)}
-                >
-                  BACK
-                </button>
-              </div> */}
-
-              {/* Verify Button */}
-              <div
-                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
-                onMouseEnter={() => {
-                  setIsHovered(!isHovered);
-                }}
-                onMouseLeave={() => {
-                  setIsHovered(!isHovered);
-                }}
-                onClick={() => {
-                  verifyOTP();
-                }}
-              >
-                <motion.div
-                  animate={
-                    !isHovered
-                      ? { width: 0, y: 0, opacity: 1 }
-                      : { width: "100%", y: 0, opacity: 1 }
-                  }
-                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                  className="absolute w-full h-full bg-blue-500"
-                ></motion.div>
-
-                <motion.button
-                  animate={
-                    !isHovered
-                      ? {
-                          color: "#3b82f6",
-                          borderColor: "#3b82f6",
-                          y: 0,
-                          opacity: 1,
-                        }
-                      : { y: 0, opacity: 1 }
-                  }
-                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                  whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
-                >
-                  Verify OTP
-                </motion.button>
-              </div>
-            </motion.div>
-          )}
-          {step === 3 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -493,16 +320,16 @@ const RegistrationForm = () => {
               <div className="mb-4 text-center">
                 <p>Scan the QR code below to make payment:</p>
                 <Image
-                  src="/code1.jpg"
+                  src="/qr-code.svg"
                   alt="QR Code"
                   className="w-40 mx-auto my-4"
-                  width={100}
-                  height={100}
+                  width={50}
+                  height={50}
                 />
 
                 {/* Total Fare */}
                 <div className="w-full px-4 mb-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  Registration amount : ₹{formData.total_fare}
+                  Registration - Rs 249
                 </div>
 
                 <input
@@ -580,7 +407,7 @@ const RegistrationForm = () => {
             </motion.div>
           )}
 
-          {step === 4 && (
+          {step === 3 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -615,7 +442,7 @@ const RegistrationForm = () => {
                   <div ref={qrRef}>
                     <QRCode
                       size={256}
-                      value={`${process.env.NEXT_PUBLIC_CLIENT_URL}/${uniqueId}`}
+                      value={`https://localhost/ticket/${uniqueId}`}
                       viewBox={`0 0 256 256`}
                     />
                   </div>
@@ -630,8 +457,7 @@ const RegistrationForm = () => {
                   </div>
                   <span className="text-sm italic text-blue-500 mx-6">
                     Your ticket will be validated within 48 hours . Download the
-                    above QR to check yout ticket status.Ticket is sent to your
-                    registered email.
+                    above QR to check yout ticket status.
                   </span>
                 </motion.div>
               )}
@@ -643,4 +469,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default RegistrationFormInternal;

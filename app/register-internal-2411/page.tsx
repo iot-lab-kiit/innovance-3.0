@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import TimerSection from "../components/Timer/TimerSection";
 import Footer from "../components/global/Footer";
 import Star from "../components/global/Star";
-import Registration from "../components/Registration/registration";
+import RegistrationFormInternal from "../components/Registration/RegistrationFormInternal";
 
 const Page = () => {
   return (
@@ -24,11 +24,9 @@ const Page = () => {
             Get Your FutureTech <br />
             Tickets Now!
           </h1>
-          <div className="w-[80vw] md:w-3/2 text-center font-poppins font-light xl:text-lg text-blue-500">
-            Register now for just ₹199 for the first 100 sign-ups! Regular
-            price: ₹249.
-          </div>
-
+          <div className="w-[80vw] md:w-3/2 text-center font-poppins font-light xl:text-lg">
+            at 199/- for first 100 registrations! else 249/-{" "}
+           </div>
           <div className="w-[80vw] md:w-3/2 text-center font-poppins font-light xl:text-lg">
             Discover the next wave of innovation at FutureTech Conference.{" "}
             <br />
@@ -40,7 +38,7 @@ const Page = () => {
       </motion.div>
       <Star />
 
-      <Registration />
+      <RegistrationFormInternal />
 
       <Star />
       <TimerSection text1="HURRY!" text2="RESERVE YOUR SPOTS NOW" />

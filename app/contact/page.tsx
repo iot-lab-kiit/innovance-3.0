@@ -63,12 +63,12 @@ const page = () => {
           </svg>
           <p className="font-bitter">PHONE</p>
           <div className="flex flex-wrap">
-          <a href="tel:+916297476549" className="font-poppins">
-            +91-6297476549 , 
-          </a>
-          <a href="tel:+916371942667" className="font-poppins">
-            +91-6371942667
-          </a>
+            <a href="tel:+916297476549" className="font-poppins">
+              +91-6297476549 ,
+            </a>
+            <a href="tel:+916371942667" className="font-poppins">
+              +91-6371942667
+            </a>
           </div>
         </div>
         <div className="w-full md:w-1/3 p-6 rounded-2xl h-auto border border-gray-500 flex flex-col gap-3 justify-center items-center">
@@ -85,11 +85,13 @@ const page = () => {
             />
           </svg>
           <p className="font-bitter">EMAIL</p>
-          <a href="mailTo:iot.lab@kiit.ac.in" className="font-poppins">iot.lab@kiit.ac.in</a>
+          <a href="mailTo:iot.lab@kiit.ac.in" className="font-poppins">
+            iot.lab@kiit.ac.in
+          </a>
         </div>
       </div>
       <Star />
-      <TimerSection />
+      <TimerSection text1="HURRY!" text2="RESERVE YOUR SPOTS NOW" />
       <Footer />
     </div>
   );

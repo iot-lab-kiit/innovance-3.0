@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import Star from "@/app/components/global/Star";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
 function Pricing() {
   const [isHovered, setIsHovered] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(true);
 
 
   return (
     <div>
  
       <div className="boxes flex flex-wrap justify-center gap-8 px-4">
-        <div className="smallbox w-full sm:w-[26em] h-[30rem] border-2 bg-[#101010] border-[#FFFFFF]">
+        <div className="smallbox w-full sm:w-[26em] h-[30rem] border-2 bg-[#101010] border-[#585858] rounded-lg">
           <span className="mx-8 mt-12 flex flex-row">
             <Image
               src="/backgrounds/star_image_blue.jpg"
@@ -60,13 +58,13 @@ function Pricing() {
             </Link>
           </div>
         </div>
-        <div className="relative w-full sm:w-[26rem] h-[30rem] border-2 bg-[#101010] border-[#FFFFFF] overflow-hidden">
+        <div className="relative w-full sm:w-[26rem] h-[30rem] border-2 bg-[#101010] border-[#585858] rounded-lg overflow-hidden">
 
-      {isDisabled && (
+     
         <div className="absolute inset-0 bg-black bg-opacity-70 z-10 pointer-events-none"></div>
-      )}
       
-      <div className="smallbox w-full h-full p-8">
+      
+      <div className="smallbox w-full h-full p-8 cursor-not-allowed">
         <span className="flex flex-row">
           <Image
             src="/backgrounds/star_image_blue.jpg"
@@ -95,29 +93,19 @@ function Pricing() {
           <li>• Meals included</li>
         </ul>
         
-        <div
-          className="relative"
-          // onMouseEnter={() => setIsHovered(true)}
-          // onMouseLeave={() => setIsHovered(false)}
-        >
-          <motion.div
-            // initial={{ width: "100%" }}
-            // animate={isHovered ? { width: 0 } : { width: "100%" }}
-            // transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-            className="absolute w-full h-full bg-blue-500"
-          />
-          
-          <Link href={isDisabled ? "#" : "/registrations"}>
-            <motion.button
-              // disabled={isDisabled}
-              // transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-              // whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-              className={`w-full h-full text-background relative z-20 py-2 px-5 border ${isDisabled ? "opacity-50 cursor-not-allowed" : "border-background"}`}
-            >
-              GET TICKET
-            </motion.button>
-          </Link>
-        </div>
+        <div className="relative">
+  <motion.div
+    className="absolute w-full h-full bg-blue-500 opacity-50 pointer-events-none"
+  />
+  
+  <motion.button
+    disabled
+    className="w-full h-full text-background relative z-20 py-2 px-5 cursor-not-allowed pointer-events-none"
+  >
+    GET TICKET
+  </motion.button>
+</div>
+
       </div>
     </div>
       </div>

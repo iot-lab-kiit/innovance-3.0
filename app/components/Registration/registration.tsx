@@ -195,6 +195,10 @@ const RegistrationForm = () => {
       }
     } else {
       if (step === 2) return;
+      if (step === 1 && !formData.email.endsWith("@kiit.ac.in")) {
+        setEmailError("Email must be a KIIT email ID");
+        return;
+      }
       setStep(step + 1);
     }
   };
@@ -205,6 +209,9 @@ const RegistrationForm = () => {
         <h1 className="text-center mb-6 sm:mb-10 font-medium font-bitter md:text-5xl text-2xl sm:text-5xl lg:text-6xl">
           Registration Form
         </h1>
+        <h2 className="text-center mb-6 sm:mb-10 font-medium font-bitter md:text-3xl text-xl sm:text-3xl lg:text-4xl">
+          Rs 250
+        </h2>
         <form onSubmit={handleSubmit}>
           {step === 1 && (
             <motion.div

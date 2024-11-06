@@ -148,7 +148,7 @@ const TicketPage = () => {
                     <div>CAMPUS 15</div>
                     <div>11 AM ONWARDS</div>
                   </div>
-                  {userData.status !== "completed" ? (
+                  {userData.status !== "complete" ? (
                     <div>
                       <div>Your registration status is pending.</div>
                       <div>
@@ -223,7 +223,7 @@ const TicketPage = () => {
               e.stopPropagation();
               handleDownloadTicket();
             }}
-            disabled={userData.status !== "completed"}
+            disabled={userData.status !== "complete"}
             className="p-4 px-8 border border-white text-xl mt-5 disabled:text-gray-500 disabled:border-gray-500"
           >
             Download

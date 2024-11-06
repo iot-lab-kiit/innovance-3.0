@@ -6,7 +6,7 @@ import QRCode from "react-qr-code";
 import { useRef } from "react";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Watch } from "react-loader-spinner";
+// import { Watch } from "react-loader-spinner";
 const notify = () =>
   toast.info("OTP Sent to your registered email!", {
     position: "top-right",
@@ -51,7 +51,7 @@ const RegistrationForm = () => {
   const [emailError, setEmailError] = useState("");
   const [timer, setTimer] = useState(0);
   const [isOtpSent, setIsOtpSent] = useState(false);
-
+  console.log(loading)
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (timer > 0) {

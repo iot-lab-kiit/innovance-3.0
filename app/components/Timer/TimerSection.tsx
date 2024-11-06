@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import Timer from "./Timer";
 import { Bitter } from "@next/font/google";
-import { Poppins } from "@next/font/google";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import Star from "../global/Star";
@@ -13,10 +12,6 @@ const bitter = Bitter({
   subsets: ["latin"],
 });
 
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-});
 
 type Props = {
   text1: string;

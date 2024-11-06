@@ -1,4 +1,7 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+import fs from "fs/promises";
+import path from "path";
 
 export async function POST(request: Request) {
   const data = await request.json();
@@ -30,6 +33,14 @@ export async function POST(request: Request) {
     if (!apiResponse.ok) throw new Error("Failed to register user");
 
     const result = await apiResponse.json();
+    const id = result.data.id;
+    await sendConfirmationEmail(
+      data.email,
+      data.first_name,
+      data.last_name,
+      data.roll,
+      id
+    );
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     console.error("Error:", error);
@@ -38,6 +49,44 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
+}
+
+async function sendConfirmationEmail(
+  email: string,
+  first_name: string,
+  last_name: string,
+  roll: string,
+  id: string
+): Promise<void> {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const htmlTemplatePath = path.join(
+    process.cwd(),
+    "templates",
+    "registration.html"
+  );
+
+  let htmlContent = await fs.readFile(htmlTemplatePath, "utf-8");
+  htmlContent = htmlContent
+    .replace(/{{first_name}}/g, first_name)
+    .replace(/{{last_name}}/g, last_name)
+    .replace(/{{ticket_url}}/g, `${process.env.NEXT_PUBLIC_CLIENT_URL}/${id}`)
+    .replace(/{{roll}}/g, roll);
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "Registration Successful",
+    html: htmlContent,
+  };
+
+  await transporter.sendMail(mailOptions);
 }
 
 export async function GET(request: Request) {

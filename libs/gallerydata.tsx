@@ -7,6 +7,7 @@ type GalleryData = {
   year: string;
   images: Image[];
 };
+
 export async function fetchGalleryData(): Promise<GalleryData[]> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/items/innovance_gallery`,
@@ -18,7 +19,7 @@ export async function fetchGalleryData(): Promise<GalleryData[]> {
 
   const baseImageUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/assets`;
 
-  return data?.data?.reduce((acc: GalleryData[], item: any) => {
+  const galleryData = data?.data?.reduce((acc: GalleryData[], item: any) => {
     const yearIndex = acc.findIndex((section) => section.year === item.year);
     const image = {
       src: `${baseImageUrl}/${item.image}`,
@@ -36,4 +37,8 @@ export async function fetchGalleryData(): Promise<GalleryData[]> {
 
     return acc;
   }, []);
+
+  return galleryData.sort(
+    (a: GalleryData, b: GalleryData) => Number(b.year) - Number(a.year)
+  );
 }

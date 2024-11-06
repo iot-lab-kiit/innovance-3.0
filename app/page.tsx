@@ -70,7 +70,17 @@ export default function Home() {
         <Card />
       </motion.div>
 
+
       <Star />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ margin: "-100px" }}
+        variants={fadeInUp}
+      >
+        <Pricing />
+      </motion.div>
+      <Star/>
 
       <motion.div
         initial="hidden"

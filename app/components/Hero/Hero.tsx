@@ -49,7 +49,7 @@ export default function Hero() {
                 transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                 className="absolute w-full h-full bg-blue-500"
               ></motion.div> */}
-              <button className="text-xs sm:text-base hover:scale-105 transition-all text-background bg-blue-500 border-background border w-fit m-auto py-3 px-7 font-geistMono">
+              <button className="text-xs hover:text-sm  sm:text-base sm:hover:text-lg text-background bg-blue-500 border-background border w-fit m-auto py-3 px-7 font-geistMono">
                 GET TICKET
               </button>
             </Link>

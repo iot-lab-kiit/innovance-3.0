@@ -95,7 +95,8 @@ const RegistrationFormInternal = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    if (step === 3) {
+
+    if (step === 2) {
       try {
         setIsPending(true);
         const response = await fetch("/api/register", {

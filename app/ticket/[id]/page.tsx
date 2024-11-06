@@ -145,8 +145,8 @@ const TicketPage = () => {
                 <div className="flex flex-col gap-10">
                   <div>
                     <div>9-10 NOVEMBER</div>
-                    <div>CAMPUS 15</div>
-                    <div>11 AM ONWARDS</div>
+                    <div>CAMPUS 17</div>
+                    <div>6PM ONWARDS</div>
                   </div>
                   {userData.status !== "complete" ? (
                     <div>

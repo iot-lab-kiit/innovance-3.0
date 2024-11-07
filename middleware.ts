@@ -6,8 +6,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   if (pathname.startsWith(protectedPath)) {
     const authToken = request.cookies.get("auth-token");
-  
-    if (authToken !== process.env.TOKEN) {
+    if (authToken?.value !== process.env.TOKEN || !authToken) {
       const url = new URL("/", request.url);
       return NextResponse.redirect(url);
     }

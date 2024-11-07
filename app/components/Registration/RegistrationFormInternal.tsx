@@ -378,6 +378,7 @@ const RegistrationFormInternal = () => {
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="txn_id"
+                  required
                   placeholder="Transaction ID"
                   value={formData.txn_id}
                   onChange={handleChange}

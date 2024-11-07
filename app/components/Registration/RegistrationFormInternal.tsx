@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import QRCode from "react-qr-code";
 import { useRef } from "react";
-
+import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Watch } from "react-loader-spinner";
 import Link from "next/link";
@@ -87,12 +87,57 @@ const RegistrationFormInternal = () => {
     img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
   };
 
+  const handleUserVerified = async (): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/verified_user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: formData.email }), // Assuming formData is an object
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        toast.success("User Verified!", {
+          position: "top-right",
+          autoClose: 5000,
+          theme: "dark",
+          transition: Bounce,
+        });
+        return true;
+      } else {
+        toast.error("User Not Verified", {
+          position: "top-right",
+          autoClose: 5000,
+          theme: "light",
+          transition: Bounce,
+        });
+        return false;
+      }
+    } catch (error) {
+      console.error("Error verifying user:", error);
+      toast.error("Verification failed. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        theme: "light",
+        transition: Bounce,
+      });
+      return false;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    if (step === 2) {
-      try {
+    try {
+      if (step === 1) {
+        const isVerified = await handleUserVerified();
+        if (!isVerified) {
+          setLoading(false); // Stop loading if verification failed
+          return;
+        }
+        setStep(2); // Proceed to next step if verified
+      } else if (step === 2) {
         setIsPending(true);
         const response = await fetch("/api/register", {
           method: "POST",
@@ -100,17 +145,31 @@ const RegistrationFormInternal = () => {
           body: JSON.stringify(formData),
         });
         const data = await response.json();
-        setUniqueId(data?.data.id);
+        if (data?.data?.id) {
+          setUniqueId(data.data.id);
+          setStep(3); // Proceed to step 3 on success
+        } else {
+          toast.error("Registration failed. Please try again.", {
+            position: "top-right",
+            autoClose: 5000,
+            theme: "light",
+            transition: Bounce,
+          });
+        }
         setIsPending(false);
-        setStep(3);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-        setIsPending(false);
+      } else {
+        setStep(step + 1);
       }
-    } else {
-      //   if (step === 1) return;
-      setStep(step + 1);
+    } catch (error) {
+      console.error("Error during form submission:", error);
+      toast.error("An error occurred. Please try again later.", {
+        position: "top-right",
+        autoClose: 5000,
+        theme: "light",
+        transition: Bounce,
+      });
+      setIsPending(false);
+    } finally {
       setLoading(false);
     }
   };
@@ -272,12 +331,8 @@ const RegistrationFormInternal = () => {
 
               <div
                 className="block relative w-[11rem] mx-auto my-8"
-                onMouseEnter={() => {
-                  setIsHovered(!isHovered);
-                }}
-                onMouseLeave={() => {
-                  setIsHovered(!isHovered);
-                }}
+                onMouseEnter={() => setIsHovered(!isHovered)}
+                onMouseLeave={() => setIsHovered(!isHovered)}
               >
                 <motion.div
                   initial={{ width: "100%" }}
@@ -344,12 +399,8 @@ const RegistrationFormInternal = () => {
               {
                 <div
                   className="block relative"
-                  onMouseEnter={() => {
-                    setIsHovered(!isHovered);
-                  }}
-                  onMouseLeave={() => {
-                    setIsHovered(!isHovered);
-                  }}
+                  onMouseEnter={() => setIsHovered(!isHovered)}
+                  onMouseLeave={() => setIsHovered(!isHovered)}
                 >
                   <motion.div
                     initial={{ width: "100%" }}

@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import { Watch } from "react-loader-spinner";
 // import { Watch } from "react-loader-spinner";
+
 const notify = () =>
   toast.info("OTP Sent to your registered email!", {
     position: "top-right",
@@ -39,7 +40,7 @@ const RegistrationForm = () => {
     roll: "",
     total_fare: "199",
     txn_id: "",
-    type: "offline",
+    type: "online",
     whatsapp: "",
     year: "",
     otp: "",
@@ -53,7 +54,7 @@ const RegistrationForm = () => {
   const [emailError, setEmailError] = useState("");
   const [timer, setTimer] = useState(0);
   const [isOtpSent, setIsOtpSent] = useState(false);
-  console.log(loading);
+
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (timer > 0) {
@@ -126,11 +127,11 @@ const RegistrationForm = () => {
     });
 
     const data = await response.json();
+
     if (data.success) {
-      notify();
-    } else {
-      toast.error("Failed to send OTP", { autoClose: 3000 });
-    }
+      if (data.message === "email is already verified") setStep(3);
+      else notify();
+    } else toast.error("Failed to send OTP", { autoClose: 3000 });
   }
   async function verifyOTP() {
     setLoading(true);
@@ -163,10 +164,10 @@ const RegistrationForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
     if (step === 3) {
       try {
         setIsPending(true);
-
         const response = await fetch("/api/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -174,11 +175,11 @@ const RegistrationForm = () => {
         });
         const data = await response.json();
         setUniqueId(data?.data.id);
-        setIsPending(false);
         setStep(4);
-        setLoading(false);
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Error", error);
+      } finally {
+        setLoading(false);
         setIsPending(false);
       }
     } else {

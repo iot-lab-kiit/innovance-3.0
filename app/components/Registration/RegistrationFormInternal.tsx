@@ -302,6 +302,7 @@ const RegistrationFormInternal = () => {
                     <option value="MTech">MTech</option>
                     <option value="ECSE">ECSE</option>
                     <option value="EEE">EEE</option>
+                    <option value="ETC">ETC</option>
                     <option value="ECE">ECE</option>
                     <option value="ME">ME</option>
                     <option value="Civil">Civil</option>
@@ -323,6 +324,10 @@ const RegistrationFormInternal = () => {
                   <option value="" disabled>
                     Select your year
                   </option>
+                  {formData.branch === "MCA" && (
+                    <option value="1">1st Year</option>
+                  )}
+
                   <option value="2">2nd Year</option>
                   <option value="3">3rd Year</option>
                   <option value="4">4th Year</option>

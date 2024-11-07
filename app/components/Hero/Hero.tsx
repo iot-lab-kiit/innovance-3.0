@@ -19,7 +19,7 @@ export default function Hero() {
       >
         <div className="text-center flex flex-col gap-8">
           <motion.div
-            className=" text-blue-500 text-2xl font-bitter "
+            className=" text-blue-500 text-xl font-bitter "
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
@@ -33,6 +33,14 @@ export default function Hero() {
             className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bitter"
           >
             Innovance 3.0
+          </motion.div>
+          <motion.div
+            className=" text-blue-500 text-4xl font-bitter mb-3 "
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+          >
+            Forge the Future with AI
           </motion.div>
           <div
             className="block relative w-[11rem] mx-auto"

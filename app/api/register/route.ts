@@ -5,7 +5,19 @@ import path from "path";
 
 export async function POST(request: Request) {
   const data = await request.json();
+
   try {
+    const isUserVerified = await fetch(
+      `${process.env.OTP_URL}/api/email/isVerified`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: data.email }),
+      }
+    );
+
+    if (!isUserVerified.ok) throw new Error("Verification failed");
+
     const apiResponse = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/items/innovance_registration_2024`,
       {
@@ -30,9 +42,16 @@ export async function POST(request: Request) {
       }
     );
 
+    const result = await apiResponse.json();
+
+    if (
+      result.errors &&
+      result.errors[0].message === 'Field "roll" has to be unique.'
+    )
+      throw new Error("Roll number already registered");
+
     if (!apiResponse.ok) throw new Error("Failed to register user");
 
-    const result = await apiResponse.json();
     const id = result.data.id;
     await sendConfirmationEmail(
       data.email,
@@ -43,7 +62,7 @@ export async function POST(request: Request) {
     );
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error verifying OTP:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }

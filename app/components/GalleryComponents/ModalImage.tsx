@@ -1,5 +1,6 @@
 // components/ModalImage.tsx
-import Modal from 'react-modal';
+import Modal from "react-modal";
+import Image from "next/image";
 
 type ModalImageProps = {
   isOpen: boolean;
@@ -8,9 +9,14 @@ type ModalImageProps = {
   onClose: () => void;
 };
 
-Modal.setAppElement('body');
+Modal.setAppElement("body");
 
-const ModalImage = ({ isOpen, imageSrc, imageAlt, onClose }: ModalImageProps) => {
+const ModalImage = ({
+  isOpen,
+  imageSrc,
+  imageAlt,
+  onClose,
+}: ModalImageProps) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -30,10 +36,13 @@ const ModalImage = ({ isOpen, imageSrc, imageAlt, onClose }: ModalImageProps) =>
 
         {/* Image */}
         {imageSrc && (
-          <img
+          <Image
             src={imageSrc}
-            alt={imageAlt ?? ''}
+            alt={imageAlt ?? ""}
             className="w-full h-auto max-h-[90vh] object-cover rounded-lg"
+            layout="responsive"
+            width={500}
+            height={500}
           />
         )}
       </div>

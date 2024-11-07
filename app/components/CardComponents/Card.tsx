@@ -21,11 +21,20 @@ const speakers: Speaker[] = [
       "Software Engineer at J.P. Morgan and tech mentor with 270K+ followers on Instagram!",
     image: "/assets/img/vanshika.png",
     twitterUrl: "https://x.com/vanshikatech",
-    linkedinUrl:
-      "https://www.linkedin.com/in/vanshikapandeyy/",
-    instagramUrl:
-      "https://www.instagram.com/codecrookshanks/",
+    linkedinUrl: "https://www.linkedin.com/in/vanshikapandeyy/",
+    instagramUrl: "https://www.instagram.com/codecrookshanks/",
     youtubeUrl: "https://www.youtube.com/@Vanshikapandey30",
+  },
+  {
+    name: "Sunchit Dudeja",
+    title: ". Software Developer .",
+    description:
+      "One of the youngest SDE V at Adobe and core X Top LinkedIn Voice. 30K+ followers on LinkedIn.",
+    image: "/assets/img/sunchit.png",
+    twitterUrl: "https://x.com/sunchitdudeja",
+    linkedinUrl: "https://www.linkedin.com/in/sunchitdudeja/?originalSubdomain=in",
+    instagramUrl: "https://www.instagram.com/sunchitdudeja/",
+    youtubeUrl: "https://www.youtube.com/@CodeWithSunchitDudeja",
   },
 ];
 
@@ -46,13 +55,13 @@ export default function Card() {
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 xl:px-12">
       <div className="max-w-[90%] xl:max-w-[70%] mx-auto">
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bitter text-white text-center mb-4">
-          Our Speaker
+          Our Speakers
         </h2>
         <p className="text-base sm:text-lg lg:text-xl font-geist text-gray-300 text-center mb-12">
-          We&apos;re thrilled to announce our upcoming speakers. Don&apos;t miss this
-          chance to learn from one of the brightest minds in the industry!
+          We&apos;re thrilled to announce our upcoming speakers. Don&apos;t miss
+          this chance to learn from one of the brightest minds in the industry!
         </p>
-        <div className="gap-6 lg:gap-8 flex flex-col items-center">
+        <div className="gap-6 lg:gap-8 flex flex-col items-center md:flex-row">
           {speakers.map((speaker) => (
             <motion.div
               key={speaker.name}

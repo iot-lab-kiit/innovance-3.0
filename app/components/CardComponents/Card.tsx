@@ -16,7 +16,7 @@ interface Speaker {
 const speakers: Speaker[] = [
   {
     name: "Vanshika Pandey",
-    title: ". Software Developer",
+    title: ". Software Developer .",
     description:
       "Software Engineer at J.P. Morgan and tech mentor with 270K+ followers on Instagram!",
     image: "/assets/img/vanshika.png",

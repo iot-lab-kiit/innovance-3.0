@@ -362,7 +362,7 @@ const RegistrationFormInternal = () => {
               <div className="mb-4 text-center">
                 <p>Scan the QR code below to make payment:</p>
                 <Image
-                  src="/code2.jpg"
+                  src="/code4.jpg"
                   alt="QR Code"
                   className="w-40 mx-auto my-4"
                   width={100}

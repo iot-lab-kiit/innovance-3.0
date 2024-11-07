@@ -18,7 +18,7 @@ const RegistrationFormInternal = () => {
     last_name: "",
     phone: "",
     roll: "",
-    total_fare: "199",
+    total_fare: "249",
     txn_id: "",
     type: "offline",
     whatsapp: "",
@@ -362,7 +362,7 @@ const RegistrationFormInternal = () => {
               <div className="mb-4 text-center">
                 <p>Scan the QR code below to make payment:</p>
                 <Image
-                  src="/code3.jpg"
+                  src="/code2.jpg"
                   alt="QR Code"
                   className="w-40 mx-auto my-4"
                   width={100}

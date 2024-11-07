@@ -20,14 +20,14 @@ function Pricing() {
               alt="Picture of the star"
             />
             <span className="text-xs md:text-sm font-semibold tracking-wide uppercase text-gray-400 mx-2">
-              Early Bird
+              GENERAL
             </span>
           </span>
           <h2 className="text-3xl mx-8 md:text-4xl lg:text-5xl font-medium my-5">
-            199/-
+            249/-
           </h2>
           <p className="text-lg mx-8 md:text-2xl font-bitter font-normal mb-5">
-            First 100 registrations
+            REGULAR PRICE
           </p>
           <ul className="text-gray-300 mx-8 mb-6 leading-8">
             <li>• Tickets to Exclusive Speaker Sessions</li>
@@ -58,11 +58,9 @@ function Pricing() {
             </Link>
           </div>
         </div>
-        <div className="relative w-full sm:w-[26rem] h-[30rem] border-2 bg-[#101010] border-[#585858] rounded-lg overflow-hidden">
+        {/* <div className="relative w-full sm:w-[26rem] h-[30rem] border-2 bg-[#101010] border-[#585858] rounded-lg overflow-hidden">
 
      
-        <div className="absolute inset-0 bg-black bg-opacity-70 z-10 pointer-events-none"></div>
-      
       
       <div className="smallbox w-full h-full p-8 cursor-not-allowed">
         <span className="flex flex-row">
@@ -107,7 +105,7 @@ function Pricing() {
 </div>
 
       </div>
-    </div>
+    </div> */}
       </div>
     </div>
   );

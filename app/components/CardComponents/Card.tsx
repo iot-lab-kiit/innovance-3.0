@@ -49,7 +49,7 @@ export default function Card() {
           Our Speaker
         </h2>
         <p className="text-base sm:text-lg lg:text-xl font-geist text-gray-300 text-center mb-12">
-          We&apos;re thrilled to announce our upcoming speakers. Don't miss this
+          We&apos;re thrilled to announce our upcoming speakers. Don&apos;t miss this
           chance to learn from one of the brightest minds in the industry!
         </p>
         <div className="gap-6 lg:gap-8 flex flex-col items-center">

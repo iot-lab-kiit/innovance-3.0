@@ -294,16 +294,16 @@ const RegistrationFormInternal = () => {
                     </option>
                     <option value="CSE">CSE</option>
                     <option value="IT">IT</option>
-                    <option value="IT">CSSE</option>
-                    <option value="IT">CSCE</option>
-                    <option value="IT">CE</option>
-                    <option value="IT">MME</option>
-                    <option value="IT">MCA</option>
-                    <option value="IT">MTech</option>
+                    <option value="CSSE">CSSE</option>
+                    <option value="CSCE">CSCE</option>
+                    <option value="CE">CE</option>
+                    <option value="MME">MME</option>
+                    <option value="MCA">MCA</option>
+                    <option value="MTech">MTech</option>
                     <option value="ECSE">ECSE</option>
                     <option value="EEE">EEE</option>
                     <option value="ECE">ECE</option>
-                    <option value="Mech">ME</option>
+                    <option value="ME">ME</option>
                     <option value="Civil">Civil</option>
                   </select>
                 </div>

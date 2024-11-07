@@ -35,7 +35,7 @@ export default function Hero() {
             Innovance 3.0
           </motion.div>
           <motion.div
-            className=" text-blue-500 text-4xl font-bitter mb-3 "
+            className=" text-blue-500 text-2xl md:text-3xl font-bitter mb-3 "
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}

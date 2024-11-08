@@ -29,7 +29,7 @@ const speakers: Speaker[] = [
     name: "Sunchit Dudeja",
     title: ". Software Developer .",
     description:
-      "One of the youngest SDE V at Adobe and core X Top LinkedIn Voice. 30K+ followers on LinkedIn.",
+      "One of the youngest SDE V at Adobe and  4X Top LinkedIn Voice. 51K+ followers on LinkedIn.",
     image: "/assets/img/sunchit.png",
     twitterUrl: "https://x.com/sunchitdudeja",
     linkedinUrl: "https://www.linkedin.com/in/sunchitdudeja/?originalSubdomain=in",

@@ -247,7 +247,8 @@ const RegistrationForm = () => {
               <div className="flex my-3 gap-4">
                 <input
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  type="text"
+                  type="number"
+                  maxLength={10}
                   id="phone"
                   required
                   placeholder="Phone Number"
@@ -258,7 +259,8 @@ const RegistrationForm = () => {
                 {!numberFieldState && (
                   <input
                     className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    type="text"
+                    type="number"
+                    maxLength={10}
                     id="whatsapp"
                     required
                     placeholder="WhatsApp Number"
@@ -290,7 +292,7 @@ const RegistrationForm = () => {
               <div className="flex my-3 gap-4">
                 <input
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  type="text"
+                  type="number"
                   id="roll"
                   required
                   placeholder="Roll Number"
@@ -476,11 +478,11 @@ const RegistrationForm = () => {
               <div className="mb-4 text-center">
                 <p>Scan the QR code below to make payment:</p>
                 <Image
-                  src="/code4.jpg"
+                  src="/code5.jpg"
                   alt="QR Code"
-                  className="w-40 mx-auto my-4"
-                  width={100}
-                  height={100}
+                  className="w-52 mx-auto my-4"
+                  width={500}
+                  height={500}
                 />
 
                 {/* Total Fare */}

@@ -14,8 +14,8 @@ export default function Navbar() {
   };
 
   const variants = {
-    hidden: { opacity: 0, y: -256 }, // Start off-screen and transparent
-    visible: { opacity: 1, y: 0 }, // End position
+    hidden: { opacity: 0, y: -256 },
+    visible: { opacity: 1, y: 0 },
   };
   return (
     <div className="font-geistMono z-30 relative">
@@ -90,7 +90,7 @@ export default function Navbar() {
       {/* <hr className="mx-4 z-40 relative" /> */}
       <AnimatePresence>
         {isOpen && (
-          <div className={`relative`}>
+          <div className={`relative`} onClick={()=>toggleMenu()}>
             <motion.div
               key={"hamburger"}
               initial="hidden"
@@ -107,13 +107,13 @@ export default function Navbar() {
                 Home
               </Link>
               <Link
-                href="#about"
+                href="/#about"
                 className="hover:text-lg hover:text-blue-300 transition-all"
               >
                 About
               </Link>
               <Link
-                href="#schedule"
+                href="/#schedule"
                 className="hover:text-lg hover:text-blue-300 transition-all"
               >
                 Schedule
@@ -130,11 +130,11 @@ export default function Navbar() {
               >
                 Contact
               </Link>
-              <div className="">
-                <button className="py-2 px-5 border border-foreground hover:text-lg hover:text-blue-300 hover:border-blue-300 transition-all">
+              <Link href="/registrations">
+                <button className="py-2 px-5 border border-foreground text-blue-300 transition-all">
                   GET TICKET
                 </button>
-              </div>
+              </Link>
             </motion.div>
           </div>
         )}

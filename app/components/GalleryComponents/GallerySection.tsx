@@ -19,14 +19,12 @@ const GallerySection = ({ year, images }: GallerySectionProps) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
   useEffect(() => {
-    // Reset loading state when images prop changes
     setImagesLoaded(false);
-    
-    // Check if all images are loaded
+
     Promise.all(
-      images.map(image => {
+      images.map((image) => {
         return new Promise((resolve) => {
-          const img = document.createElement('img');
+          const img = document.createElement("img");
           img.src = image.src;
           img.onload = resolve;
         });
@@ -56,36 +54,34 @@ const GallerySection = ({ year, images }: GallerySectionProps) => {
 
       {/* Responsive Image Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-        {!imagesLoaded ? (
-          // Skeleton Loading Grid
-          [...Array(images.length)].map((_, idx) => (
-            <div
-              key={`skeleton-${idx}`}
-              className="relative overflow-hidden rounded-lg bg-gray-900 aspect-square w-full"
-            >
-              <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 skeleton-animate" />
-            </div>
-          ))
-        ) : (
-          // Actual Images
-          images.map((image, idx) => (
-            <div
-              key={idx}
-              className="overflow-hidden rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105 w-full"
-              onClick={() => openModal(image)}
-            >
-              <div className="aspect-square">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  width={500}
-                  height={500}
-                  className="w-full h-full object-cover"
-                />
+        {!imagesLoaded
+          ? // Skeleton Loading Grid
+            [...Array(images.length)].map((_, idx) => (
+              <div
+                key={`skeleton-${idx}`}
+                className="relative overflow-hidden rounded-lg bg-gray-900 aspect-square w-full"
+              >
+                <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 skeleton-animate" />
               </div>
-            </div>
-          ))
-        )}
+            ))
+          : // Actual Images
+            images.map((image, idx) => (
+              <div
+                key={idx}
+                className="overflow-hidden rounded-lg shadow-lg cursor-pointer transition-transform transform hover:scale-105 w-full"
+                onClick={() => openModal(image)}
+              >
+                <div className="aspect-square">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    width={500}
+                    height={500}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            ))}
       </div>
 
       {/* Modal */}
@@ -100,7 +96,6 @@ const GallerySection = ({ year, images }: GallerySectionProps) => {
       <div className="flex justify-center mt-6">
         <Star />
       </div>
-   
     </section>
   );
 };

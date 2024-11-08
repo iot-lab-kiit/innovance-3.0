@@ -6,7 +6,10 @@ import QRCode from "react-qr-code";
 import { useRef } from "react";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
 import { Watch } from "react-loader-spinner";
+// import { Watch } from "react-loader-spinner";
+
 const notify = () =>
   toast.info("OTP Sent to your registered email!", {
     position: "top-right",
@@ -35,9 +38,9 @@ const RegistrationForm = () => {
     last_name: "",
     phone: "",
     roll: "",
-    total_fare: "199",
+    total_fare: "249",
     txn_id: "",
-    type: "offline",
+    type: "online",
     whatsapp: "",
     year: "",
     otp: "",
@@ -124,11 +127,11 @@ const RegistrationForm = () => {
     });
 
     const data = await response.json();
+
     if (data.success) {
-      notify();
-    } else {
-      toast.error("Failed to send OTP", { autoClose: 3000 });
-    }
+      if (data.message === "email is already verified") setStep(3);
+      else notify();
+    } else toast.error("Failed to send OTP", { autoClose: 3000 });
   }
   async function verifyOTP() {
     setLoading(true);
@@ -161,10 +164,10 @@ const RegistrationForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
     if (step === 3) {
       try {
         setIsPending(true);
-
         const response = await fetch("/api/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -172,11 +175,11 @@ const RegistrationForm = () => {
         });
         const data = await response.json();
         setUniqueId(data?.data.id);
-        setIsPending(false);
         setStep(4);
-        setLoading(false);
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Error", error);
+      } finally {
+        setLoading(false);
         setIsPending(false);
       }
     } else {
@@ -244,7 +247,8 @@ const RegistrationForm = () => {
               <div className="flex my-3 gap-4">
                 <input
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  type="text"
+                  type="number"
+                  maxLength={10}
                   id="phone"
                   required
                   placeholder="Phone Number"
@@ -255,7 +259,8 @@ const RegistrationForm = () => {
                 {!numberFieldState && (
                   <input
                     className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    type="text"
+                    type="number"
+                    maxLength={10}
                     id="whatsapp"
                     required
                     placeholder="WhatsApp Number"
@@ -287,7 +292,7 @@ const RegistrationForm = () => {
               <div className="flex my-3 gap-4">
                 <input
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  type="text"
+                  type="number"
                   id="roll"
                   required
                   placeholder="Roll Number"
@@ -311,17 +316,18 @@ const RegistrationForm = () => {
                     </option>
                     <option value="CSE">CSE</option>
                     <option value="IT">IT</option>
-                    <option value="IT">CSSE</option>
-                    <option value="IT">CSCE</option>
-                    <option value="IT">CE</option>
-                    <option value="IT">MME</option>
-                    <option value="IT">MCA</option>
-                    <option value="IT">MTech</option>
+                    <option value="CSSE">CSSE</option>
+                    <option value="CSCE">CSCE</option>
+                    <option value="CE">CE</option>
+                    <option value="MME">MME</option>
+                    <option value="MCA">MCA</option>
+                    <option value="MTech">MTech</option>
                     <option value="ECSE">ECSE</option>
+                    <option value="ETC">ETC</option>
                     <option value="EEE">EEE</option>
                     <option value="ECE">ECE</option>
-                    <option value="ECE">MBA</option>
-                    <option value="Mech">ME</option>
+                    <option value="MBA">MBA</option>
+                    <option value="ME">ME</option>
                     <option value="Civil">Civil</option>
                   </select>
                 </div>
@@ -341,41 +347,34 @@ const RegistrationForm = () => {
                   <option value="" disabled>
                     Select your year
                   </option>
+                  {formData.branch === "MCA" && (
+                    <option value="1">1st Year</option>
+                  )}
                   <option value="2">2nd Year</option>
                   <option value="3">3rd Year</option>
                   <option value="4">4th Year</option>
                 </select>
               </div>
-
               <div
-                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
-                onMouseEnter={() => setIsHovered(!isHovered)}
-                onMouseLeave={() => setIsHovered(!isHovered)}
+                className="block relative w-[11rem] mx-auto my-8"
+                onMouseEnter={() => {
+                  setIsHovered(!isHovered);
+                }}
+                onMouseLeave={() => {
+                  setIsHovered(!isHovered);
+                }}
               >
                 <motion.div
-                  animate={
-                    isHovered
-                      ? { width: 0, y: 0, opacity: 1 }
-                      : { width: "100%", y: 0, opacity: 1 }
-                  }
+                  initial={{ width: "100%" }}
+                  animate={isHovered ? { width: 0 } : { width: "100%" }}
                   transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                   className="absolute w-full h-full bg-blue-500"
                 ></motion.div>
 
                 <motion.button
-                  animate={
-                    isHovered
-                      ? {
-                          color: "#3b82f6",
-                          borderColor: "#3b82f6",
-                          y: 0,
-                          opacity: 1,
-                        }
-                      : { y: 0, opacity: 1 }
-                  }
                   transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                   whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                  className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
                 >
                   NEXT
                 </motion.button>
@@ -442,43 +441,29 @@ const RegistrationForm = () => {
 
               {/* Verify Button */}
               <div
-                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
-                onMouseEnter={() => {
-                  setIsHovered(!isHovered);
-                }}
-                onMouseLeave={() => {
-                  setIsHovered(!isHovered);
-                }}
+                className="block relative w-[11rem] mx-auto my-8"
                 onClick={() => {
                   verifyOTP();
                 }}
               >
                 <motion.div
-                  animate={
-                    !isHovered
-                      ? { width: 0, y: 0, opacity: 1 }
-                      : { width: "100%", y: 0, opacity: 1 }
-                  }
-                  transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                  initial={{ width: "100%" }}
+                  // animate={isHovered ? { width: 0 } : { width: "100%" }}
+                  // transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+
                   className="absolute w-full h-full bg-blue-500"
                 ></motion.div>
 
                 <motion.button
-                  animate={
-                    !isHovered
-                      ? {
-                          color: "#3b82f6",
-                          borderColor: "#3b82f6",
-                          y: 0,
-                          opacity: 1,
-                        }
-                      : { y: 0, opacity: 1 }
-                  }
                   transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                  whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                  whileHover={{
+                    color: "#3b82f6",
+                    borderColor: "#3b82f6",
+                    backgroundColor: "black",
+                  }}
+                  className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
                 >
-                  Verify OTP
+                  VERIFY OTP
                 </motion.button>
               </div>
             </motion.div>
@@ -493,11 +478,11 @@ const RegistrationForm = () => {
               <div className="mb-4 text-center">
                 <p>Scan the QR code below to make payment:</p>
                 <Image
-                  src="/code1.jpg"
+                  src="/code7.jpg"
                   alt="QR Code"
-                  className="w-40 mx-auto my-4"
-                  width={100}
-                  height={100}
+                  className="w-52 mx-auto my-4"
+                  width={500}
+                  height={500}
                 />
 
                 {/* Total Fare */}
@@ -509,13 +494,14 @@ const RegistrationForm = () => {
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="txn_id"
+                  required
                   placeholder="Transaction ID"
                   value={formData.txn_id}
                   onChange={handleChange}
                 />
-                <p className="text-sm text-gray-400 mt-2">
-                  Note: if you are using PhonePe for payment please enter your
-                  UTR, instead of Transaction ID
+                <p className="text-red text-sm py-5 text-red-700">
+                  NOTE: If you are using PhonePe for payment, please enter your
+                  UTR, instead of Transaction ID.
                 </p>
               </div>
               {/* 
@@ -533,7 +519,7 @@ const RegistrationForm = () => {
 
               {
                 <div
-                  className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+                  className="block relative"
                   onMouseEnter={() => {
                     setIsHovered(!isHovered);
                   }}
@@ -542,38 +528,31 @@ const RegistrationForm = () => {
                   }}
                 >
                   <motion.div
-                    animate={
-                      !isHovered
-                        ? { width: 0, y: 0, opacity: 1 }
-                        : { width: "100%", y: 0, opacity: 1 }
-                    }
-                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                    initial={{ width: "100%" }}
+                    // animate={isHovered ? { width: 0 } : { width: "100%" }}
+                    // transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                     className="absolute w-full h-full bg-blue-500"
                   ></motion.div>
 
                   <motion.button
-                    animate={
-                      !isHovered
-                        ? {
-                            color: "#3b82f6",
-                            borderColor: "#3b82f6",
-                            y: 0,
-                            opacity: 1,
-                          }
-                        : { y: 0, opacity: 1 }
-                    }
-                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                    whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                    className={`text-xs sm:text-base hover:font-semibold flex items-center gap-2 text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                    transition={{
+                      duration: 0.5,
+                      ease: [0.17, 0.55, 0.55, 1],
+                    }}
+                    whileHover={{
+                      color: "#3b82f6",
+                      borderColor: "#3b82f6",
+                      backgroundColor: "#171717",
+                    }}
+                    className="w-full h-full text-background relative z-10 py-2 px-5 border border-background flex justify-center gap-5 items-center"
                   >
-                    <p>SUBMIT</p>
-
+                    GET TICKET
                     <Watch
                       visible={loading}
                       height="20"
                       width="20"
                       radius="48"
-                      color="#ffffff"
+                      color="#3b82f6"
                       ariaLabel="watch-loading"
                       wrapperStyle={{}}
                       wrapperClass="text-white"
@@ -623,14 +602,22 @@ const RegistrationForm = () => {
                       viewBox={`0 0 256 256`}
                     />
                   </div>
-                  <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDownloadQRCode();
-                    }}
-                    className="bg-blue-500 rounded px-5 py-1 text-center text-sm my-4 cursor-pointer"
-                  >
-                    Download QR Code
+                  <div className="flex items-center flex-col justify-center w-56 gap-3 my-2">
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDownloadQRCode();
+                      }}
+                      className="bg-blue-500 rounded px-5 py-1 text-center text-sm cursor-pointer w-full"
+                    >
+                      Download QR Code
+                    </div>
+                    <Link
+                      href={`${process.env.NEXT_PUBLIC_CLIENT_URL}/${uniqueId}`}
+                      className="bg-blue-500 rounded px-5 py-1 text-center text-sm cursor-pointer w-full"
+                    >
+                      <button>Go to Ticket</button>
+                    </Link>
                   </div>
                   <span className="text-sm italic text-blue-500 mx-6">
                     Your ticket will be validated within 48 hours . Download the

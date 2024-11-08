@@ -6,24 +6,25 @@ import Hero from "./components/Hero/Hero";
 import StatisticsShowcase from "./components/StatisticsShowcase/StatisticsShowcase";
 import TimerSection from "./components/Timer/TimerSection";
 import { EventSchedule } from "./components/EventSchedule/EventSchedule";
+import Pricing from "./components/Pricing/tickets";
 import FAQ from "./components/FAQ/FAQ";
 import About from "./components/About";
 import Star from "./components/global/Star";
 import Card from "./components/CardComponents/Card";
 
 const fadeInUp = {
-  hidden: { 
-    y: 40, 
-    opacity: 0 
+  hidden: {
+    y: 40,
+    opacity: 0,
   },
-  visible: { 
-    y: 0, 
+  visible: {
+    y: 0,
     opacity: 1,
     transition: {
       duration: 0.8,
-      ease: [0.6, 0.05, 0.01, 0.99]
-    }
-  }
+      ease: [0.6, 0.05, 0.01, 0.99],
+    },
+  },
 };
 
 export default function Home() {
@@ -68,6 +69,15 @@ export default function Home() {
         <Card />
       </motion.div>
 
+      <Star />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ margin: "-100px" }}
+        variants={fadeInUp}
+      >
+        <Pricing />
+      </motion.div>
       <Star />
 
       <motion.div

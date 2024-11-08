@@ -15,17 +15,26 @@ interface Speaker {
 
 const speakers: Speaker[] = [
   {
-    name: "Striver",
-    title: "Educator",
+    name: "Vanshika Pandey",
+    title: ". Software Developer .",
     description:
-      "Empowering people to embrace innovation and explore new possibilities in the wild world of tech",
-    image: "/assets/img/striver-final.png",
-    twitterUrl: "https://x.com/striver_79?lang=en",
-    linkedinUrl:
-      "https://www.linkedin.com/in/rajstriver?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-    instagramUrl:
-      "https://www.instagram.com/striver_79?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D",
-    youtubeUrl: "https://youtube.com/@striver_79?si=cUeIo7RvfZtcYWlL",
+      "Software Engineer at J.P. Morgan and tech mentor with 270K+ followers on Instagram!",
+    image: "/assets/img/vanshika.png",
+    twitterUrl: "https://x.com/vanshikatech",
+    linkedinUrl: "https://www.linkedin.com/in/vanshikapandeyy/",
+    instagramUrl: "https://www.instagram.com/codecrookshanks/",
+    youtubeUrl: "https://www.youtube.com/@Vanshikapandey30",
+  },
+  {
+    name: "Sunchit Dudeja",
+    title: ". Software Developer .",
+    description:
+      "One of the youngest SDE V at Adobe and  4X Top LinkedIn Voice. 51K+ followers on LinkedIn.",
+    image: "/assets/img/sunchit.png",
+    twitterUrl: "https://x.com/sunchitdudeja",
+    linkedinUrl: "https://www.linkedin.com/in/sunchitdudeja/?originalSubdomain=in",
+    instagramUrl: "https://www.instagram.com/sunchitdudeja/",
+    youtubeUrl: "https://www.youtube.com/@CodeWithSunchitDudeja",
   },
 ];
 
@@ -46,13 +55,13 @@ export default function Card() {
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 xl:px-12">
       <div className="max-w-[90%] xl:max-w-[70%] mx-auto">
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bitter text-white text-center mb-4">
-          Archives
+          Our Speakers
         </h2>
         <p className="text-base sm:text-lg lg:text-xl font-geist text-gray-300 text-center mb-12">
-          Innovance 2.0 united 400+ innovators with Striver&apos;s insights on
-          IoT and career guidance, sparking excitement for the tech revolution
+          We&apos;re thrilled to announce our upcoming speakers. Don&apos;t miss
+          this chance to learn from one of the brightest minds in the industry!
         </p>
-        <div className="gap-6 lg:gap-8 flex flex-col items-center">
+        <div className="gap-6 lg:gap-8 flex flex-col items-center md:flex-row">
           {speakers.map((speaker) => (
             <motion.div
               key={speaker.name}
@@ -93,15 +102,15 @@ export default function Card() {
 
                 {/* Image with hover effect */}
                 <motion.div
-                  className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[250px] lg:h-[250px] overflow-hidden rounded-lg shadow-lg"
+                  className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[300px] lg:h-[300px] overflow-hidden rounded-lg shadow-lg"
                   whileHover={{ scale: 1.1, y: -10 }}
                   transition={{ type: "spring", stiffness: 200 }}
                 >
                   <Image
                     src={speaker.image}
                     alt={speaker.name}
-                    width={600}
-                    height={550}
+                    width={1000}
+                    height={850}
                     className="object-cover ml-4"
                     priority={true}
                   />

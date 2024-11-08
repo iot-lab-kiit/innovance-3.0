@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Poppins } from "@next/font/google";
 import QRCode from "react-qr-code";
 import { useRef } from "react";
-
+import { Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Watch } from "react-loader-spinner";
-
-const poppins = Poppins({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-});
+import Link from "next/link";
 
 const RegistrationFormInternal = () => {
   const [step, setStep] = useState(1);
@@ -92,11 +87,57 @@ const RegistrationFormInternal = () => {
     img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
   };
 
+  const handleUserVerified = async (): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/verified_user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: formData.email }), // Assuming formData is an object
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        toast.success("User Verified!", {
+          position: "top-right",
+          autoClose: 5000,
+          theme: "dark",
+          transition: Bounce,
+        });
+        return true;
+      } else {
+        toast.error("User Not Verified", {
+          position: "top-right",
+          autoClose: 5000,
+          theme: "light",
+          transition: Bounce,
+        });
+        return false;
+      }
+    } catch (error) {
+      console.error("Error verifying user:", error);
+      toast.error("Verification failed. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        theme: "light",
+        transition: Bounce,
+      });
+      return false;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    if (step === 3) {
-      try {
+
+    try {
+      if (step === 1) {
+        const isVerified = await handleUserVerified();
+        if (!isVerified) {
+          setLoading(false); // Stop loading if verification failed
+          return;
+        }
+        setStep(2); // Proceed to next step if verified
+      } else if (step === 2) {
         setIsPending(true);
         const response = await fetch("/api/register", {
           method: "POST",
@@ -104,17 +145,31 @@ const RegistrationFormInternal = () => {
           body: JSON.stringify(formData),
         });
         const data = await response.json();
-        setUniqueId(data?.data.id);
+        if (data?.data?.id) {
+          setUniqueId(data.data.id);
+          setStep(3); // Proceed to step 3 on success
+        } else {
+          toast.error("Registration failed. Please try again.", {
+            position: "top-right",
+            autoClose: 5000,
+            theme: "light",
+            transition: Bounce,
+          });
+        }
         setIsPending(false);
-        setStep(3);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-        setIsPending(false);
+      } else {
+        setStep(step + 1);
       }
-    } else {
-    //   if (step === 1) return;
-      setStep(step + 1);
+    } catch (error) {
+      console.error("Error during form submission:", error);
+      toast.error("An error occurred. Please try again later.", {
+        position: "top-right",
+        autoClose: 5000,
+        theme: "light",
+        transition: Bounce,
+      });
+      setIsPending(false);
+    } finally {
       setLoading(false);
     }
   };
@@ -172,7 +227,8 @@ const RegistrationFormInternal = () => {
               <div className="flex my-3 gap-4">
                 <input
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  type="text"
+                  type="number"
+                  maxLength={10}
                   id="phone"
                   required
                   placeholder="Phone Number"
@@ -183,7 +239,8 @@ const RegistrationFormInternal = () => {
                 {!numberFieldState && (
                   <input
                     className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    type="text"
+                    type="number"
+                    maxLength={10}
                     id="whatsapp"
                     required
                     placeholder="WhatsApp Number"
@@ -215,7 +272,7 @@ const RegistrationFormInternal = () => {
               <div className="flex my-3 gap-4">
                 <input
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  type="text"
+                  type="number"
                   id="roll"
                   required
                   placeholder="Roll Number"
@@ -239,16 +296,17 @@ const RegistrationFormInternal = () => {
                     </option>
                     <option value="CSE">CSE</option>
                     <option value="IT">IT</option>
-                    <option value="IT">CSSE</option>
-                    <option value="IT">CSCE</option>
-                    <option value="IT">CE</option>
-                    <option value="IT">MME</option>
-                    <option value="IT">MCA</option>
-                    <option value="IT">MTech</option>
+                    <option value="CSSE">CSSE</option>
+                    <option value="CSCE">CSCE</option>
+                    <option value="CE">CE</option>
+                    <option value="MME">MME</option>
+                    <option value="MCA">MCA</option>
+                    <option value="MTech">MTech</option>
                     <option value="ECSE">ECSE</option>
                     <option value="EEE">EEE</option>
+                    <option value="ETC">ETC</option>
                     <option value="ECE">ECE</option>
-                    <option value="Mech">ME</option>
+                    <option value="ME">ME</option>
                     <option value="Civil">Civil</option>
                   </select>
                 </div>
@@ -268,6 +326,10 @@ const RegistrationFormInternal = () => {
                   <option value="" disabled>
                     Select your year
                   </option>
+                  {formData.branch === "MCA" && (
+                    <option value="1">1st Year</option>
+                  )}
+
                   <option value="2">2nd Year</option>
                   <option value="3">3rd Year</option>
                   <option value="4">4th Year</option>
@@ -275,34 +337,21 @@ const RegistrationFormInternal = () => {
               </div>
 
               <div
-                className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
+                className="block relative w-[11rem] mx-auto my-8"
                 onMouseEnter={() => setIsHovered(!isHovered)}
                 onMouseLeave={() => setIsHovered(!isHovered)}
               >
                 <motion.div
-                  animate={
-                    isHovered
-                      ? { width: 0, y: 0, opacity: 1 }
-                      : { width: "100%", y: 0, opacity: 1 }
-                  }
+                  initial={{ width: "100%" }}
+                  animate={isHovered ? { width: 0 } : { width: "100%" }}
                   transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                   className="absolute w-full h-full bg-blue-500"
                 ></motion.div>
 
                 <motion.button
-                  animate={
-                    isHovered
-                      ? {
-                          color: "#3b82f6",
-                          borderColor: "#3b82f6",
-                          y: 0,
-                          opacity: 1,
-                        }
-                      : { y: 0, opacity: 1 }
-                  }
                   transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                   whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                  className={`text-xs sm:text-base hover:font-semibold text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                  className="w-full h-full text-background relative z-10 py-2 px-5 border border-background"
                 >
                   NEXT
                 </motion.button>
@@ -320,22 +369,23 @@ const RegistrationFormInternal = () => {
               <div className="mb-4 text-center">
                 <p>Scan the QR code below to make payment:</p>
                 <Image
-                  src="/qr-code.svg"
+                  src="/code6.jpg"
                   alt="QR Code"
-                  className="w-40 mx-auto my-4"
-                  width={50}
-                  height={50}
+                  className="w-52 mx-auto my-4"
+                  width={500}
+                  height={500}
                 />
 
                 {/* Total Fare */}
                 <div className="w-full px-4 mb-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                  Registration - Rs 249
+                  Registration amount : ₹{formData.total_fare}
                 </div>
 
                 <input
                   className="w-full px-4 py-4 bg-[#171717] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   type="text"
                   id="txn_id"
+                  required
                   placeholder="Transaction ID"
                   value={formData.txn_id}
                   onChange={handleChange}
@@ -356,47 +406,36 @@ const RegistrationFormInternal = () => {
 
               {
                 <div
-                  className="relative w-fit m-auto mt-0 sm:mt-4 md:mt-8"
-                  onMouseEnter={() => {
-                    setIsHovered(!isHovered);
-                  }}
-                  onMouseLeave={() => {
-                    setIsHovered(!isHovered);
-                  }}
+                  className="block relative"
+                  onMouseEnter={() => setIsHovered(!isHovered)}
+                  onMouseLeave={() => setIsHovered(!isHovered)}
                 >
                   <motion.div
-                    animate={
-                      !isHovered
-                        ? { width: 0, y: 0, opacity: 1 }
-                        : { width: "100%", y: 0, opacity: 1 }
-                    }
-                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
+                    initial={{ width: "100%" }}
+                    // animate={isHovered ? { width: 0 } : { width: "100%" }}
+                    // transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
                     className="absolute w-full h-full bg-blue-500"
                   ></motion.div>
 
                   <motion.button
-                    animate={
-                      !isHovered
-                        ? {
-                            color: "#3b82f6",
-                            borderColor: "#3b82f6",
-                            y: 0,
-                            opacity: 1,
-                          }
-                        : { y: 0, opacity: 1 }
-                    }
-                    transition={{ duration: 0.5, ease: [0.17, 0.55, 0.55, 1] }}
-                    whileHover={{ color: "#3b82f6", borderColor: "#3b82f6" }}
-                    className={`text-xs sm:text-base hover:font-semibold flex items-center gap-2 text-background border-background border w-fit m-auto py-3 px-7 ${poppins.className}`}
+                    transition={{
+                      duration: 0.5,
+                      ease: [0.17, 0.55, 0.55, 1],
+                    }}
+                    whileHover={{
+                      color: "#3b82f6",
+                      borderColor: "#3b82f6",
+                      backgroundColor: "#171717",
+                    }}
+                    className="w-full h-full text-background relative z-10 py-2 px-5 border border-background flex justify-center gap-5 items-center"
                   >
-                    <p>SUBMIT</p>
-
+                    GET TICKET
                     <Watch
                       visible={loading}
                       height="20"
                       width="20"
                       radius="48"
-                      color="#ffffff"
+                      color="#3b82f6"
                       ariaLabel="watch-loading"
                       wrapperStyle={{}}
                       wrapperClass="text-white"
@@ -442,18 +481,26 @@ const RegistrationFormInternal = () => {
                   <div ref={qrRef}>
                     <QRCode
                       size={256}
-                      value={`https://localhost/ticket/${uniqueId}`}
+                      value={`${process.env.NEXT_PUBLIC_CLIENT_URL}/${uniqueId}`}
                       viewBox={`0 0 256 256`}
                     />
                   </div>
-                  <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDownloadQRCode();
-                    }}
-                    className="bg-blue-500 rounded px-5 py-1 text-center text-sm my-4 cursor-pointer"
-                  >
-                    Download QR Code
+                  <div className="flex items-center flex-col justify-center w-56 gap-3 my-2">
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDownloadQRCode();
+                      }}
+                      className="bg-blue-500 rounded px-5 py-1 text-center text-sm cursor-pointer w-full"
+                    >
+                      Download QR Code
+                    </div>
+                    <Link
+                      href={`${process.env.NEXT_PUBLIC_CLIENT_URL}/${uniqueId}`}
+                      className="bg-blue-500 rounded px-5 py-1 text-center text-sm cursor-pointer w-full"
+                    >
+                      <button>Go to Ticket</button>
+                    </Link>
                   </div>
                   <span className="text-sm italic text-blue-500 mx-6">
                     Your ticket will be validated within 48 hours . Download the

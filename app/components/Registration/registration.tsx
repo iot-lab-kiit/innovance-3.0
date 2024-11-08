@@ -320,6 +320,7 @@ const RegistrationForm = () => {
                     <option value="CSCE">CSCE</option>
                     <option value="CE">CE</option>
                     <option value="MME">MME</option>
+                    <option value="BCA">BCA</option>
                     <option value="MCA">MCA</option>
                     <option value="MTech">MTech</option>
                     <option value="ECSE">ECSE</option>

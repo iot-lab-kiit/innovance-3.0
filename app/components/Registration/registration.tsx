@@ -330,6 +330,7 @@ const RegistrationForm = () => {
                     <option value="MBA">MBA</option>
                     <option value="ME">ME</option>
                     <option value="Civil">Civil</option>
+                    <option value="BioTech">Bio Tech</option>
                   </select>
                 </div>
               </div>

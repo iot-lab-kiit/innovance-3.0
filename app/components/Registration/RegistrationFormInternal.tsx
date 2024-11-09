@@ -309,6 +309,7 @@ const RegistrationFormInternal = () => {
                     <option value="ECE">ECE</option>
                     <option value="ME">ME</option>
                     <option value="Civil">Civil</option>
+                    <option value="BioTech">Bio Tech</option>
                   </select>
                 </div>
               </div>

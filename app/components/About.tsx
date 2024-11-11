@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { Bitter } from "@next/font/google";
+import { Bitter } from "next/font/google";
 import Star from "@/app/components/global/Star";
-import { Poppins } from "@next/font/google";
+import { Poppins } from "next/font/google";
 const bitter = Bitter({ subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 function About() {

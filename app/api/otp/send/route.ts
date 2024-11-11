@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
+  return NextResponse.json({
+    success: false,
+    message: "Internal server error",
+  });
+
   const { email, rollNo } = await request.json();
   try {
     const response = await fetch(`${process.env.OTP_URL}/api/otp/send`, {

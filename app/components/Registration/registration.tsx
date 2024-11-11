@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Poppins } from "@next/font/google";
+import { Poppins } from "next/font/google";
 import QRCode from "react-qr-code";
 import { useRef } from "react";
 import { Bounce, ToastContainer, toast } from "react-toastify";

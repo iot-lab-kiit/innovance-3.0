@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { MdLocationPin } from "react-icons/md";
 import { motion } from "framer-motion";
-import { Poppins } from "@next/font/google";
+import { Poppins } from "next/font/google";
 
 
 interface ScheduleItem {

@@ -7,7 +7,7 @@ import Image from "next/image";
 import logo from "../../../public/assets/img/logo-dark.png";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
+  // const [isHovered, setIsHovered] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -58,14 +58,10 @@ export default function Navbar() {
             Contact
           </Link>
         </div>
-        <div
+        {/* <div
           className="hidden md:block relative"
-          onMouseEnter={() => {
-            setIsHovered(!isHovered);
-          }}
-          onMouseLeave={() => {
-            setIsHovered(!isHovered);
-          }}
+          onMouseEnter={() => setIsHovered(!isHovered)}
+          onMouseLeave={() => setIsHovered(!isHovered)}
         >
           <motion.div
             initial={{ width: "100%" }}
@@ -82,7 +78,7 @@ export default function Navbar() {
               GET TICKET
             </motion.button>
           </Link>
-        </div>
+        </div> */}
         <div className="md:hidden flex justify-center items-center">
           <HamburgerButton isOpen={isOpen} toggleMenu={toggleMenu} />
         </div>
@@ -90,7 +86,7 @@ export default function Navbar() {
       {/* <hr className="mx-4 z-40 relative" /> */}
       <AnimatePresence>
         {isOpen && (
-          <div className={`relative`} onClick={()=>toggleMenu()}>
+          <div className={`relative`} onClick={() => toggleMenu()}>
             <motion.div
               key={"hamburger"}
               initial="hidden"
@@ -130,11 +126,11 @@ export default function Navbar() {
               >
                 Contact
               </Link>
-              <Link href="/registrations">
+              {/* <Link href="/registrations">
                 <button className="py-2 px-5 border border-foreground text-blue-300 transition-all">
                   GET TICKET
                 </button>
-              </Link>
+              </Link> */}
             </motion.div>
           </div>
         )}
